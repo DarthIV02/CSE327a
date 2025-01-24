@@ -1,0 +1,24 @@
+Run on Thu Jan 23 16:40:20 2025
+
+Characterization starts. Max Frequency.
+Total Execution time (us): 112359 at 2400000
+[Core 0] Execution Time (us): 112224
+[Core 0] Energy (mJ): 157
+[Core 0] Cycle Count: 269338424
+[Core 0] Instructions: 0
+[Core 0] L1 Cache Accesses: 0
+[Core 0] L1 Cache Misses: 0
+[Core 0] L2 Accesses: 0
+[Core 0] L2 Misses: 0
+[Core 0] LLC miss: 0
+Characterization starts. Min Frequency.
+Total Execution time (us): 180086 at 1500000
+[Core 0] Execution Time (us): 179790
+[Core 0] Energy (mJ): 89
+[Core 0] Cycle Count: 269685946
+[Core 0] Instructions: 0
+[Core 0] L1 Cache Accesses: 0
+[Core 0] L1 Cache Misses: 0
+[Core 0] L2 Accesses: 0
+[Core 0] L2 Misses: 0
+[Core 0] LLC miss: 0
