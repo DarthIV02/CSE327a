@@ -1,24 +1,368 @@
-Run on Thu Jan 23 16:40:20 2025
+Run on Sat Jan 25 14:32:47 2025
 
 Characterization starts. Max Frequency.
-Total Execution time (us): 112359 at 2400000
-[Core 0] Execution Time (us): 112224
-[Core 0] Energy (mJ): 157
-[Core 0] Cycle Count: 269338424
-[Core 0] Instructions: 0
-[Core 0] L1 Cache Accesses: 0
-[Core 0] L1 Cache Misses: 0
-[Core 0] L2 Accesses: 0
-[Core 0] L2 Misses: 0
-[Core 0] LLC miss: 0
+Total Execution time (us): 111985 at 2400000
+[Core 0] Execution Time (us): 111826
+[Core 0] Energy (mJ): 156
+[Core 0] Cycle Count: 268384535
+[Core 0] Instructions: 793523885
+[Core 0] L1 Cache Accesses: 384841983
+[Core 0] L1 Cache Misses: 18
+[Core 0] L1 Miss Ratio: 0.000000
+[Core 0] L2 Accesses: 206
+[Core 0] L2 Misses: 21
+[Core 0] L2 Miss Ratio: 0.101942
+[Core 0] LLC miss: 9
 Characterization starts. Min Frequency.
-Total Execution time (us): 180086 at 1500000
-[Core 0] Execution Time (us): 179790
+Total Execution time (us): 178948 at 1500000
+[Core 0] Execution Time (us): 178796
 [Core 0] Energy (mJ): 89
-[Core 0] Cycle Count: 269685946
-[Core 0] Instructions: 0
-[Core 0] L1 Cache Accesses: 0
-[Core 0] L1 Cache Misses: 0
-[Core 0] L2 Accesses: 0
-[Core 0] L2 Misses: 0
-[Core 0] LLC miss: 0
+[Core 0] Cycle Count: 268194407
+[Core 0] Instructions: 793345071
+[Core 0] L1 Cache Accesses: 384725249
+[Core 0] L1 Cache Misses: 9
+[Core 0] L1 Miss Ratio: 0.000000
+[Core 0] L2 Accesses: 156
+[Core 0] L2 Misses: 1
+[Core 0] L2 Miss Ratio: 0.006410
+[Core 0] LLC miss: 1
+Characterization starts. Max Frequency.
+Total Execution time (us): 328369 at 2400000
+[Core 0] Execution Time (us): 327948
+[Core 0] Energy (mJ): 459
+[Core 0] Cycle Count: 787075263
+[Core 0] Instructions: 300000072
+[Core 0] L1 Cache Accesses: 210004777
+[Core 0] L1 Cache Misses: 24841039
+[Core 0] L1 Miss Ratio: 0.118288
+[Core 0] L2 Accesses: 64955929
+[Core 0] L2 Misses: 8377
+[Core 0] L2 Miss Ratio: 0.000129
+[Core 0] LLC miss: 6615
+Characterization starts. Min Frequency.
+Total Execution time (us): 521526 at 1500000
+[Core 0] Execution Time (us): 521108
+[Core 0] Energy (mJ): 260
+[Core 0] Cycle Count: 781662421
+[Core 0] Instructions: 300000070
+[Core 0] L1 Cache Accesses: 210005890
+[Core 0] L1 Cache Misses: 24842589
+[Core 0] L1 Miss Ratio: 0.118295
+[Core 0] L2 Accesses: 64612174
+[Core 0] L2 Misses: 14536
+[Core 0] L2 Miss Ratio: 0.000225
+[Core 0] LLC miss: 2738
+Characterization starts. Max Frequency.
+Total Execution time (us): 931032 at 2400000
+[Core 0] Execution Time (us): 930188
+[Core 0] Energy (mJ): 1302
+[Core 0] Cycle Count: 2232452832
+[Core 0] Instructions: 1748245075
+[Core 0] L1 Cache Accesses: 2555099462
+[Core 0] L1 Cache Misses: 7918628
+[Core 0] L1 Miss Ratio: 0.003099
+[Core 0] L2 Accesses: 34338935
+[Core 0] L2 Misses: 328331
+[Core 0] L2 Miss Ratio: 0.009561
+[Core 0] LLC miss: 665359
+Characterization starts. Min Frequency.
+Total Execution time (us): 1486797 at 1500000
+[Core 0] Execution Time (us): 1484996
+[Core 0] Energy (mJ): 742
+[Core 0] Cycle Count: 2227494630
+[Core 0] Instructions: 1748272408
+[Core 0] L1 Cache Accesses: 2555078175
+[Core 0] L1 Cache Misses: 7969415
+[Core 0] L1 Miss Ratio: 0.003119
+[Core 0] L2 Accesses: 34347462
+[Core 0] L2 Misses: 334572
+[Core 0] L2 Miss Ratio: 0.009741
+[Core 0] LLC miss: 573090
+Characterization starts. Max Frequency.
+Total Execution time (us): 330856 at 2400000
+[Core 0] Execution Time (us): 111841
+[Core 0] Energy (mJ): 156
+[Core 0] Cycle Count: 268419902
+[Core 0] Instructions: 793523885
+[Core 0] L1 Cache Accesses: 384861991
+[Core 0] L1 Cache Misses: 24
+[Core 0] L1 Miss Ratio: 0.000000
+[Core 0] L2 Accesses: 246
+[Core 0] L2 Misses: 44
+[Core 0] L2 Miss Ratio: 0.178862
+[Core 0] LLC miss: 52
+[Core 1] Execution Time (us): 330413
+[Core 1] Energy (mJ): 462
+[Core 1] Cycle Count: 792992527
+[Core 1] Instructions: 300042611
+[Core 1] L1 Cache Accesses: 210021571
+[Core 1] L1 Cache Misses: 24841225
+[Core 1] L1 Miss Ratio: 0.118279
+[Core 1] L2 Accesses: 65287408
+[Core 1] L2 Misses: 40248
+[Core 1] L2 Miss Ratio: 0.000616
+[Core 1] LLC miss: 10609
+Characterization starts. Min Frequency.
+Total Execution time (us): 522996 at 1500000
+[Core 0] Execution Time (us): 178798
+[Core 0] Energy (mJ): 89
+[Core 0] Cycle Count: 268197314
+[Core 0] Instructions: 793345069
+[Core 0] L1 Cache Accesses: 384745395
+[Core 0] L1 Cache Misses: 13
+[Core 0] L1 Miss Ratio: 0.000000
+[Core 0] L2 Accesses: 242
+[Core 0] L2 Misses: 23
+[Core 0] L2 Miss Ratio: 0.095041
+[Core 0] LLC miss: 18
+[Core 1] Execution Time (us): 522564
+[Core 1] Energy (mJ): 261
+[Core 1] Cycle Count: 783846469
+[Core 1] Instructions: 300000072
+[Core 1] L1 Cache Accesses: 210006010
+[Core 1] L1 Cache Misses: 24822829
+[Core 1] L1 Miss Ratio: 0.118201
+[Core 1] L2 Accesses: 64626227
+[Core 1] L2 Misses: 70564
+[Core 1] L2 Miss Ratio: 0.001092
+[Core 1] LLC miss: 3483
+Characterization starts. Max Frequency.
+Total Execution time (us): 944044 at 2400000
+[Core 0] Execution Time (us): 111784
+[Core 0] Energy (mJ): 156
+[Core 0] Cycle Count: 268282266
+[Core 0] Instructions: 793523885
+[Core 0] L1 Cache Accesses: 384827885
+[Core 0] L1 Cache Misses: 55
+[Core 0] L1 Miss Ratio: 0.000000
+[Core 0] L2 Accesses: 776
+[Core 0] L2 Misses: 89
+[Core 0] L2 Miss Ratio: 0.114691
+[Core 0] LLC miss: 87
+[Core 1] Execution Time (us): 943143
+[Core 1] Energy (mJ): 1320
+[Core 1] Cycle Count: 2263544253
+[Core 1] Instructions: 1748245075
+[Core 1] L1 Cache Accesses: 2556387079
+[Core 1] L1 Cache Misses: 7777324
+[Core 1] L1 Miss Ratio: 0.003042
+[Core 1] L2 Accesses: 34346206
+[Core 1] L2 Misses: 347212
+[Core 1] L2 Miss Ratio: 0.010109
+[Core 1] LLC miss: 1005461
+Characterization starts. Min Frequency.
+Total Execution time (us): 1545683 at 1500000
+[Core 0] Execution Time (us): 178803
+[Core 0] Energy (mJ): 89
+[Core 0] Cycle Count: 268204598
+[Core 0] Instructions: 793345067
+[Core 0] L1 Cache Accesses: 384707354
+[Core 0] L1 Cache Misses: 44
+[Core 0] L1 Miss Ratio: 0.000000
+[Core 0] L2 Accesses: 913
+[Core 0] L2 Misses: 26
+[Core 0] L2 Miss Ratio: 0.028478
+[Core 0] LLC miss: 39
+[Core 1] Execution Time (us): 1504087
+[Core 1] Energy (mJ): 752
+[Core 1] Cycle Count: 2256131508
+[Core 1] Instructions: 1748245073
+[Core 1] L1 Cache Accesses: 2556398111
+[Core 1] L1 Cache Misses: 7701029
+[Core 1] L1 Miss Ratio: 0.003012
+[Core 1] L2 Accesses: 34360145
+[Core 1] L2 Misses: 338471
+[Core 1] L2 Miss Ratio: 0.009851
+[Core 1] LLC miss: 993727
+Characterization starts. Max Frequency.
+Total Execution time (us): 946500 at 2400000
+[Core 0] Execution Time (us): 331764
+[Core 0] Energy (mJ): 464
+[Core 0] Cycle Count: 796234057
+[Core 0] Instructions: 300000072
+[Core 0] L1 Cache Accesses: 210004607
+[Core 0] L1 Cache Misses: 24818014
+[Core 0] L1 Miss Ratio: 0.118178
+[Core 0] L2 Accesses: 65069531
+[Core 0] L2 Misses: 83440
+[Core 0] L2 Miss Ratio: 0.001282
+[Core 0] LLC miss: 7289
+[Core 1] Execution Time (us): 945597
+[Core 1] Energy (mJ): 1323
+[Core 1] Cycle Count: 2269434645
+[Core 1] Instructions: 1748245075
+[Core 1] L1 Cache Accesses: 2556421756
+[Core 1] L1 Cache Misses: 7700056
+[Core 1] L1 Miss Ratio: 0.003012
+[Core 1] L2 Accesses: 34349527
+[Core 1] L2 Misses: 341113
+[Core 1] L2 Miss Ratio: 0.009931
+[Core 1] LLC miss: 1033965
+Characterization starts. Min Frequency.
+Total Execution time (us): 1506103 at 1500000
+[Core 0] Execution Time (us): 526688
+[Core 0] Energy (mJ): 263
+[Core 0] Cycle Count: 790032028
+[Core 0] Instructions: 300366436
+[Core 0] L1 Cache Accesses: 210145409
+[Core 0] L1 Cache Misses: 24830107
+[Core 0] L1 Miss Ratio: 0.118157
+[Core 0] L2 Accesses: 64785503
+[Core 0] L2 Misses: 120872
+[Core 0] L2 Miss Ratio: 0.001866
+[Core 0] LLC miss: 21804
+[Core 1] Execution Time (us): 1504476
+[Core 1] Energy (mJ): 752
+[Core 1] Cycle Count: 2256715249
+[Core 1] Instructions: 1748245077
+[Core 1] L1 Cache Accesses: 2556380979
+[Core 1] L1 Cache Misses: 7700082
+[Core 1] L1 Miss Ratio: 0.003012
+[Core 1] L2 Accesses: 34356999
+[Core 1] L2 Misses: 338783
+[Core 1] L2 Miss Ratio: 0.009861
+[Core 1] LLC miss: 1080997
+Characterization starts. Max Frequency.
+Total Execution time (us): 112059 at 2400000
+[Core 0] Execution Time (us): 111814
+[Core 0] Energy (mJ): 156
+[Core 0] Cycle Count: 268355578
+[Core 0] Instructions: 793523885
+[Core 0] L1 Cache Accesses: 384770718
+[Core 0] L1 Cache Misses: 37
+[Core 0] L1 Miss Ratio: 0.000000
+[Core 0] L2 Accesses: 468
+[Core 0] L2 Misses: 53
+[Core 0] L2 Miss Ratio: 0.113248
+[Core 0] LLC miss: 20
+[Core 1] Execution Time (us): 111883
+[Core 1] Energy (mJ): 156
+[Core 1] Cycle Count: 268521443
+[Core 1] Instructions: 793523885
+[Core 1] L1 Cache Accesses: 384909874
+[Core 1] L1 Cache Misses: 49
+[Core 1] L1 Miss Ratio: 0.000000
+[Core 1] L2 Accesses: 508
+[Core 1] L2 Misses: 42
+[Core 1] L2 Miss Ratio: 0.082677
+[Core 1] LLC miss: 18
+Characterization starts. Min Frequency.
+Total Execution time (us): 179142 at 1500000
+[Core 0] Execution Time (us): 178832
+[Core 0] Energy (mJ): 89
+[Core 0] Cycle Count: 268248931
+[Core 0] Instructions: 793372098
+[Core 0] L1 Cache Accesses: 384589520
+[Core 0] L1 Cache Misses: 480
+[Core 0] L1 Miss Ratio: 0.000001
+[Core 0] L2 Accesses: 2975
+[Core 0] L2 Misses: 1733
+[Core 0] L2 Miss Ratio: 0.582521
+[Core 0] LLC miss: 1520
+[Core 1] Execution Time (us): 178904
+[Core 1] Energy (mJ): 89
+[Core 1] Cycle Count: 268356075
+[Core 1] Instructions: 793345071
+[Core 1] L1 Cache Accesses: 384794385
+[Core 1] L1 Cache Misses: 48
+[Core 1] L1 Miss Ratio: 0.000000
+[Core 1] L2 Accesses: 431
+[Core 1] L2 Misses: 3
+[Core 1] L2 Miss Ratio: 0.006961
+[Core 1] LLC miss: 8
+Characterization starts. Max Frequency.
+Total Execution time (us): 328628 at 2400000
+[Core 0] Execution Time (us): 298789
+[Core 0] Energy (mJ): 418
+[Core 0] Cycle Count: 717093820
+[Core 0] Instructions: 300000061
+[Core 0] L1 Cache Accesses: 210004174
+[Core 0] L1 Cache Misses: 24838382
+[Core 0] L1 Miss Ratio: 0.118276
+[Core 0] L2 Accesses: 59470896
+[Core 0] L2 Misses: 7834
+[Core 0] L2 Miss Ratio: 0.000132
+[Core 0] LLC miss: 6713
+[Core 1] Execution Time (us): 328297
+[Core 1] Energy (mJ): 459
+[Core 1] Cycle Count: 787914992
+[Core 1] Instructions: 300000072
+[Core 1] L1 Cache Accesses: 210003746
+[Core 1] L1 Cache Misses: 24839734
+[Core 1] L1 Miss Ratio: 0.118282
+[Core 1] L2 Accesses: 64973257
+[Core 1] L2 Misses: 8575
+[Core 1] L2 Miss Ratio: 0.000132
+[Core 1] LLC miss: 6632
+Characterization starts. Min Frequency.
+Total Execution time (us): 518551 at 1500000
+[Core 0] Execution Time (us): 477656
+[Core 0] Energy (mJ): 238
+[Core 0] Cycle Count: 716484781
+[Core 0] Instructions: 300000070
+[Core 0] L1 Cache Accesses: 210005573
+[Core 0] L1 Cache Misses: 24840353
+[Core 0] L1 Miss Ratio: 0.118284
+[Core 0] L2 Accesses: 59560113
+[Core 0] L2 Misses: 6018
+[Core 0] L2 Miss Ratio: 0.000101
+[Core 0] LLC miss: 892
+[Core 1] Execution Time (us): 518145
+[Core 1] Energy (mJ): 259
+[Core 1] Cycle Count: 777217548
+[Core 1] Instructions: 300000074
+[Core 1] L1 Cache Accesses: 210005781
+[Core 1] L1 Cache Misses: 24843266
+[Core 1] L1 Miss Ratio: 0.118298
+[Core 1] L2 Accesses: 64250038
+[Core 1] L2 Misses: 17952
+[Core 1] L2 Miss Ratio: 0.000279
+[Core 1] LLC miss: 1976
+Characterization starts. Max Frequency.
+Total Execution time (us): 1018836 at 2400000
+[Core 0] Execution Time (us): 1013832
+[Core 0] Energy (mJ): 1419
+[Core 0] Cycle Count: 2433197379
+[Core 0] Instructions: 1748262240
+[Core 0] L1 Cache Accesses: 2555782245
+[Core 0] L1 Cache Misses: 8308586
+[Core 0] L1 Miss Ratio: 0.003251
+[Core 0] L2 Accesses: 34250707
+[Core 0] L2 Misses: 834149
+[Core 0] L2 Miss Ratio: 0.024354
+[Core 0] LLC miss: 10081200
+[Core 1] Execution Time (us): 1006076
+[Core 1] Energy (mJ): 1408
+[Core 1] Cycle Count: 2414583396
+[Core 1] Instructions: 1748245075
+[Core 1] L1 Cache Accesses: 2554685559
+[Core 1] L1 Cache Misses: 7947049
+[Core 1] L1 Miss Ratio: 0.003111
+[Core 1] L2 Accesses: 34213938
+[Core 1] L2 Misses: 674015
+[Core 1] L2 Miss Ratio: 0.019700
+[Core 1] LLC miss: 10147863
+Characterization starts. Min Frequency.
+Total Execution time (us): 1521636 at 1500000
+[Core 0] Execution Time (us): 1515810
+[Core 0] Energy (mJ): 757
+[Core 0] Cycle Count: 2273716295
+[Core 0] Instructions: 1748268899
+[Core 0] L1 Cache Accesses: 2556102638
+[Core 0] L1 Cache Misses: 7930587
+[Core 0] L1 Miss Ratio: 0.003103
+[Core 0] L2 Accesses: 34234202
+[Core 0] L2 Misses: 387930
+[Core 0] L2 Miss Ratio: 0.011332
+[Core 0] LLC miss: 10444770
+[Core 1] Execution Time (us): 1494437
+[Core 1] Energy (mJ): 747
+[Core 1] Cycle Count: 2241656268
+[Core 1] Instructions: 1748245077
+[Core 1] L1 Cache Accesses: 2554719932
+[Core 1] L1 Cache Misses: 7909177
+[Core 1] L1 Miss Ratio: 0.003096
+[Core 1] L2 Accesses: 34219921
+[Core 1] L2 Misses: 397169
+[Core 1] L2 Miss Ratio: 0.011606
+[Core 1] LLC miss: 10017904
