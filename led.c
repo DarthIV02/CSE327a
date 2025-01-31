@@ -12,15 +12,16 @@ int main(void)
     }
     pinMode(LEDPinRed, OUTPUT);
     pinMode(LEDPinYellow, OUTPUT);
+    
     while(1){
-
-        digitalWrite(LEDPinRed, HIGH); // Red LED is switched on
-        digitalWrite(LEDPinYellow, LOW); // green LED is switched off
-        delay(3000); // Wait for 3 seconds
-        
-        digitalWrite(LEDPinRed, LOW); // Red LED is switched off
-        digitalWrite(LEDPinYellow, HIGH); // green LED is switched on
-        delay(3000); // Wait for a further 3 seconds in which the LEDs are then switched over
+        digitalWrite(LEDPinRed, LOW); //led red off
+        digitalWrite(LEDPinYellow, HIGH); //led yellow on
+        printf("led red...\n");
+        delay(500);
+        digitalWrite(LEDPinRed, HIGH); //led red on
+        digitalWrite(LEDPinYellow, LOW); //led yellow off
+        printf("...led yellow\n");
+        delay(500);
     }
     return 0;
 }
