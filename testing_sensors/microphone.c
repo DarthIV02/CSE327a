@@ -48,7 +48,7 @@ int main(void) {
           digitalWrite(Led13,LOW);
         }
         
-        delay(50);                  // Slight pause so that we don't overwhelm the serial interface
+        delay(100);                  // Slight pause so that we don't overwhelm the serial interface
     }
     return 0;
 }
