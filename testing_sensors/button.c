@@ -70,9 +70,9 @@ unsigned short int isHeld(unsigned short int button, unsigned short int holdTime
 }
 
 int main(void) {
-    signal(SIGINT, cleanup);
-    signal(SIGTERM, cleanup);
-    signal(SIGHUP, cleanup);
+    //signal(SIGINT, cleanup);
+    //signal(SIGTERM, cleanup);
+    //signal(SIGHUP, cleanup);
 
     wiringPiSetupGpio();
 
