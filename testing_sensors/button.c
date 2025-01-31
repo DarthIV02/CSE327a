@@ -25,6 +25,7 @@
 #include <signal.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include <stdio.h>
 
 // GPIO Pins, BCM numbering
 #define RED_BUTTON 5
