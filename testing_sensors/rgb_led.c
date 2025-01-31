@@ -18,20 +18,24 @@ int main(void) {
     pinMode(redpin, OUTPUT); 
     pinMode(bluepin, OUTPUT);
     pinMode(greenpin, OUTPUT); 
+    softPwmCreate(redpin, 0, 0xFF);
+    softPwmCreate(bluepin, 0, 0xFF);
+    softPwmCreate(greenpin, 0, 0xFF);
+
     int val = 0;
 
     while(1){
-        for(val=255; val>0; val--){
-            analogWrite(redpin, val); 
-            analogWrite(greenpin, 255-val); 
-            analogWrite(bluepin, 128-val); 
+        for(val=255; val>0; val--){ 
+            softPwmWrite(redpin, val);
+            softPwmWrite(greenpin, 255-val); 
+            softPwmWrite(bluepin, 128-val); 
             delay(50);
         }
         for(val=0; val<255; val++)
         {
-            analogWrite(redpin, val); 
-            analogWrite(greenpin, 255-val); 
-            analogWrite(bluepin, 128-val); 
+            softPwmWrite(redpin, val); 
+            softPwmWrite(greenpin, 255-val); 
+            softPwmWrite(bluepin, 128-val); 
             delay(50);
         }
         printf("%d\n", val);
