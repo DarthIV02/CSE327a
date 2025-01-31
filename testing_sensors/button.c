@@ -1,30 +1,85 @@
-#include <wiringPi.h>
-#include <stdio.h>
-#define  ButtonPin 5
+/*
 
-int value; // Temporary variable
-  
-int main(void)
-{
-    if(wiringPiSetup() == -1){
-    //if the wiringPi initialization fails, print error message
-        printf("setup wiringPi failed !");
-        return 1;
-    }
+    Program: 	wiringPi Buttons (buttons.c)
+    Author:  M. Heidenreich, (c) 2021
 
-    pinMode(button, INPUT); // Initialization sensor pin
-    digitalWrite(button, HIGH); // Activation of internal pull-up resistor
-    Serial.begin(9600); // Initialization of the serial monitor
-    Serial.println("KY-004 Button test");
+    Description:
+    This code is provided in support of the following YouTube tutorial:
+    https://www.youtube.com/watch?v=9Znf0CnsbXI 
     
-    while(1){
-        // The current signal at the sensor is read out.
-        value = digitalRead(button); 
-        // If a signal could be detected, this is displayed on the serial monitor.
-        if (value == LOW) {
-            Serial.println("Signal detected");
-            delay(300); // 300 ms break
+    This 2-part Raspberry Pi GPIO tutorial shows how to correctly use buttons with wiringPi.
+    While I use the buttons to control LEDs, you can use the same approach with any other
+    electronic components (or code in a subroutine/function in general).
+
+    THIS SOFTWARE AND LINKED VIDEO TOTORIAL ARE PROVIDED "AS IS" AND THE
+    AUTHOR DISCLAIMS ALL WARRANTIES INCLUDING ALL IMPLIED WARRANTIES OF
+    MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR
+    ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES
+    WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN
+    ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
+    OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+*/
+
+#include <wiringPi.h>
+#include <pthread.h>
+#include <signal.h>
+#include <stdlib.h>
+#include <unistd.h>
+
+// GPIO Pins, BCM numbering
+#define RED_BUTTON 5
+
+void cleanup(int signo) {
+    pullUpDnControl(RED_BUTTON, PUD_DOWN);
+
+    exit(0);
+}
+
+void goRed() {
+    printf("Button pressed...\n");
+    delay(100);
+}
+
+unsigned short int isPressed(unsigned short int button) {
+    static struct timespec lastCall;
+    struct timespec thisCall;
+    float timeDiff;
+
+    clock_gettime(CLOCK_REALTIME, &thisCall);
+    timeDiff = (thisCall.tv_sec + thisCall.tv_nsec/1E9 - lastCall.tv_sec - lastCall.tv_nsec/1E9)*5;
+    lastCall = thisCall;
+
+    return timeDiff > 1 ? 1 : 0;
+}
+
+unsigned short int isHeld(unsigned short int button, unsigned short int holdTime) {
+    unsigned short int sample;
+    unsigned short int sampleCount = holdTime/25;
+    unsigned short int delayInterval = holdTime/40;
+
+    for(sample=0; sample<sampleCount; sample++) {
+        if (digitalRead(button)) {
+            break;
         }
+
+        delay(delayInterval);
     }
+
+    return sample == sampleCount ? 1 : 0;
+}
+
+int main(void) {
+    signal(SIGINT, cleanup);
+    signal(SIGTERM, cleanup);
+    signal(SIGHUP, cleanup);
+
+    wiringPiSetupGpio();
+
+    pinMode(RED_BUTTON, INPUT);
+    pullUpDnControl(RED_BUTTON, PUD_UP);
+
+    wiringPiISR(RED_BUTTON, INT_EDGE_BOTH, goRed);
+    
+    pause();
     return 0;
 }
