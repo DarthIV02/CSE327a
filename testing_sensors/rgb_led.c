@@ -18,7 +18,6 @@ int main(void) {
     pinMode(redpin, OUTPUT); 
     pinMode(bluepin, OUTPUT);
     pinMode(greenpin, OUTPUT); 
-    Serial.begin(9600);
     int val = 0;
 
     while(1){
@@ -35,7 +34,7 @@ int main(void) {
             analogWrite(bluepin, 128-val); 
             delay(50);
         }
-        Serial.println(val, DEC);
+        printf("%d\n", val);
     }
     return 0;
 }
