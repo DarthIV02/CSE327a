@@ -21,68 +21,32 @@
 */
 
 #include <wiringPi.h>
-#include <pthread.h>
-#include <signal.h>
-#include <stdlib.h>
-#include <unistd.h>
 #include <stdio.h>
 
 // GPIO Pins, BCM numbering
 #define RED_BUTTON 5
 
-void cleanup(int signo) {
-    pullUpDnControl(RED_BUTTON, PUD_DOWN);
-
-    exit(0);
-}
-
-void goRed() {
-    printf("Button pressed...\n");
-    delay(100);
-}
-
-unsigned short int isPressed(unsigned short int button) {
-    static struct timespec lastCall;
-    struct timespec thisCall;
-    float timeDiff;
-
-    clock_gettime(CLOCK_REALTIME, &thisCall);
-    timeDiff = (thisCall.tv_sec + thisCall.tv_nsec/1E9 - lastCall.tv_sec - lastCall.tv_nsec/1E9)*5;
-    lastCall = thisCall;
-
-    return timeDiff > 1 ? 1 : 0;
-}
-
-unsigned short int isHeld(unsigned short int button, unsigned short int holdTime) {
-    unsigned short int sample;
-    unsigned short int sampleCount = holdTime/25;
-    unsigned short int delayInterval = holdTime/40;
-
-    for(sample=0; sample<sampleCount; sample++) {
-        if (digitalRead(button)) {
-            break;
-        }
-
-        delay(delayInterval);
-    }
-
-    return sample == sampleCount ? 1 : 0;
-}
-
 int main(void) {
-    //signal(SIGINT, cleanup);
-    //signal(SIGTERM, cleanup);
-    //signal(SIGHUP, cleanup);
 
-    wiringPiSetupGpio();
-
+    if(wiringPiSetup() == -1){
+    //if the wiringPi initialization fails, print error message
+        printf("setup wiringPi failed !");
+        return 1;
+    }
     pinMode(RED_BUTTON, INPUT);
-    pullUpDnControl(RED_BUTTON, PUD_UP);
 
-    printf("Ready :)");
-
-    wiringPiISR(RED_BUTTON, INT_EDGE_BOTH, goRed);
-    
-    pause();
+    while(1){
+        val = digitalRead(RED_BUTTON); //read the value of the digital interface 3 assigned to val
+        if (val == HIGH)         //when the shock sensor have signal, LED blink
+        {
+            printf("button pressed...\n");
+            delay(500);
+        }
+        else
+        {
+            printf("button not pressed...\n");
+            delay(500);
+        }
+    }
     return 0;
 }
