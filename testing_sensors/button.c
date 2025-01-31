@@ -40,12 +40,12 @@ int main(void) {
         val = digitalRead(RED_BUTTON); //read the value of the digital interface 3 assigned to val
         if (val == HIGH)         //when the shock sensor have signal, LED blink
         {
-            printf("button pressed...\n");
+            printf("button not pressed...\n");
             delay(500);
         }
         else
         {
-            printf("button not pressed...\n");
+            printf("button pressed...\n");
             delay(500);
         }
     }
