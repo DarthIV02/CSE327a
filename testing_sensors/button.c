@@ -34,6 +34,7 @@ int main(void) {
         return 1;
     }
     pinMode(RED_BUTTON, INPUT);
+    int val = 0;
 
     while(1){
         val = digitalRead(RED_BUTTON); //read the value of the digital interface 3 assigned to val
