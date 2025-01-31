@@ -79,7 +79,7 @@ int main(void) {
     pinMode(RED_BUTTON, INPUT);
     pullUpDnControl(RED_BUTTON, PUD_UP);
 
-    printf("Ready :)")
+    printf("Ready :)");
 
     wiringPiISR(RED_BUTTON, INT_EDGE_BOTH, goRed);
     
