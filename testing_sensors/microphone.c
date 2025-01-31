@@ -36,7 +36,7 @@ int main(void) {
     pinMode(sensorDigitalPin,INPUT);  // Define pin 3 as an input port, to accept digital input
     pinMode(Led13,OUTPUT);            // Define LED13 as an output port, to indicate digital trigger reached
 
-    int val = 0;
+    digitalWrite(Led13, LOW);
 
     while(1){
         analogValue = analogRead(sensorAnalogPin); // Read the value of the analog interface A0 assigned to digitalValue 
