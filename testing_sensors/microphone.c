@@ -14,8 +14,6 @@
 #include <stdio.h>
 #include <softPwm.h>
 
-// Select the Arduino input pin to accept the Sound Sensor's analog output 
-#define sensorAnalogPin 24
 // Select the Arduino input pin to accept the Sound Sensor's digital output
 #define sensorDigitalPin 25
 #define Led13 21
@@ -27,7 +25,7 @@ int main(void) {
         printf("setup wiringPi failed !");
         return 1;
     }
-    int  analogValue = 0;         // Define variable to store the analog value coming from the Sound Sensor
+
     int  digitalValue;            // Define variable to store the digital value coming from the Sound Sensor
                               // When D0 from the Sound Sensor (connnected to pin 3 on the
                               // Arduino) sends High (voltage present), L will light. In practice, you
@@ -39,9 +37,7 @@ int main(void) {
     digitalWrite(Led13, LOW);
 
     while(1){
-        analogValue = analogRead(sensorAnalogPin); // Read the value of the analog interface A0 assigned to digitalValue 
         digitalValue = digitalRead(sensorDigitalPin); // Read the value of the digital interface 3 assigned to digitalValue 
-        printf("%d", analogValue); // Send the analog value to the serial transmit interface
         
         if(digitalValue==HIGH)      // When the Sound Sensor sends signla, via voltage present, light LED13 (L)
         {
