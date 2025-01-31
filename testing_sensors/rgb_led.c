@@ -1,5 +1,6 @@
 #include <wiringPi.h>
 #include <stdio.h>
+#include <softPwm.h>
 
 /* Selecciona el pin para el LED rojo */ 
 #define redpin 27
