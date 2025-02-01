@@ -13,7 +13,6 @@
 int counter = 0;
 int currentStateCLK;
 int lastStateCLK;
-String currentDir ="";
 unsigned long lastButtonPress = 0;
 
 int main(void) {
@@ -43,11 +42,11 @@ int main(void) {
             // the encoder is rotating CCW so decrement
             if (digitalRead(DT) != currentStateCLK) {
                 counter --;
-                currentDir ="CCW";
+                char currentDir[] = "CCW";
             } else {
                 // Encoder is rotating CW so increment
                 counter ++;
-                currentDir ="CW";
+                char currentDir[] = "CW";
             }
 
             printf("Direction: %s | Counter: %d", currentDir, counter);
