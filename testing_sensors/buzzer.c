@@ -1,7 +1,7 @@
 #include <wiringPi.h>
 #include <stdio.h>
 #include <softPwm.h>
-#include <pitches.h>
+#include "pitches.h"
 
 /* Selecciona el pin para el Buzzer */ 
 #define buzzer 3
