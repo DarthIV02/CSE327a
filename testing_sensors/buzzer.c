@@ -4,7 +4,9 @@
 #include "pitches.h"
 
 /* Selecciona el pin para el Buzzer */ 
-#define buzzer 3
+#define BUZZER 3
+
+
 
 int main(void) {
 
@@ -14,16 +16,19 @@ int main(void) {
         return 1;
     }
 
+    pinMode(BUZZER, OUTPUT);
+    softPwmCreate(BUZZER, 0, 0);
+
     // notes in the melody:
     int melody[] = {NOTE_C5, NOTE_D5, NOTE_E5, NOTE_F5, NOTE_G5, NOTE_A5, NOTE_B5, NOTE_C6};
     int duration = 500;  // 500 miliseconds
 
     for (int thisNote = 0; thisNote < 8; thisNote++) {
     // pin8 output the voice, every scale is 0.5 sencond
-        tone(buzzer, melody[thisNote], duration);
+        softPwmWrite(BUZZER, melody[thisNote]);
         
         // Output the voice after several minutes
-        delay(1000);
+        delay(duration);
     }
     
     // restart after two seconds 
