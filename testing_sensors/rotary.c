@@ -33,7 +33,6 @@ int main(void) {
     while(1){
         // Read the current state of CLK
         currentStateCLK = digitalRead(CLK);
-        printf("Clock: %d", currentStateCLK);
 
         // If last and current state of CLK are different, then pulse occurred
         // React to only 1 state change to avoid double count
@@ -73,7 +72,7 @@ int main(void) {
             lastButtonPress = millis();
         }
 
-        delay(50);
+        delay(25);
     }
 
     return 0;
