@@ -1,44 +1,41 @@
 #include <wiringPi.h>
 #include <stdio.h>
-#include <softPwm.h>
-#include "pitches.h"
+#include "pitches.h"  // Ensure this file contains correct frequency values
 
-/* Selecciona el pin para el Buzzer */ 
+/* Define Buzzer Pin */
 #define BUZZER 3
 
+void playTone(int frequency, int duration) {
+    int delayTime = 1000000 / frequency / 2;  // Half period in microseconds
+    int cycles = frequency * duration / 1000;  // Number of cycles
 
+    for (int i = 0; i < cycles; i++) {
+        digitalWrite(BUZZER, HIGH);
+        delayMicroseconds(delayTime);
+        digitalWrite(BUZZER, LOW);
+        delayMicroseconds(delayTime);
+    }
+}
 
 int main(void) {
-
-    if(wiringPiSetup() == -1){
-    //if the wiringPi initialization fails, print error message
-        printf("setup wiringPi failed !");
+    if (wiringPiSetup() == -1) {
+        printf("WiringPi setup failed!\n");
         return 1;
     }
 
     pinMode(BUZZER, OUTPUT);
-    softPwmCreate(BUZZER, 2000, 5000);
 
-    // notes in the melody:
+    // Melody notes
     int melody[] = {NOTE_C7, NOTE_D7, NOTE_E7, NOTE_FS7, NOTE_GS7, NOTE_AS7, NOTE_C8, NOTE_D8};
-    int duration = 500;  // 500 miliseconds
-    int val = 0;
+    int duration = 500;  // Each note duration in milliseconds
 
-    while(1){
+    while (1) {
         for (int thisNote = 0; thisNote < 8; thisNote++) {
-        // pin8 output the voice, every scale is 0.5 sencond
-            softPwmWrite(BUZZER, melody[thisNote]);
-
-            val = melody[thisNote];
-
-            printf("Melody: %d", val);
-            
-            // Output the voice after several minutes
-            delay(duration);
+            printf("Playing frequency: %d Hz\n", melody[thisNote]);
+            playTone(melody[thisNote], duration);
+            delay(50);  // Small gap between notes
         }
-        
-        // restart after two seconds 
-        delay(2000);
+        delay(2000);  // Pause before repeating
     }
 
     return 0;
