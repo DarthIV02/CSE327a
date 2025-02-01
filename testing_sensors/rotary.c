@@ -33,26 +33,28 @@ int main(void) {
     while(1){
         // Read the current state of CLK
         currentStateCLK = digitalRead(CLK);
-        printf("Clock: ", currentStateCLK);
+        printf("Clock: %d\n", currentStateCLK);
 
         // If last and current state of CLK are different, then pulse occurred
         // React to only 1 state change to avoid double count
         if (currentStateCLK != lastStateCLK  && currentStateCLK == 1){
 
-            char currentDir[] = "";
+            char true_dir[50];
 
             // If the DT state is different than the CLK state then
             // the encoder is rotating CCW so decrement
             if (digitalRead(DT) != currentStateCLK) {
                 counter --;
                 char currentDir[] = "CCW";
+                strcpy(true_dir, currentDir);
             } else {
                 // Encoder is rotating CW so increment
                 counter ++;
                 char currentDir[] = "CW";
+                strcpy(true_dir, currentDir);
             }
 
-            printf("Direction: %s | Counter: %d", currentDir, counter);
+            printf("Direction: %s | Counter: %d\n", true_dir, counter);
         }
 
         // Remember last CLK state
