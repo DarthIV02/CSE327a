@@ -17,18 +17,21 @@ int main(void) {
     }
 
     pinMode(BUZZER, OUTPUT);
-    softPwmCreate(BUZZER, 0, 5000);
+    softPwmCreate(BUZZER, 2000, 5000);
 
     // notes in the melody:
     int melody[] = {NOTE_C7, NOTE_D7, NOTE_E7, NOTE_FS7, NOTE_GS7, NOTE_AS7, NOTE_C8, NOTE_D8};
     int duration = 500;  // 500 miliseconds
+    int val = 0;
 
     while(1){
         for (int thisNote = 0; thisNote < 8; thisNote++) {
         // pin8 output the voice, every scale is 0.5 sencond
             softPwmWrite(BUZZER, melody[thisNote]);
 
-            printf("Melody: %d", melody[thisNote]);
+            val = melody[thisNote];
+
+            printf("Melody: %d", val);
             
             // Output the voice after several minutes
             delay(duration);
