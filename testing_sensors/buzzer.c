@@ -20,7 +20,7 @@ int main(void) {
     softPwmCreate(BUZZER, 0, 5000);
 
     // notes in the melody:
-    int melody[] = {NOTE_C5, NOTE_D5, NOTE_E5, NOTE_F5, NOTE_G5, NOTE_A5, NOTE_B5, NOTE_C6};
+    int melody[] = {NOTE_C7, NOTE_D7, NOTE_E7, NOTE_FS7, NOTE_GS7, NOTE_AS7, NOTE_C8, NOTE_D8};
     int duration = 500;  // 500 miliseconds
 
     while(1){
