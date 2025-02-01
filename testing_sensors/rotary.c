@@ -26,7 +26,7 @@ int main(void) {
     // Set encoder pins as inputs
 	pinMode(CLK, INPUT);
 	pinMode(DT, INPUT);
-	pinMode(SW, INPUT_PULLUP);
+	pinMode(SW, INPUT); // INPUT_PULLUP
     // Read the initial state of CLK
 	lastStateCLK = digitalRead(CLK);
 
@@ -65,7 +65,7 @@ int main(void) {
             //if 50ms have passed since last LOW pulse, it means that the
             //button has been pressed, released and pressed again
             if (millis() - lastButtonPress > 50) {
-                Serial.println("Button pressed!");
+                printf("Button pressed!");
             }
 
             // Remember last button press event
