@@ -1,7 +1,6 @@
 #include <wiringPi.h>
 #include <stdio.h>
 #include <softPwm.h>
-#include <attachInterrupt.h>
 
 /* Selecciona el pin para el LED rojo */ 
 #define CLK 24
@@ -10,8 +9,11 @@
 /* Selecciona el pin para el LED azul */ 
 #define SW 22
 
-int count = 0;//Define the count
-int lastCLK = 0;//CLK initial value
+int counter = 0;
+int currentStateCLK;
+int lastStateCLK;
+String currentDir ="";
+unsigned long lastButtonPress = 0;
 
 int main(void) {
 
@@ -21,35 +23,53 @@ int main(void) {
         return 1;
     }
 
-    const int interrupt0 = 0;// Interrupt 0 在 pin 2 上
-
-    pinMode(SW, INPUT);
-    digitalWrite(SW, HIGH);
-    pinMode(CLK, INPUT);
-    pinMode(DT, INPUT);
-    attachInterrupt(interrupt0, ClockChanged, CHANGE);//Set the interrupt 0 handler, trigger level change
+    // Set encoder pins as inputs
+	pinMode(CLK,INPUT);
+	pinMode(DT,INPUT);
+	pinMode(SW, INPUT_PULLUP);
+    // Read the initial state of CLK
+	lastStateCLK = digitalRead(CLK);
 
     while(1){
-        if (!digitalRead(SW) && count != 0) //Read the button press and the count value to 0 when the counter reset
-        {
-            count = 0;
-            printf("count: %d", count);
+        // Read the current state of CLK
+        currentStateCLK = digitalRead(CLK);
+
+        // If last and current state of CLK are different, then pulse occurred
+        // React to only 1 state change to avoid double count
+        if (currentStateCLK != lastStateCLK  && currentStateCLK == 1){
+
+            // If the DT state is different than the CLK state then
+            // the encoder is rotating CCW so decrement
+            if (digitalRead(DT) != currentStateCLK) {
+                counter --;
+                currentDir ="CCW";
+            } else {
+                // Encoder is rotating CW so increment
+                counter ++;
+                currentDir ="CW";
+            }
+
+            printf("Direction: %s | Counter: %d", currentDir, counter);
+        }
+
+        // Remember last CLK state
+        lastStateCLK = currentStateCLK;
+
+        // Read the button state
+        int btnState = digitalRead(SW);
+
+        //If we detect LOW signal, button is pressed
+        if (btnState == LOW) {
+            //if 50ms have passed since last LOW pulse, it means that the
+            //button has been pressed, released and pressed again
+            if (millis() - lastButtonPress > 50) {
+                Serial.println("Button pressed!");
+            }
+
+            // Remember last button press event
+            lastButtonPress = millis();
         }
     }
 
     return 0;
-}
-
-//The interrupt handlers
-void ClockChanged()
-{
-  int clkValue = digitalRead(CLK);//Read the CLK pin level
-  int dtValue = digitalRead(DT);//Read the DT pin level
-  if (lastCLK != clkValue)
-  {
-    lastCLK = clkValue;
-    count += (clkValue != dtValue ? 1 : -1);//CLK and inconsistent DT + 1, otherwise - 1
-
-    printf("count: %d", count);
-  }
 }
