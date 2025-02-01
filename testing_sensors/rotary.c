@@ -24,8 +24,8 @@ int main(void) {
     }
 
     // Set encoder pins as inputs
-	pinMode(CLK,INPUT);
-	pinMode(DT,INPUT);
+	pinMode(CLK, INPUT);
+	pinMode(DT, INPUT);
 	pinMode(SW, INPUT_PULLUP);
     // Read the initial state of CLK
 	lastStateCLK = digitalRead(CLK);
@@ -37,6 +37,8 @@ int main(void) {
         // If last and current state of CLK are different, then pulse occurred
         // React to only 1 state change to avoid double count
         if (currentStateCLK != lastStateCLK  && currentStateCLK == 1){
+
+            char currentDir[] = "";
 
             // If the DT state is different than the CLK state then
             // the encoder is rotating CCW so decrement
