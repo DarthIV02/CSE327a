@@ -27,7 +27,7 @@ int main(void) {
     while(1){
         digitalValue = digitalRead(DETECTION); // Read the value of the digital interface 3 assigned to digitalValue 
         
-        if(digitalValue==HIGH)      // When the Sound Sensor sends signla, via voltage present, light LED13 (L)
+        if(digitalValue==LOW)      // When the Sound Sensor sends signla, via voltage present, light LED13 (L)
         {
           digitalWrite(Led13,HIGH);
         }
