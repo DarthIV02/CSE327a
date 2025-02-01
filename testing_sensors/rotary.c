@@ -1,7 +1,7 @@
 #include <wiringPi.h>
 #include <stdio.h>
 #include <softPwm.h>
-#include <string>
+#include <string.h>
 
 /* Selecciona el pin para el LED rojo */ 
 #define CLK 24
