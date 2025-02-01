@@ -27,6 +27,8 @@ int main(void) {
         for (int thisNote = 0; thisNote < 8; thisNote++) {
         // pin8 output the voice, every scale is 0.5 sencond
             softPwmWrite(BUZZER, melody[thisNote]);
+
+            printf("Melody: %d", melody[thisNote])
             
             // Output the voice after several minutes
             delay(duration);
