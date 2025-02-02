@@ -40,7 +40,7 @@ void init_sensors(SharedVariable* sv) {
 
 // 1. Button
 void body_button(SharedVariable* sv) {
-    if (READ(PIN_BUTTON) == 1){
+    if (READ(PIN_BUTTON) == 0){
         if(sv->bProgramExit == 0){
             TURN_OFF(PIN_ALED);
             TURN_OFF(PIN_DIP_GRN);
