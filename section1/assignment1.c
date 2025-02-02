@@ -66,13 +66,13 @@ void body_twocolor(SharedVariable* sv) {
 // 6. SMD RGB LED
 void body_rgbcolor(SharedVariable* sv) {
     if(sv->detection_movement == 0){
-        softPwmWrite(PIN_SMD_RED, 0xff);
-        softPwmWrite(PIN_SMD_GRN, 0x00);
-        softPwmWrite(PIN_SMD_BLU, 0x00);
+        softPwmWrite(PIN_SMD_RED, 255);
+        softPwmWrite(PIN_SMD_GRN, 0);
+        softPwmWrite(PIN_SMD_BLU, 0);
     } else {
-        softPwmWrite(PIN_SMD_RED, 0x80);
-        softPwmWrite(PIN_SMD_GRN, 0xff);
-        softPwmWrite(PIN_SMD_BLU, 0x00);    
+        softPwmWrite(PIN_SMD_RED, 80);
+        softPwmWrite(PIN_SMD_GRN, 255);
+        softPwmWrite(PIN_SMD_BLU, 0);    
     }
 }
 
