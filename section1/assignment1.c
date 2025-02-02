@@ -70,11 +70,19 @@ void playTone(int frequency, int duration) {
     int delayTime = 1000000 / frequency / 2;  // Half period in microseconds
     int cycles = frequency * duration / 1000;  // Number of cycles
 
+    unsigned long start_time;
+
     for (int i = 0; i < cycles; i++) {
         TURN_ON(PIN_BUZZER);
-        millis(delayTime);
+        start_time = millis()
+        while (millis() - start_time < delayTime){
+            continue;
+        }
         TURN_OFF(PIN_BUZZER);
-        millis(delayTime);
+        start_time = millis()
+        while (millis() - start_time < delayTime){
+            continue;
+        }
     }
 }
 
