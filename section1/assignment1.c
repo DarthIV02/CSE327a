@@ -5,20 +5,24 @@
 
 void init_shared_variable(SharedVariable* sv) {
     sv->bProgramExit = 0;
+    sv->detection = 0;
 // You can initialize the shared variable if needed.
 }
 
 void ledInit(void) {
-    softPwmCreate(PIN_SMD_RED, 0, 0xff);
 
-//......
-//initialize SMD and DIP
+// Initialize LEDs
+
+    softPwmCreate(PIN_SMD_RED, 0, 0xff);
+    pinMode(PIN_DIP_RED, OUTPUT);
+    pinMode(PIN_DIP_GRN, OUTPUT);
+    pinMode(PIN_ALED, OUTPUT);
 }
 
 void init_sensors(SharedVariable* sv) {
 // .......
     ledInit();
-    pinMode(PIN_ALED, OUTPUT);
+    pinMode(PIN_MOTION, INPUT);
 }
 
 // 1. Button
@@ -27,6 +31,7 @@ void body_button(SharedVariable* sv) {
 
 // 2. Infrared Motion Sensor
 void body_motion(SharedVariable* sv) {
+    sv->detection = READ(PIN_MOTION); // Read the value of the digital interface 3 assigned to digitalValue
 }
 
 // 3. Microphone Sound Sensor
@@ -39,6 +44,13 @@ void body_encoder(SharedVariable* sv) {
 
 // 5. DIP two-color LED
 void body_twocolor(SharedVariable* sv) {
+    if(sv->detection == 0){
+        TURN_ON(PIN_DIP_GRN);
+        TURN_OFF(PIN_DIP_RED);
+    } else {
+        TURN_ON(PIN_DIP_RED);
+        TURN_OFF(PIN_DIP_GRN);
+    }
 }
 
 // 6. SMD RGB LED
