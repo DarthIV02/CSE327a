@@ -39,7 +39,7 @@ void body_motion(SharedVariable* sv) {
 
 // 3. Microphone Sound Sensor
 void body_sound(SharedVariable* sv) {
-    sv->detection_sound = !READ(PIN_SOUND); // Read the value of the microphone
+    sv->detection_sound = READ(PIN_SOUND); // Read the value of the microphone
 }
 
 // 4. Rotary Encoder
