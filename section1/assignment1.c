@@ -42,8 +42,8 @@ void init_sensors(SharedVariable* sv) {
 void body_button(SharedVariable* sv) {
     int read_button = READ(PIN_BUTTON);
     if (read_button == 0){
-        printf("Button Pressed");
         if(sv->bProgramExit == 0){
+            printf("Button Pressed");
             TURN_OFF(PIN_ALED);
             TURN_OFF(PIN_DIP_GRN);
             TURN_OFF(PIN_DIP_RED);
@@ -51,9 +51,7 @@ void body_button(SharedVariable* sv) {
             softPwmWrite(PIN_SMD_GRN, 0);
             softPwmWrite(PIN_SMD_BLU, 0);
             sv->bProgramExit == 2;
-        }
-
-        if(sv->bProgramExit == 2){
+        } elif (sv->bProgramExit == 2){
             sv->bProgramExit == 0;
         }
     }  
