@@ -4,11 +4,13 @@
 #include <softPwm.h>
 
 void init_shared_variable(SharedVariable* sv) {
-    sv->bProgramExit = 0;
-    sv->detection_movement = 0;
-    sv->detection_sound = 0;
-    sv->detect_direction = 0;
-    sv->button_pressed = 1;
+    sv->bProgramExit = 0; // running 
+    int sv->detection_movement = 0; // none 
+    int sv->detection_sound = 0; // none
+    int sv->detect_direction = 0; // cw = 1 and ccw = 2
+    int sv->button_pressed = 1; // not pressed
+    int current_click;
+    int past_click;
 // You can initialize the shared variable if needed.
 }
 
@@ -44,7 +46,7 @@ void body_button(SharedVariable* sv) {
     int read_button = READ(PIN_BUTTON);
 
     if (sv->bProgramExit == 2){
-        //printf("Button Pressed");
+        // If paused then turn off
         TURN_OFF(PIN_ALED);
         TURN_OFF(PIN_DIP_GRN);
         TURN_OFF(PIN_DIP_RED);
@@ -53,7 +55,7 @@ void body_button(SharedVariable* sv) {
         softPwmWrite(PIN_SMD_BLU, 0);
     }
 
-    if (read_button == 0 && sv->button_pressed == 1){
+    if (read_button == 0 && sv->button_pressed == 1){ // change state when clicked
         if(sv->bProgramExit == 0){
             sv->bProgramExit = 2;
         } else if (sv->bProgramExit == 2){
@@ -61,7 +63,7 @@ void body_button(SharedVariable* sv) {
         }
     }
 
-    sv->button_pressed = read_button;
+    sv->button_pressed = read_button; // save previous state
 }
 
 // 2. Infrared Motion Sensor
@@ -100,11 +102,11 @@ void body_encoder(SharedVariable* sv) {
 
 // 5. DIP two-color LED
 void body_twocolor(SharedVariable* sv) {
-    if (sv->bProgramExit == 0){
-        if(sv->detection_movement == 1){
+    if (sv->bProgramExit == 0){ // Make sure to only turn on when running
+        if(sv->detection_movement == 1){ // If it detects movement
             TURN_ON(PIN_DIP_GRN);
             TURN_OFF(PIN_DIP_RED);
-        } else {
+        } else { // No movement
             TURN_ON(PIN_DIP_RED);
             TURN_OFF(PIN_DIP_GRN);
         }
@@ -113,7 +115,7 @@ void body_twocolor(SharedVariable* sv) {
 
 // 6. SMD RGB LED
 void body_rgbcolor(SharedVariable* sv) {
-    if (sv->bProgramExit == 0){ 
+    if (sv->bProgramExit == 0){ // If the program is running
         if(sv->detect_direction == 0){ // Counterclockwise
             if(sv->detection_movement == 0){ // No motion
                 softPwmWrite(PIN_SMD_RED, 0xEE);
@@ -140,7 +142,7 @@ void body_rgbcolor(SharedVariable* sv) {
 
 // 7. Auto-flash LED
 void body_aled(SharedVariable* sv) {
-    if (sv->bProgramExit == 0){
+    if (sv->bProgramExit == 0){ // If running
         TURN_ON(PIN_ALED); //led on
     }
 }
