@@ -31,7 +31,7 @@ void body_button(SharedVariable* sv) {
 
 // 2. Infrared Motion Sensor
 void body_motion(SharedVariable* sv) {
-    sv->detection = READ(PIN_MOTION); // Read the value of the digital interface 3 assigned to digitalValue
+    sv->detection = !READ(PIN_MOTION); // Read the value of the digital interface 3 assigned to digitalValue
 }
 
 // 3. Microphone Sound Sensor
