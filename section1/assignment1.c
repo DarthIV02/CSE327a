@@ -47,7 +47,7 @@ void body_rgbcolor(SharedVariable* sv) {
 
 // 7. Auto-flash LED
 void body_aled(SharedVariable* sv) {
-    TURN_ON(PIN_ALED, HIGH); //led on
+    TURN_ON(PIN_ALED); //led on
 }
 
 // 8. Buzzer
