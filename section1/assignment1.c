@@ -76,13 +76,13 @@ void playTone(int frequency, int duration) {
         TURN_ON(PIN_BUZZER);
         //delayMicroseconds(delayTime);
         start_time = millis();
-        while (millis() - start_time < delayTime) {  // Convert microseconds to milliseconds
+        while (millis() - start_time < delayTime / 10) {  // Convert microseconds to milliseconds
             // Do nothing, just wait
         }
         TURN_OFF(PIN_BUZZER);
         //delayMicroseconds(delayTime);
         start_time = millis();
-        while (millis() - start_time < delayTime) {  // Convert microseconds to milliseconds
+        while (millis() - start_time < delayTime / 10) {  // Convert microseconds to milliseconds
             // Do nothing, just wait
         }
     }
