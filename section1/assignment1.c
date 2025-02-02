@@ -91,6 +91,6 @@ void playTone(int frequency, int duration) {
 // 8. Buzzer
 void body_buzzer(SharedVariable* sv) {
     if (sv->detection_sound == 1){
-        playTone(2093, 300); //Play for 3 seconds
+        playTone(3136, 300); //Play for 3 seconds
     }
 }
