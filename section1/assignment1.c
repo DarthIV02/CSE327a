@@ -43,7 +43,7 @@ void body_button(SharedVariable* sv) {
 
 // 2. Infrared Motion Sensor
 void body_motion(SharedVariable* sv) {
-    sv->detection_movement = !READ(PIN_MOTION); // Read the value of the movement
+    sv->detection_movement = READ(PIN_MOTION); // Read the value of the movement
 }
 
 // 3. Microphone Sound Sensor
@@ -77,7 +77,7 @@ void body_encoder(SharedVariable* sv) {
 
 // 5. DIP two-color LED
 void body_twocolor(SharedVariable* sv) {
-    if(sv->detection_movement == 0){
+    if(sv->detection_movement == 1){
         TURN_ON(PIN_DIP_GRN);
         TURN_OFF(PIN_DIP_RED);
     } else {
