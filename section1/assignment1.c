@@ -10,6 +10,7 @@ void init_shared_variable(SharedVariable* sv) {
 
 void ledInit(void) {
     softPwmCreate(PIN_SMD_RED, 0, 0xff);
+
 //......
 //initialize SMD and DIP
 }
@@ -17,6 +18,7 @@ void ledInit(void) {
 void init_sensors(SharedVariable* sv) {
 // .......
     ledInit();
+    pinMode(PIN_ALED, OUTPUT);
 }
 
 // 1. Button
@@ -45,6 +47,7 @@ void body_rgbcolor(SharedVariable* sv) {
 
 // 7. Auto-flash LED
 void body_aled(SharedVariable* sv) {
+    TURN_ON(PIN_ALED, HIGH); //led on
 }
 
 // 8. Buzzer
