@@ -74,7 +74,6 @@ void body_rgbcolor(SharedVariable* sv) {
         softPwmWrite(PIN_SMD_GRN, 0xff);
         softPwmWrite(PIN_SMD_BLU, 0x00);    
     }
-    softPwmWrite(redpin, val);
 }
 
 // 7. Auto-flash LED
