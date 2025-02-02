@@ -71,10 +71,10 @@ void playTone(int frequency, int duration) {
     int cycles = frequency * duration / 1000;  // Number of cycles
 
     for (int i = 0; i < cycles; i++) {
-        digitalWrite(BUZZER, HIGH);
-        delayMicroseconds(delayTime);
-        digitalWrite(BUZZER, LOW);
-        delayMicroseconds(delayTime);
+        TURN_ON(PIN_BUZZER);
+        millis(delayTime);
+        TURN_OFF(PIN_BUZZER);
+        millis(delayTime);
     }
 }
 
