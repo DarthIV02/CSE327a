@@ -35,10 +35,26 @@ void init_sensors(SharedVariable* sv) {
     pinMode(PIN_BUZZER, OUTPUT);
     pinMode(PIN_ROTARY_CLK, INPUT);
 	pinMode(PIN_ROTARY_DT, INPUT);
+    pinMode(PIN_BUTTON, INPUT);
 }
 
 // 1. Button
 void body_button(SharedVariable* sv) {
+    if (READ(PIN_BUTTON) == 1){
+        if(sv->bProgramExit == 0){
+            TURN_OFF(PIN_ALED);
+            TURN_OFF(PIN_DIP_GRN);
+            TURN_OFF(PIN_DIP_RED);
+            softPwmWrite(PIN_SMD_RED, 0);
+            softPwmWrite(PIN_SMD_GRN, 0);
+            softPwmWrite(PIN_SMD_BLU, 0);
+            sv->bProgramExit == 2;
+        }
+
+        if(sv->bProgramExit == 2){
+            sv->bProgramExit == 0;
+        }
+    }  
 }
 
 // 2. Infrared Motion Sensor
@@ -77,43 +93,49 @@ void body_encoder(SharedVariable* sv) {
 
 // 5. DIP two-color LED
 void body_twocolor(SharedVariable* sv) {
-    if(sv->detection_movement == 1){
-        TURN_ON(PIN_DIP_GRN);
-        TURN_OFF(PIN_DIP_RED);
-    } else {
-        TURN_ON(PIN_DIP_RED);
-        TURN_OFF(PIN_DIP_GRN);
+    if (sv->bProgramExit == 0){
+        if(sv->detection_movement == 1){
+            TURN_ON(PIN_DIP_GRN);
+            TURN_OFF(PIN_DIP_RED);
+        } else {
+            TURN_ON(PIN_DIP_RED);
+            TURN_OFF(PIN_DIP_GRN);
+        }
     }
 }
 
 // 6. SMD RGB LED
 void body_rgbcolor(SharedVariable* sv) {
-    if(sv->detect_direction == 0){ // Counterclockwise
-        if(sv->detection_movement == 0){ // No motion
-            softPwmWrite(PIN_SMD_RED, 0xEE);
-            softPwmWrite(PIN_SMD_GRN, 0x00);
-            softPwmWrite(PIN_SMD_BLU, 0xC8);
-        } else {  // Motion
-            softPwmWrite(PIN_SMD_RED, 0x00);
-            softPwmWrite(PIN_SMD_GRN, 0xFF);
-            softPwmWrite(PIN_SMD_BLU, 0xFF);    
-        }
-    } else { // Clockwise
-        if(sv->detection_movement == 0){ // No motion
-            softPwmWrite(PIN_SMD_RED, 0xFF);
-            softPwmWrite(PIN_SMD_GRN, 0x00);
-            softPwmWrite(PIN_SMD_BLU, 0x00);
-        } else { // Motion
-            softPwmWrite(PIN_SMD_RED, 0x80);
-            softPwmWrite(PIN_SMD_GRN, 0xFF);
-            softPwmWrite(PIN_SMD_BLU, 0x00);    
+    if (sv->bProgramExit == 0){ 
+        if(sv->detect_direction == 0){ // Counterclockwise
+            if(sv->detection_movement == 0){ // No motion
+                softPwmWrite(PIN_SMD_RED, 0xEE);
+                softPwmWrite(PIN_SMD_GRN, 0x00);
+                softPwmWrite(PIN_SMD_BLU, 0xC8);
+            } else {  // Motion
+                softPwmWrite(PIN_SMD_RED, 0x00);
+                softPwmWrite(PIN_SMD_GRN, 0xFF);
+                softPwmWrite(PIN_SMD_BLU, 0xFF);    
+            }
+        } else { // Clockwise
+            if(sv->detection_movement == 0){ // No motion
+                softPwmWrite(PIN_SMD_RED, 0xFF);
+                softPwmWrite(PIN_SMD_GRN, 0x00);
+                softPwmWrite(PIN_SMD_BLU, 0x00);
+            } else { // Motion
+                softPwmWrite(PIN_SMD_RED, 0x80);
+                softPwmWrite(PIN_SMD_GRN, 0xFF);
+                softPwmWrite(PIN_SMD_BLU, 0x00);    
+            }
         }
     }
 }
 
 // 7. Auto-flash LED
 void body_aled(SharedVariable* sv) {
-    TURN_ON(PIN_ALED); //led on
+    if (sv->bProgramExit == 0){
+        TURN_ON(PIN_ALED); //led on
+    }
 }
 
 void playTone(int frequency, int duration) {
