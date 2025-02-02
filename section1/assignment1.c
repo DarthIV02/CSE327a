@@ -51,8 +51,10 @@ void body_button(SharedVariable* sv) {
             softPwmWrite(PIN_SMD_GRN, 0);
             softPwmWrite(PIN_SMD_BLU, 0);
             sv->bProgramExit == 2;
-        } elif (sv->bProgramExit == 2){
+        } else if (sv->bProgramExit == 2){
             sv->bProgramExit == 0;
+        } else {
+
         }
     }  
 }
