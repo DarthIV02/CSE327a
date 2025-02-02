@@ -66,6 +66,7 @@ typedef struct shared_variable {
     int detect_direction;
     int current_click;
     int past_click;
+    int button_pressed;
     // You can add more variables if needed.
 } SharedVariable;
 

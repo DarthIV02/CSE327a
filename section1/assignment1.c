@@ -8,6 +8,7 @@ void init_shared_variable(SharedVariable* sv) {
     sv->detection_movement = 0;
     sv->detection_sound = 0;
     sv->detect_direction = 0;
+    sv->button_pressed = 1;
 // You can initialize the shared variable if needed.
 }
 
@@ -41,7 +42,7 @@ void init_sensors(SharedVariable* sv) {
 // 1. Button
 void body_button(SharedVariable* sv) {
     int read_button = READ(PIN_BUTTON);
-    if (read_button == 0){
+    if (read_button == 0 && read_button != sv->button_pressed){
         if(sv->bProgramExit == 0){
             printf("Button Pressed");
             TURN_OFF(PIN_ALED);
@@ -53,9 +54,12 @@ void body_button(SharedVariable* sv) {
             sv->bProgramExit == 2;
         } else if (sv->bProgramExit == 2){
             sv->bProgramExit == 0;
-        } else {
-
         }
+
+        sv->button_pressed = read_button
+
+    } else if (read_button == 1 && read_button != sv->button_pressed){
+        sv->button_pressed = read_button
     }  
 }
 
