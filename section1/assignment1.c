@@ -74,23 +74,23 @@ void playTone(int frequency, int duration) {
 
     for (int i = 0; i < cycles; i++) {
         TURN_ON(PIN_BUZZER);
-        delayMicroseconds(delayTime);
-        /*start_time = millis();
-        while (millis() - start_time < delayTime){
-            continue;
-        }*/
+        //delayMicroseconds(delayTime);
+        start_time = millis();
+        while (millis() - start_time < delayTime / 1000) {  // Convert microseconds to milliseconds
+            // Do nothing, just wait
+        }
         TURN_OFF(PIN_BUZZER);
-        delayMicroseconds(delayTime);
-        /*start_time = millis();
-        while (millis() - start_time < delayTime){
-            continue;
-        }*/
+        //delayMicroseconds(delayTime);
+        start_time = millis();
+        while (millis() - start_time < delayTime / 1000) {  // Convert microseconds to milliseconds
+            // Do nothing, just wait
+        }
     }
 }
 
 // 8. Buzzer
 void body_buzzer(SharedVariable* sv) {
     if (sv->detection_sound == 1){
-        playTone(1397, 3000); //Play for 3 seconds
+        playTone(2093, 3000); //Play for 3 seconds
     }
 }
