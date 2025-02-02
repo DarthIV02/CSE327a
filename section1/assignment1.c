@@ -7,6 +7,7 @@ void init_shared_variable(SharedVariable* sv) {
     sv->bProgramExit = 0;
     sv->detection_movement = 0;
     sv->detection_sound = 0;
+    sv->detect_direction = 0;
 // You can initialize the shared variable if needed.
 }
 
@@ -32,6 +33,8 @@ void init_sensors(SharedVariable* sv) {
     pinMode(PIN_MOTION, INPUT);
     pinMode(PIN_SOUND, INPUT);
     pinMode(PIN_BUZZER, OUTPUT);
+    pinMode(PIN_ROTARY_CLK, INPUT);
+	pinMode(PIN_ROTARY_DT, INPUT);
 }
 
 // 1. Button
@@ -50,6 +53,26 @@ void body_sound(SharedVariable* sv) {
 
 // 4. Rotary Encoder
 void body_encoder(SharedVariable* sv) {
+    // Read the current state of CLK
+    sv->current_click = READ(PIN_ROTARY_CLK);
+
+    // If last and current state of CLK are different, then pulse occurred
+    // React to only 1 state change to avoid double count
+    if (sv->current_click != sv->past_click  && sv->current_click == 1){
+
+        // If the DT state is different than the CLK state then
+        // the encoder is rotating CCW so decrement
+        if (READ(PIN_ROTARY_DT) != sv->current_click) { 
+            // counterclockwise
+            sv->detect_direction = 0;
+        } else {
+            // clockwise
+            sv->detect_direction = 1;
+        }
+    }
+
+    // Remember last CLK state
+    sv->past_click = sv->current_click;
 }
 
 // 5. DIP two-color LED
@@ -65,14 +88,26 @@ void body_twocolor(SharedVariable* sv) {
 
 // 6. SMD RGB LED
 void body_rgbcolor(SharedVariable* sv) {
-    if(sv->detection_movement == 0){
-        softPwmWrite(PIN_SMD_RED, 0xFF);
-        softPwmWrite(PIN_SMD_GRN, 0x00);
-        softPwmWrite(PIN_SMD_BLU, 0x00);
-    } else {
-        softPwmWrite(PIN_SMD_RED, 0x80);
-        softPwmWrite(PIN_SMD_GRN, 0xFF);
-        softPwmWrite(PIN_SMD_BLU, 0x00);    
+    if(sv->detect_direction == 0){ // Counterclockwise
+        if(sv->detection_movement == 0){ // No motion
+            softPwmWrite(PIN_SMD_RED, 0xEE);
+            softPwmWrite(PIN_SMD_GRN, 0x00);
+            softPwmWrite(PIN_SMD_BLU, 0xC8);
+        } else {  // Motion
+            softPwmWrite(PIN_SMD_RED, 0x00);
+            softPwmWrite(PIN_SMD_GRN, 0xFF);
+            softPwmWrite(PIN_SMD_BLU, 0xFF);    
+        }
+    } else { // Clockwise
+        if(sv->detection_movement == 0){ // No motion
+            softPwmWrite(PIN_SMD_RED, 0xFF);
+            softPwmWrite(PIN_SMD_GRN, 0x00);
+            softPwmWrite(PIN_SMD_BLU, 0x00);
+        } else { // Motion
+            softPwmWrite(PIN_SMD_RED, 0x80);
+            softPwmWrite(PIN_SMD_GRN, 0xFF);
+            softPwmWrite(PIN_SMD_BLU, 0x00);    
+        }
     }
 }
 
