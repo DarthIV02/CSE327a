@@ -42,6 +42,7 @@ void init_sensors(SharedVariable* sv) {
 // 1. Button
 void body_button(SharedVariable* sv) {
     int read_button = READ(PIN_BUTTON);
+    printf("%d", read_button);
     if (read_button == 0 && read_button != sv->button_pressed){
         if(sv->bProgramExit == 0){
             printf("Button Pressed");
@@ -58,7 +59,7 @@ void body_button(SharedVariable* sv) {
 
         sv->button_pressed = read_button;
 
-    } else if (read_button == 1 && read_button != sv->button_pressed){
+    } else if (read_button != sv->button_pressed){
         sv->button_pressed = read_button;
     }  
 }
