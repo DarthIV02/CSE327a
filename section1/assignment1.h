@@ -61,12 +61,12 @@
 // If needed, you can add anything in this structure.
 typedef struct shared_variable {
     int bProgramExit; // Once set to 1, the program will terminate.
-    // int detection_movement;
-    // int detection_sound;
-    // int detect_direction;
-    // int current_click;
-    // int past_click;
-    // int button_pressed;
+    int detection_movement;
+    int detection_sound;
+    int detect_direction;
+    int current_click;
+    int past_click;
+    int button_pressed;
     // You can add more variables if needed.
 } SharedVariable;
 
