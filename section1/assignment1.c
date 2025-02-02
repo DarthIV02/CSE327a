@@ -5,12 +5,10 @@
 
 void init_shared_variable(SharedVariable* sv) {
     sv->bProgramExit = 0; // running 
-    int sv->detection_movement = 0; // none 
-    int sv->detection_sound = 0; // none
-    int sv->detect_direction = 0; // cw = 1 and ccw = 2
-    int sv->button_pressed = 1; // not pressed
-    int current_click;
-    int past_click;
+    sv->detection_movement = 0; // none 
+    sv->detection_sound = 0; // none
+    sv->detect_direction = 0; // cw = 1 and ccw = 2
+    sv->button_pressed = 1; // not pressed
 // You can initialize the shared variable if needed.
 }
 
