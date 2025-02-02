@@ -42,26 +42,26 @@ void init_sensors(SharedVariable* sv) {
 // 1. Button
 void body_button(SharedVariable* sv) {
     int read_button = READ(PIN_BUTTON);
-    printf("%d", read_button);
-    if (read_button == 0 && read_button != sv->button_pressed){
+
+    if (sv->bProgramExit == 2){
+        //printf("Button Pressed");
+        TURN_OFF(PIN_ALED);
+        TURN_OFF(PIN_DIP_GRN);
+        TURN_OFF(PIN_DIP_RED);
+        softPwmWrite(PIN_SMD_RED, 0);
+        softPwmWrite(PIN_SMD_GRN, 0);
+        softPwmWrite(PIN_SMD_BLU, 0);
+    }
+
+    if (read_button != sv->button_pressed){
         if(sv->bProgramExit == 0){
-            printf("Button Pressed");
-            TURN_OFF(PIN_ALED);
-            TURN_OFF(PIN_DIP_GRN);
-            TURN_OFF(PIN_DIP_RED);
-            softPwmWrite(PIN_SMD_RED, 0);
-            softPwmWrite(PIN_SMD_GRN, 0);
-            softPwmWrite(PIN_SMD_BLU, 0);
-            sv->bProgramExit == 2;
+            sv->bProgramExit = 2;
         } else if (sv->bProgramExit == 2){
-            sv->bProgramExit == 0;
+            sv->bProgramExit = 0;
         }
 
         sv->button_pressed = read_button;
-
-    } else if (read_button != sv->button_pressed){
-        sv->button_pressed = read_button;
-    }  
+    }
 }
 
 // 2. Infrared Motion Sensor
