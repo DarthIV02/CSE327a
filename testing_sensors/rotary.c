@@ -4,9 +4,9 @@
 #include <string.h>
 
 /* Selecciona el pin para el LED rojo */ 
-#define CLK 24
+#define CLK 5
 /* Selecciona el pin para el LED verde */ 
-#define DT 23
+#define DT 6
 /* Selecciona el pin para el LED azul */ 
 #define SW 22
 

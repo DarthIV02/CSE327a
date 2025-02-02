@@ -15,8 +15,8 @@
 #include <softPwm.h>
 
 // Select the Arduino input pin to accept the Sound Sensor's digital output
-#define sensorDigitalPin 25
-#define Led13 21
+#define sensorDigitalPin 7
+#define Led13 12
 
 int main(void) {
 

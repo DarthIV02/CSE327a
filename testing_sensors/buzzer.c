@@ -3,7 +3,7 @@
 #include "pitches.h"  // Ensure this file contains correct frequency values
 
 /* Define Buzzer Pin */
-#define BUZZER 3
+#define BUZZER 13
 
 void playTone(int frequency, int duration) {
     int delayTime = 1000000 / frequency / 2;  // Half period in microseconds
