@@ -56,10 +56,10 @@ void body_button(SharedVariable* sv) {
             sv->bProgramExit == 0;
         }
 
-        sv->button_pressed = read_button
+        sv->button_pressed = read_button;
 
     } else if (read_button == 1 && read_button != sv->button_pressed){
-        sv->button_pressed = read_button
+        sv->button_pressed = read_button;
     }  
 }
 
