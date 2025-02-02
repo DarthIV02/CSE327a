@@ -15,9 +15,15 @@ void ledInit(void) {
 // Initialize LEDs
 
     softPwmCreate(PIN_SMD_RED, 0, 0xff);
+    softPwmCreate(PIN_SMD_GRN, 0, 0xff);
+    softPwmCreate(PIN_SMD_BLU, 0, 0xff);
+    
     pinMode(PIN_DIP_RED, OUTPUT);
     pinMode(PIN_DIP_GRN, OUTPUT);
     pinMode(PIN_ALED, OUTPUT);
+    pinMode(PIN_SMD_RED, OUTPUT);
+    pinMode(PIN_SMD_GRN, OUTPUT);
+    pinMode(PIN_SMD_BLU, OUTPUT);
 }
 
 void init_sensors(SharedVariable* sv) {
@@ -59,6 +65,16 @@ void body_twocolor(SharedVariable* sv) {
 
 // 6. SMD RGB LED
 void body_rgbcolor(SharedVariable* sv) {
+    if(sv->detection_movement == 0){
+        softPwmWrite(PIN_SMD_RED, 0xff);
+        softPwmWrite(PIN_SMD_GRN, 0x00);
+        softPwmWrite(PIN_SMD_BLU, 0x00);
+    } else {
+        softPwmWrite(PIN_SMD_RED, 0x80);
+        softPwmWrite(PIN_SMD_GRN, 0xff);
+        softPwmWrite(PIN_SMD_BLU, 0x00);    
+    }
+    softPwmWrite(redpin, val);
 }
 
 // 7. Auto-flash LED
