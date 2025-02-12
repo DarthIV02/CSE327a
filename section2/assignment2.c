@@ -25,11 +25,11 @@ void learn_workloads(SharedVariable* v) {
 
 	int workloads[] = { BUTTON, SOUND, ENCODER, MOTION, TWOCOLOR, RGBCOLOR, ALED, BUZZER };
 
-    int num_functions = 8;
+	long long time;
 
-	for (int i = 0; i < num_functions; i++) {
+	for (int i = 0; i < NUM_TASKS; i++) {
 		
-		long long time = get_current_time_us();
+		time = get_current_time_us();
         
 		/*if (workloads[i] == BUTTON){
 			//thread_button(v);
@@ -50,6 +50,7 @@ void learn_workloads(SharedVariable* v) {
 		}
 		
 		time = get_current_time_us() - time;*/
+		printDBG("%d\n", workloads[i]);
 		v->workloadExecution_ind[workloads[i]] = time;
     }
 	//printDBG("Finish\n");
