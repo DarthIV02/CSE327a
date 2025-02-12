@@ -21,7 +21,7 @@
 // sv: The variable which is shared for every function over all threads
 void learn_workloads(SharedVariable* v) {
 
-	printDBG("Start\n");
+	//printDBG("Start\n");
 
 	int workloads[] = { BUTTON, SOUND, ENCODER, MOTION, TWOCOLOR, RGBCOLOR, ALED, BUZZER };
 
@@ -52,7 +52,7 @@ void learn_workloads(SharedVariable* v) {
 		time = get_current_time_us() - time;
 		v->workloadExecution[workloads[i]] = time;
     }
-	printDBG("Finish\n");
+	//printDBG("Finish\n");
 	//return NULL;
 
 	// TODO: Fill the body
