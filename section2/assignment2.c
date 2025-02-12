@@ -53,6 +53,7 @@ void learn_workloads(SharedVariable* v) {
 		v->workloadExecution[workloads[i]] = time;
     }
 	printDBG("Finish\n");
+	return NULL
 
 	// TODO: Fill the body
 	// This function is executed before the scheduling simulation.
