@@ -53,7 +53,7 @@ void learn_workloads(SharedVariable* v) {
 
 // Struct to hold the value and its original index
 typedef struct {
-    int value;
+    long long int value;
     int original_index;
 } IndexedValue;
 
@@ -63,7 +63,7 @@ int compare(const void *a, const void *b) {
 }
 
 // Function to get the sorted indices based on the values
-void getSortedIndices(int arr[], int sortedIndices[]) {
+void getSortedIndices(long long int arr[], int sortedIndices[]) {
     // Create an array of IndexedValue structs
     IndexedValue indexedArr[NUM_TASKS];
 
