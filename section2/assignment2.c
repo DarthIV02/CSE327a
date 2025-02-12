@@ -31,7 +31,7 @@ void learn_workloads(SharedVariable* v) {
 		
 		long long time = get_current_time_us();
         
-		if (workloads[i] == BUTTON){
+		/*if (workloads[i] == BUTTON){
 			//thread_button(v);
 		} else if(workloads[i] == SOUND){
 			//thread_sound(v);
@@ -50,7 +50,7 @@ void learn_workloads(SharedVariable* v) {
 		}
 		
 		time = get_current_time_us() - time;
-		v->workloadExecution[workloads[i]] = time;
+		v->workloadExecution[workloads[i]] = time;*/
     }
 	//printDBG("Finish\n");
 	//return NULL;
