@@ -3,6 +3,7 @@
 #define _ASSIGNMENT_BODY_
 
 #include <stdint.h>
+#include "workload.h"
 
 // Macros
 #define TURN_ON(pin) digitalWrite(pin, 1)
@@ -67,7 +68,7 @@ typedef struct shared_variable {
     int current_click;
     int past_click;
     int button_pressed;
-    long long workloadExecution_ind[8];
+    long long workloadExecution_ind[NUM_TASKS];
     // You can add more variables if needed.
 } SharedVariable;
 
