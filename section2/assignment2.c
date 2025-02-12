@@ -29,15 +29,15 @@ void learn_workloads(SharedVariable* v) {
 
     int num_functions = 8;
 
-	/*for (int i = 0; i < num_functions; i++) {
+	for (int i = 0; i < num_functions; i++) {
 		
 		long long time = get_current_time_us();
         
 		functions[i](NULL);  // Call each function
 		
-		time = get_current_time_us() - time;
-		v->workloadExecution[workloads[i]] = time;
-    }*/
+		/*time = get_current_time_us() - time;
+		v->workloadExecution[workloads[i]] = time;*/
+    }
 	// TODO: Fill the body
 	// This function is executed before the scheduling simulation.
 	// You need to calculate the execution time of each thread here.
