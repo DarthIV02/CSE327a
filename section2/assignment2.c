@@ -21,7 +21,12 @@
 // sv: The variable which is shared for every function over all threads
 void learn_workloads(SharedVariable* v) {
 
-	//printDBG("Start\n");
+	// TODO: Fill the body
+	// This function is executed before the scheduling simulation.
+	// You need to calculate the execution time of each thread here.
+
+	//Could I set the rate here, to determine which of the 2 versions to run?
+
 	void *(*functions[])(void *) = { thread_button, thread_sound, thread_encoder, thread_motion,
 		thread_twocolor, thread_rgbcolor, thread_aled, thread_buzzer };
 
@@ -32,47 +37,14 @@ void learn_workloads(SharedVariable* v) {
 	for (int i = 0; i < NUM_TASKS; i++) {
 		
 		time = get_current_time_us();
-        
-		/*if (workloads[i] == BUTTON){
-			//thread_button(v);
-		} else if(workloads[i] == SOUND){
-			//thread_sound(v);
-		} else if(workloads[i] == ENCODER){
-			//thread_encoder(v);
-		} else if(workloads[i] == MOTION){
-			//thread_motion(v);
-		}else if(workloads[i] == TWOCOLOR){
-			//thread_twocolor(v);
-		} else if(workloads[i] == RGBCOLOR){
-			//thread_rgbcolor(v);
-		} else if(workloads[i] == ALED){
-			//thread_aled(v);
-		} else if(workloads[i] == BUZZER){
-			//thread_buzzer(v);
-		}*/
 
 		functions[i](v);
 		
 		time = get_current_time_us() - time;
-		printDBG("%d\n", workloads[i]);
+		printDBG("Workload %d has time %llu\n", workloads[i], time);
 		v->workloadExecution_ind[workloads[i]] = time;
     }
-	//printDBG("Finish\n");
-	//return NULL;
 
-	// TODO: Fill the body
-	// This function is executed before the scheduling simulation.
-	// You need to calculate the execution time of each thread here.
-	//
-	// Thread functions: 
-	// thread_button, thread_touch, thread_encoder, thread_tilt,
-	// thread_twocolor, thread_rgbcolor, thread_aled, thread_buzzer
-
-	// Tip 1. You can call each workload function here like:
-	// thread_button();
-
-	// Tip 2. You can get the current time here like:
-	// long long curTime = get_current_time_us();
 }
 
 // Struct to hold the value and its original index
@@ -150,7 +122,8 @@ TaskSelection select_task(SharedVariable* sv, const int* aliveTasks, long long i
 	int sortedIndices[NUM_TASKS];
 
     // Get the sorted indices based on the array values
-    getSortedIndices(workloadDeadlines, sortedIndices);
+    getSortedIndices(workloadDeadlines, sortedIndices); /*This is run everytime it only
+	 has to run once, and then we can determine where the new alive fits?*/
 
 	for (int i = 0; i < NUM_TASKS; ++i) {
 		if (aliveTasks[sortedIndices[i]] == 1) {
@@ -163,6 +136,7 @@ TaskSelection select_task(SharedVariable* sv, const int* aliveTasks, long long i
 	TaskSelection sel;
 	sel.task = prev_selection; // The thread ID which will be scheduled. i.e., 0(BUTTON) ~ 7(BUZZER)
 	sel.freq = 1; // Request the maximum frequency (if you want the minimum frequency, use 0 instead.)
+	/*How to determine the best tasks to run at low frequency?*/
 
     return sel;
 }
