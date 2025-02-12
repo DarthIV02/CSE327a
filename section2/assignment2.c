@@ -27,7 +27,10 @@ void learn_workloads(SharedVariable* v) {
 
     int num_functions = 8;
 
+	printDBG("Start");
+
 	for (int i = 0; i < num_functions; i++) {
+		
 		long long time = get_current_time_us();
         
 		functions[i](NULL);  // Call each function
