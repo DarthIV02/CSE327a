@@ -21,7 +21,7 @@
 // sv: The variable which is shared for every function over all threads
 void learn_workloads(SharedVariable* v) {
 
-	printDBG("Start");
+	//printDBG("Start");
 
 	void *(*functions[])(void *) = { thread_button, thread_sound, thread_encoder, thread_motion,
 		thread_twocolor, thread_rgbcolor, thread_aled, thread_buzzer };
@@ -119,14 +119,14 @@ TaskSelection select_task(SharedVariable* sv, const int* aliveTasks, long long i
 	// It selects a next thread using aliveTasks.
 	static int prev_selection = -1;
 
-	/*for (int i = 0; i < NUM_TASKS; ++i) {
+	for (int i = 0; i < NUM_TASKS; ++i) {
 		if (aliveTasks[i] == 1) {
 			prev_selection = i;
 			break;
 		}
-	}*/
+	}
 
-	int sortedIndices[NUM_TASKS];
+	/*int sortedIndices[NUM_TASKS];
 
     // Get the sorted indices based on the array values
     getSortedIndices(workloadDeadlines, sortedIndices);
@@ -136,7 +136,7 @@ TaskSelection select_task(SharedVariable* sv, const int* aliveTasks, long long i
 			prev_selection = sortedIndices[i];
 			break;
 		}
-	}
+	}*/
 
 	// The retun value can be specified like this:
 	TaskSelection sel;
