@@ -6,6 +6,7 @@
 
 #include <stdio.h>
 #include <limits.h>
+#include <stdlib.h>
 
 
 // Note: Deadline of each workload is defined in the "workloadDeadlines" variable.
@@ -50,6 +51,36 @@ void learn_workloads(SharedVariable* v) {
 	// long long curTime = get_current_time_us();
 }
 
+// Struct to hold the value and its original index
+typedef struct {
+    int value;
+    int original_index;
+} IndexedValue;
+
+// Comparison function to sort based on value
+int compare(const void *a, const void *b) {
+    return ((IndexedValue*)a)->value - ((IndexedValue*)b)->value;
+}
+
+// Function to get the sorted indices based on the values
+void getSortedIndices(int arr[], int sortedIndices[]) {
+    // Create an array of IndexedValue structs
+    IndexedValue indexedArr[NUM_TASKS];
+
+    // Populate the indexed array
+    for (int i = 0; i < NUM_TASKS; i++) {
+        indexedArr[i].value = arr[i];
+        indexedArr[i].original_index = i;
+    }
+
+    // Sort the indexed array based on the value field using qsort
+    qsort(indexedArr, NUM_TASKS, sizeof(IndexedValue), compare);
+
+    // Extract the sorted indices
+    for (int i = 0; i < NUM_TASKS; i++) {
+        sortedIndices[i] = indexedArr[i].original_index;
+    }
+}
 
 // select_task(SharedVariable* sv, const int* aliveTasks):
 // This function is called while runnning the actual scheduler
@@ -85,9 +116,21 @@ TaskSelection select_task(SharedVariable* sv, const int* aliveTasks, long long i
 	// It selects a next thread using aliveTasks.
 	static int prev_selection = -1;
 
-	for (int i = 0; i < NUM_TASKS; ++i) {
+	/*for (int i = 0; i < NUM_TASKS; ++i) {
 		if (aliveTasks[i] == 1) {
 			prev_selection = i;
+			break;
+		}
+	}*/
+
+	int sortedIndices[NUM_TASKS];
+
+    // Get the sorted indices based on the array values
+    getSortedIndices(workloadDeadlines, NUM_TASKS, sortedIndices);
+
+	for (int i = 0; i < NUM_TASKS; ++i) {
+		if (aliveTasks[sortedIndices[i]] == 1) {
+			prev_selection = sortedIndices[i];
 			break;
 		}
 	}
