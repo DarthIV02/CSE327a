@@ -23,7 +23,7 @@ void learn_workloads(SharedVariable* v) {
 
 	printDBG("Start\n");
 
-	void (*functions[])() = { thread_button, thread_sound, thread_encoder, thread_motion,
+	void *(*functions[])(void *) = { thread_button, thread_sound, thread_encoder, thread_motion,
 		thread_twocolor, thread_rgbcolor, thread_aled, thread_buzzer };
 	int workloads[] = { BUTTON, SOUND, ENCODER, MOTION, TWOCOLOR, RGBCOLOR, ALED, BUZZER };
 
