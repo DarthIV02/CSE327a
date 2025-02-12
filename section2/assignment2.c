@@ -41,7 +41,7 @@ void learn_workloads(SharedVariable* v) {
 		functions[i](v);
 		
 		time = get_current_time_us() - time;
-		printDBG("Workload %d has time %llu\n", workloads[i], time);
+		printDBG("Thread %d has time %llu\n", workloads[i], time);
 		v->workloadExecution_ind[workloads[i]] = time;
     }
 
