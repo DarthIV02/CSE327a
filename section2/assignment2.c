@@ -33,9 +33,9 @@ void learn_workloads(SharedVariable* v) {
 		
 		long long time = get_current_time_us();
         
-		functions[i](NULL);  // Call each function
+		/*functions[i](NULL);  // Call each function
 		
-		/*time = get_current_time_us() - time;
+		time = get_current_time_us() - time;
 		v->workloadExecution[workloads[i]] = time;*/
     }
 	// TODO: Fill the body
