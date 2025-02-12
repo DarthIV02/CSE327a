@@ -30,7 +30,7 @@ void learn_workloads(SharedVariable* v) {
 	for (int i = 0; i < num_functions; i++) {
 		long long time = get_current_time_us();
         
-		functions[i]();  // Call each function
+		functions[i](NULL);  // Call each function
 		
 		time = get_current_time_us() - time;
 		v->workloadExecution[workloads[i]] = time;
