@@ -52,6 +52,8 @@ void learn_workloads(SharedVariable* v) {
 		time = get_current_time_us() - time;
 		v->workloadExecution[workloads[i]] = time;
     }
+	printDBG("Finish\n");
+
 	// TODO: Fill the body
 	// This function is executed before the scheduling simulation.
 	// You need to calculate the execution time of each thread here.
