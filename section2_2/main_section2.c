@@ -51,6 +51,8 @@ int main(int argc, char* argv[]) {
 		runningTimeInSec = atoi(argv[1]);
 	}
 
+	fflush(stdout)
+
 	printf("To run scheduler for %d seconds\n", runningTimeInSec);
 
 	if (wiringPiSetup() == -1) {
