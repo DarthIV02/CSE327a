@@ -23,7 +23,7 @@ void learn_workloads(SharedVariable* v) {
 
 	printDBG("Start");
 
-	/*void *(*functions[])(void *) = { thread_button, thread_sound, thread_encoder, thread_motion,
+	void *(*functions[])(void *) = { thread_button, thread_sound, thread_encoder, thread_motion,
 		thread_twocolor, thread_rgbcolor, thread_aled, thread_buzzer };
 	int workloads[] = { BUTTON, SOUND, ENCODER, MOTION, TWOCOLOR, RGBCOLOR, ALED, BUZZER };
 
@@ -38,7 +38,7 @@ void learn_workloads(SharedVariable* v) {
 		time = get_current_time_us() - time;
 		v->workloadExecution[workloads[i]] = time;
 		printDBG("For workload %d, the time is %llu.\n", i, time);
-    }*/
+    }
 	// TODO: Fill the body
 	// This function is executed before the scheduling simulation.
 	// You need to calculate the execution time of each thread here.
