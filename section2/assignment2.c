@@ -21,13 +21,13 @@
 // sv: The variable which is shared for every function over all threads
 void learn_workloads(SharedVariable* v) {
 
+	printDBG("Start");
+
 	void *(*functions[])(void *) = { thread_button, thread_sound, thread_encoder, thread_motion,
 		thread_twocolor, thread_rgbcolor, thread_aled, thread_buzzer };
 	int workloads[] = { BUTTON, SOUND, ENCODER, MOTION, TWOCOLOR, RGBCOLOR, ALED, BUZZER };
 
     int num_functions = 8;
-
-	printDBG("Start");
 
 	for (int i = 0; i < num_functions; i++) {
 		
