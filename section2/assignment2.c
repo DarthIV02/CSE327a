@@ -7,6 +7,7 @@
 #include <stdio.h>
 #include <limits.h>
 #include <stdlib.h>
+#include <iostream>
 
 
 // Note: Deadline of each workload is defined in the "workloadDeadlines" variable.
@@ -37,7 +38,7 @@ void learn_workloads(SharedVariable* v) {
 		
 		time = get_current_time_us() - time;
 		v->workloadExecution[workloads[i]] = time;
-		printDBG("For workload %d, the time is %llu.\n", i, time);
+		printDBG("Workload %d: %d\n", i, static_cast<int>(time));
     }
 	// TODO: Fill the body
 	// This function is executed before the scheduling simulation.
