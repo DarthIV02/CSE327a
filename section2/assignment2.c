@@ -119,14 +119,14 @@ TaskSelection select_task(SharedVariable* sv, const int* aliveTasks, long long i
 	// It selects a next thread using aliveTasks.
 	static int prev_selection = -1;
 
-	for (int i = 0; i < NUM_TASKS; ++i) {
+	/*for (int i = 0; i < NUM_TASKS; ++i) {
 		if (aliveTasks[i] == 1) {
 			prev_selection = i;
 			break;
 		}
-	}
+	}*/
 
-	/*int sortedIndices[NUM_TASKS];
+	int sortedIndices[NUM_TASKS];
 
     // Get the sorted indices based on the array values
     getSortedIndices(workloadDeadlines, sortedIndices);
@@ -136,7 +136,7 @@ TaskSelection select_task(SharedVariable* sv, const int* aliveTasks, long long i
 			prev_selection = sortedIndices[i];
 			break;
 		}
-	}*/
+	}
 
 	// The retun value can be specified like this:
 	TaskSelection sel;
