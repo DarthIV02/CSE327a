@@ -62,9 +62,10 @@ int main(int argc, char* argv[]) {
 	signal(SIGINT, signal_handler);
 
 	init_deferred_buffer(128*1024*1024); // 128MB
-	printf("Here\n");
 	init_userspace_governor();
 	init_workload();
+
+	printf("Here\n");
 
 	// Initializers that you need to implement
 	init_shared_variable(&sv);
