@@ -123,7 +123,7 @@ TaskSelection select_task(SharedVariable* sv, const int* aliveTasks, long long i
 
     // Get the sorted indices based on the array values
     getSortedIndices(workloadDeadlines, sortedIndices); /*This is run everytime it only
-	 has to run once, and then we can determine where the new alive fits?*/
+	 has to run once, because they are static...*/
 
 	for (int i = 0; i < NUM_TASKS; ++i) {
 		if (aliveTasks[sortedIndices[i]] == 1) {
