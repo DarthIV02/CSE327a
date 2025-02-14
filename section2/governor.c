@@ -20,6 +20,8 @@ static int curFreq = 0;
 #define POLICY_PATH "/sys/devices/system/cpu/cpufreq/policy0/"
 
 void init_userspace_governor() {
+
+	printf("Start0\n");
 	char buf[32];
 
 	FILE* fp;
