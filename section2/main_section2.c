@@ -62,7 +62,6 @@ int main(int argc, char* argv[]) {
 	signal(SIGINT, signal_handler);
 	init_deferred_buffer(1024*1024*1024); // 128MB
 	init_userspace_governor();
-	printf("Start\n");
 	init_workload();
 
 	// Initializers that you need to implement

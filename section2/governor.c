@@ -27,18 +27,23 @@ void init_userspace_governor() {
 	fprintf(fp, "userspace");
 	fclose(fp);
 
+	printf("Start1\n");
+
 
 	fp = fopen("/sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq", "r");
 	fscanf(fp, "%d", &maxFreq);
 	fclose(fp);
+	printf("Start2\n");
 
 	fp = fopen("/sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq", "r");
 	fscanf(fp, "%d", &minFreq);
 	fclose(fp);
+	printf("Start3\n");
 
 	fp = fopen("/sys/devices/system/cpu/cpu0/cpufreq/scaling_setspeed", "r");
 	fscanf(fp, "%d", &curFreq);
 	fclose(fp);
+	printf("Start4\n");
 
 	// Custom syscall test:
 	// Instead of File IO, we use a custom system call to minimize FILE IO time.
