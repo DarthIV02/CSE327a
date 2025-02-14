@@ -38,7 +38,7 @@ void learn_workloads(SharedVariable* v) {
 		
 		time = get_current_time_us();
 
-		functions[i](v);
+		//functions[i](v);
 		
 		time = get_current_time_us() - time;
 		printDBG("Thread %d has time %llu\n", workloads[i], time);
