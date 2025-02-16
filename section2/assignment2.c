@@ -156,7 +156,9 @@ TaskSelection select_task(SharedVariable* sv, const int* aliveTasks, long long i
     }
     printDBG("\n");
 
-	printDBG("Iddle time: %llu \n", idleTime);
+	if (idleTime > 0){
+		sv->total_idle_time += idleTime;
+	}
 
 	sel.freq = 1; // Request the maximum frequency (if you want the minimum frequency, use 0 instead.)
 	/*How to determine the best tasks to run at low frequency?*/
