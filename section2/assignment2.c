@@ -152,9 +152,9 @@ TaskSelection select_task(SharedVariable* sv, const int* aliveTasks, long long i
 	sel.task = prev_selection; // The thread ID which will be scheduled. i.e., 0(BUTTON) ~ 7(BUZZER)
 
 	for (int i = 0; i < NUM_TASKS; i++) {
-        printf("%d ", aliveTasks[i]);
+        printDBG("%d ", aliveTasks[i]);
     }
-    printf("\n");
+    printDBG("\n");
 
 	printDBG("Iddle time: %llu \n", idleTime);
 
