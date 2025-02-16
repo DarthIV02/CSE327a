@@ -119,15 +119,15 @@ TaskSelection select_task(SharedVariable* sv, const int* aliveTasks, long long i
 		}
 	}*/
 
-	int sortedIndices[NUM_TASKS];
-
     // Get the sorted indices based on the array values
-    getSortedIndices(workloadDeadlines, sortedIndices); /*This is run everytime it only
+	if (sv->ordered == 0){
+		getSortedIndices(workloadDeadlines, sv->deadlinesIndices); /*This is run everytime it only
 	 has to run once, because they are static...*/
+	}
 
 	for (int i = 0; i < NUM_TASKS; ++i) {
-		if (aliveTasks[sortedIndices[i]] == 1) {
-			prev_selection = sortedIndices[i];
+		if (aliveTasks[sv->deadlinesIndices[i]] == 1) {
+			prev_selection = sv->deadlinesIndices[i];
 			break;
 		}
 	}

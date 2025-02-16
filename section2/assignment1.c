@@ -9,6 +9,7 @@ void init_shared_variable(SharedVariable* sv) {
     sv->detection_sound = 0; // none
     sv->detect_direction = 0; // cw = 1 and ccw = 2
     sv->button_pressed = 1; // not pressed
+    sv->ordered = 0;
 // You can initialize the shared variable if needed.
 }
 
