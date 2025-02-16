@@ -156,9 +156,20 @@ TaskSelection select_task(SharedVariable* sv, const int* aliveTasks, long long i
     }
     printDBG("\n");
 
+	for (int i = 0; i < NUM_TASKS; i++) {
+        printDBG("%llu ", workloadDeadlines[i]);
+    }
+    printDBG("\n");
+
 	if (idleTime > 0){
 		sv->total_idle_time += idleTime;
 	}
+
+	for (int i = 0; i < NUM_TASKS; ++i) {
+		if (aliveTasks[sv->deadlinesIndices[i]] == 1) {
+
+		}
+	}	
 
 	sel.freq = 1; // Request the maximum frequency (if you want the minimum frequency, use 0 instead.)
 	/*How to determine the best tasks to run at low frequency?*/
