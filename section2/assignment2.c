@@ -162,7 +162,6 @@ TaskSelection select_task(SharedVariable* sv, const int* aliveTasks, long long i
 				long long closest_deadline = workloadDeadlines[act_idx];
 				if((time % closest_deadline) + pred_time + sv->workloadExecution_ind[act_idx] > closest_deadline){ //Pass deadline
 					prev_freq = 1; //Run it fast
-					//printDBG("Change");
 					break;
 				} else {
 					//Doesnt break this deadline
@@ -191,7 +190,8 @@ TaskSelection select_task(SharedVariable* sv, const int* aliveTasks, long long i
 		sv->total_idle_time += idleTime;
 	}
 
-	sel.freq = 6; // Request the maximum frequency (if you want the minimum frequency, use 0 instead.)
+	printDBG("Freq %d", prev_freq);
+	sel.freq = prev_freq; // Request the maximum frequency (if you want the minimum frequency, use 0 instead.)
 	/*How to determine the best tasks to run at low frequency?*/
 
     return sel;
