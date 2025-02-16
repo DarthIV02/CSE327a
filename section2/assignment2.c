@@ -35,14 +35,26 @@ void learn_workloads(SharedVariable* v) {
 	long long time;
 
 	for (int i = 0; i < NUM_TASKS; i++) {
+
+		set_by_max_freq();
 		
 		time = get_current_time_us();
 
 		functions[i](v);
 		
 		time = get_current_time_us() - time;
-		printDBG("Thread %d has time %llu\n", workloads[i], time);
+		printDBG("Thread high %d has time %llu\n", workloads[i], time);
 		v->workloadExecution_ind[workloads[i]] = time;
+
+		set_by_min_freq();
+		
+		time = get_current_time_us();
+
+		functions[i](v);
+		
+		time = get_current_time_us() - time;
+		printDBG("Thread low %d has time %llu\n", workloads[i], time);
+		v->workloadExecution_ind[workloads[i] + NUM_TASKS] = time;
     }
 
 }
