@@ -121,8 +121,7 @@ TaskSelection select_task(SharedVariable* sv, const int* aliveTasks, long long i
 
     // Get the sorted indices based on the array values
 	if (sv->ordered == 0){
-		getSortedIndices(workloadDeadlines, sv->deadlinesIndices); /*This is run everytime it only
-	 has to run once, because they are static...*/
+		getSortedIndices(workloadDeadlines, sv->deadlinesIndices); /*only run once*/
 	}
 
 	for (int i = 0; i < NUM_TASKS; ++i) {
@@ -137,6 +136,8 @@ TaskSelection select_task(SharedVariable* sv, const int* aliveTasks, long long i
 	sel.task = prev_selection; // The thread ID which will be scheduled. i.e., 0(BUTTON) ~ 7(BUZZER)
 	sel.freq = 1; // Request the maximum frequency (if you want the minimum frequency, use 0 instead.)
 	/*How to determine the best tasks to run at low frequency?*/
+
+	printDBG("Idle time: %llu\n", idleTime);
 
     return sel;
 }
