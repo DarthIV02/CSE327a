@@ -58,7 +58,7 @@ void learn_workloads(SharedVariable* v) {
 		
 		time = get_current_time_us() - time;
 		//printDBG("Thread low %d has time %llu\n", workloads[i], time);
-		v->workloadExecution_ind[workloads[i] + NUM_TASKS] = time;
+		v->workloadExecution_ind[workloads[i]] = time;
     }
 
 }
@@ -127,6 +127,7 @@ TaskSelection select_task(SharedVariable* sv, const int* aliveTasks, long long i
 	// Starter scheduler: Round robin
 	// It selects a next thread using aliveTasks.
 	static int prev_selection = -1;
+	static int prev_freq = 0;
 
 	/*for (int i = 0; i < NUM_TASKS; ++i) {
 		if (aliveTasks[i] == 1) {
@@ -140,10 +141,33 @@ TaskSelection select_task(SharedVariable* sv, const int* aliveTasks, long long i
 		getSortedIndices(workloadDeadlines, sv->deadlinesIndices); /*only run once*/
 	}
 
+	long long pred_time = 0;
+	long long time = get_scheduler_elapsed_time_us();
+
 	for (int i = 0; i < NUM_TASKS; ++i) {
-		if (aliveTasks[sv->deadlinesIndices[i]] == 1) {
-			prev_selection = sv->deadlinesIndices[i];
-			break;
+
+		int act_idx = sv->deadlinesIndices[i];
+
+		if (aliveTasks[act_idx] == 1) { // For each alive task
+			if (prev_selection == -1){ 
+				
+				//Select the first task with earliest deadline
+				prev_selection = act_idx;
+				pred_time += sv->workloadExecution_ind[act_idx+NUM_TASKS]; //Slowest current
+			
+			} else { 
+				
+				//Check if you can run it at the slowest fequency
+				long long closest_deadline = workloadDeadlines[act_idx];
+				if((time % closest_deadline) + pred_time > closest_deadline){ //Pass deadline
+					prev_freq = 1; //Run it fast
+					break;
+				} else {
+					//Doesnt break this deadline
+					pred_time += sv->workloadExecution_ind[act_idx]; //Fastest it can run
+				}
+
+			}
 		}
 	}
 
@@ -151,27 +175,21 @@ TaskSelection select_task(SharedVariable* sv, const int* aliveTasks, long long i
 	TaskSelection sel;
 	sel.task = prev_selection; // The thread ID which will be scheduled. i.e., 0(BUTTON) ~ 7(BUZZER)
 
-	for (int i = 0; i < NUM_TASKS; i++) {
+	/*for (int i = 0; i < NUM_TASKS; i++) { //Print alive tasks
         printDBG("%d ", aliveTasks[i]);
     }
-    printDBG("\n");
+    printDBG("\n");*/
 
-	for (int i = 0; i < NUM_TASKS; i++) {
+	/*for (int i = 0; i < NUM_TASKS; i++) { //Print deadline (they remain constant)
         printDBG("%llu ", workloadDeadlines[i]);
     }
-    printDBG("\n");
+    printDBG("\n");*/
 
 	if (idleTime > 0){
 		sv->total_idle_time += idleTime;
 	}
 
-	for (int i = 0; i < NUM_TASKS; ++i) {
-		if (aliveTasks[sv->deadlinesIndices[i]] == 1) {
-
-		}
-	}	
-
-	sel.freq = 1; // Request the maximum frequency (if you want the minimum frequency, use 0 instead.)
+	sel.freq = prev_freq; // Request the maximum frequency (if you want the minimum frequency, use 0 instead.)
 	/*How to determine the best tasks to run at low frequency?*/
 
     return sel;
