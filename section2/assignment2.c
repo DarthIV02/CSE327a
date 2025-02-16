@@ -36,6 +36,8 @@ void learn_workloads(SharedVariable* v) {
 
 	for (int i = 0; i < NUM_TASKS; i++) {
 
+		//High frequency
+
 		set_by_max_freq();
 		
 		time = get_current_time_us();
@@ -43,8 +45,10 @@ void learn_workloads(SharedVariable* v) {
 		functions[i](v);
 		
 		time = get_current_time_us() - time;
-		printDBG("Thread high %d has time %llu\n", workloads[i], time);
+		//printDBG("Thread high %d has time %llu\n", workloads[i], time);
 		v->workloadExecution_ind[workloads[i]] = time;
+
+		// Low frequency
 
 		set_by_min_freq();
 		
@@ -53,7 +57,7 @@ void learn_workloads(SharedVariable* v) {
 		functions[i](v);
 		
 		time = get_current_time_us() - time;
-		printDBG("Thread low %d has time %llu\n", workloads[i], time);
+		//printDBG("Thread low %d has time %llu\n", workloads[i], time);
 		v->workloadExecution_ind[workloads[i] + NUM_TASKS] = time;
     }
 
@@ -146,6 +150,12 @@ TaskSelection select_task(SharedVariable* sv, const int* aliveTasks, long long i
 	// The retun value can be specified like this:
 	TaskSelection sel;
 	sel.task = prev_selection; // The thread ID which will be scheduled. i.e., 0(BUTTON) ~ 7(BUZZER)
+
+	for (int i = 0; i < NUM_TASKS; i++) {
+        printf("%d ", aliveTasks[i]);
+    }
+    printf("\n");
+
 	sel.freq = 1; // Request the maximum frequency (if you want the minimum frequency, use 0 instead.)
 	/*How to determine the best tasks to run at low frequency?*/
 
