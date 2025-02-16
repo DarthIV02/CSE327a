@@ -162,7 +162,7 @@ TaskSelection select_task(SharedVariable* sv, const int* aliveTasks, long long i
 				long long closest_deadline = workloadDeadlines[act_idx];
 				if((time % closest_deadline) + pred_time + sv->workloadExecution_ind[act_idx] > closest_deadline){ //Pass deadline
 					prev_freq = 1; //Run it fast
-					printDBG("Change");
+					//printDBG("Change");
 					break;
 				} else {
 					//Doesnt break this deadline
