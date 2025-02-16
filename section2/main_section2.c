@@ -97,7 +97,7 @@ int main(int argc, char* argv[]) {
 		execute_task(sel);
 	}
 
-	printDBG("Total idle time: %llu", &sv->total_idle_time)
+	printDBG("Total idle time: %llu", &sv->total_idle_time);
 
 	finish_workload();
 	release_buffer(fileno(stdout));
