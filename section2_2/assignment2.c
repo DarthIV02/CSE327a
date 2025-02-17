@@ -169,7 +169,7 @@ TaskSelection select_task(SharedVariable* sv, const int* aliveTasks, long long i
 			}
 		}
 
-		printDGB("Next\n");
+		printDBG("Next\n");
 	}
 
 	// The retun value can be specified like this:
