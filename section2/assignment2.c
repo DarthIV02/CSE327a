@@ -198,10 +198,10 @@ TaskSelection select_task(SharedVariable* sv, const int* aliveTasks, long long i
     }
     printDBG("\n");
 
-	for (int i = 0; i < NUM_TASKS; i++) { //Print deadline (they remain constant)
+	/*for (int i = 0; i < NUM_TASKS; i++) { //Print deadline (they remain constant)
         printDBG("%llu ", workloadDeadlines[i]);
     }
-    printDBG("\n");
+    printDBG("\n");*/
 
 	if (idleTime > 0){
 		sv->total_idle_time += idleTime;
@@ -215,7 +215,7 @@ TaskSelection select_task(SharedVariable* sv, const int* aliveTasks, long long i
 		}
 	}
 
-	//printDBG("Freq %d \n", prev_freq);
+	printDBG("Chosen task %d Freq %d \n", prev_selection, prev_freq);
 	sv->prev_selected = prev_selection;
 	sv->prev_freq = prev_freq;
 	sel.freq = prev_freq; // Request the maximum frequency (if you want the minimum frequency, use 0 instead.)
