@@ -144,7 +144,7 @@ TaskSelection select_task(SharedVariable* sv, const int* aliveTasks, long long i
 
 	// Starter scheduler: Round robin
 	// It selects a next thread using aliveTasks.
-	int prev_selection = -1;
+	int prev_selection = 0;
 
 	if (sv->ordered == 0){
 		getSortedIndices(workloadDeadlines, sv->deadlinesIndices); /*only run once*/
