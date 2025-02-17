@@ -148,12 +148,14 @@ TaskSelection select_task(SharedVariable* sv, const int* aliveTasks, long long i
 		}
 	}*/
 
+	printf("Start\n");
+
     // Get the sorted indices based on the array values
 	if (sv->ordered == 0){
 		getSortedIndices(workloadDeadlines, sv->deadlinesIndices); /*only run once*/
 	}
 
-	printf("Start\n");
+	// Segmetation Fault with print here
 
 	long long pred_time = 0;
 	long long time = get_scheduler_elapsed_time_us();
