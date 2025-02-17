@@ -141,8 +141,6 @@ TaskSelection select_task(SharedVariable* sv, const int* aliveTasks, long long i
 	static int prev_selection = -1;
 	int prev_freq = 0;
 
-	printf("Start\n");
-
 	/*for (int i = 0; i < NUM_TASKS; ++i) {
 		if (aliveTasks[i] == 1) {
 			prev_selection = i;
@@ -154,6 +152,8 @@ TaskSelection select_task(SharedVariable* sv, const int* aliveTasks, long long i
 	if (sv->ordered == 0){
 		getSortedIndices(workloadDeadlines, sv->deadlinesIndices); /*only run once*/
 	}
+
+	printf("Start\n");
 
 	long long pred_time = 0;
 	long long time = get_scheduler_elapsed_time_us();
