@@ -39,26 +39,38 @@ void learn_workloads(SharedVariable* v) {
 		//High frequency
 
 		set_by_max_freq();
-		
-		time = get_current_time_us();
 
-		functions[i](v);
+		long long max_time = 0;
+
+		for (int r = 0; r < 10; r++){
+			time = get_current_time_us();
+			functions[i](v);
+			time = get_current_time_us() - time;
+			if (time > max_time){
+				max_time = time;
+			}
+		}
 		
-		time = get_current_time_us() - time;
-		printDBG("Thread high %d has time %llu\n", workloads[i], time);
-		v->workloadExecution_ind[workloads[i]] = time;
+		printDBG("Thread high %d has time %llu\n", workloads[i], max_time);
+		v->workloadExecution_ind[workloads[i]] = max_time;
 
 		// Low frequency
 
 		set_by_min_freq();
 		
-		time = get_current_time_us();
+		max_time = 0;
 
-		functions[i](v);
-		
-		time = get_current_time_us() - time;
-		printDBG("Thread low %d has time %llu\n", workloads[i], time);
-		v->workloadExecution_ind[workloads[i]+NUM_TASKS] = time;
+		for (int r = 0; r < 10; r++){
+			time = get_current_time_us();
+			functions[i](v);
+			time = get_current_time_us() - time;
+			if (time > max_time){
+				max_time = time;
+			}
+		}
+
+		printDBG("Thread low %d has time %llu\n", workloads[i], max_time);
+		v->workloadExecution_ind[workloads[i]+NUM_TASKS] = max_time;
     }
 
 }
@@ -153,22 +165,24 @@ TaskSelection select_task(SharedVariable* sv, const int* aliveTasks, long long i
 				
 				//Select the first task with earliest deadline
 				prev_selection = act_idx;
-				pred_time += sv->workloadExecution_ind[act_idx+NUM_TASKS]; //Slowest current
 			
-			} else { 
+			}
 				
-				//Check if you can run it at the slowest fequency
-				time = get_scheduler_elapsed_time_us();
-				long long closest_deadline = workloadDeadlines[act_idx];
-				if((time % closest_deadline) + pred_time + sv->workloadExecution_ind[act_idx] > closest_deadline){ //Pass deadline
-					prev_freq = 1; //Run it fast
-					break;
+			//Check if you can run it at the slowest fequency
+			time = get_scheduler_elapsed_time_us();
+			long long closest_deadline = workloadDeadlines[act_idx];
+			if((time % closest_deadline) + pred_time + sv->workloadExecution_ind[act_idx] > closest_deadline){ //Pass deadline
+				prev_freq = 1; //Run it fast
+				break;
+			} else {
+				//Doesnt break this deadline
+				if (prev_selection == act_idx){
+					pred_time += sv->workloadExecution_ind[act_idx + NUM_TASKS]; //Slowest it can run
 				} else {
-					//Doesnt break this deadline
 					pred_time += sv->workloadExecution_ind[act_idx]; //Fastest it can run
 				}
-
 			}
+
 		}
 	}
 
