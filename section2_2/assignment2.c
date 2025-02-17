@@ -81,7 +81,7 @@ void learn_workloads(SharedVariable* v) {
 
 		long long max_time = 0;
 
-		for (int r = 0; r < 10; r++){
+		for (int r = 0; r < 5; r++){
 			time = get_current_time_us();
 			functions[i](v);
 			time = get_current_time_us() - time;
@@ -99,7 +99,7 @@ void learn_workloads(SharedVariable* v) {
 		
 		max_time = 0;
 
-		for (int r = 0; r < 10; r++){
+		for (int r = 0; r < 5; r++){
 			time = get_current_time_us();
 			functions[i](v);
 			time = get_current_time_us() - time;
@@ -150,6 +150,7 @@ TaskSelection select_task(SharedVariable* sv, const int* aliveTasks, long long i
 	// Starter scheduler: Round robin
 	// It selects a next thread using aliveTasks.
 	int prev_selection = -1;
+	int prev_freq = 0;
 	
 	long long pred_time = 0;
 	long long time = get_scheduler_elapsed_time_us();
@@ -166,6 +167,18 @@ TaskSelection select_task(SharedVariable* sv, const int* aliveTasks, long long i
 				prev_selection = act_idx;
 			
 			}
+		}
+
+		long long closest_deadline = workloadDeadlines[act_idx];
+		if (prev_selection == act_idx){
+			pred_time += sv->workloadExecution_ind[act_idx + 8]; //Slowest it can run
+		} else {
+			pred_time += sv->workloadExecution_ind[act_idx]; //Fastest it can run
+		}
+		if((time % closest_deadline) + pred_time > closest_deadline){ //Pass deadline
+			prev_freq = 1; //Run it fast
+		} else {
+			//printDBG("------Laxity is %llu, %llu for task %d\n", (time % closest_deadline) + pred_time, closest_deadline, act_idx);
 		}
 	}
 
