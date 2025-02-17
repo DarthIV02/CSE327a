@@ -144,7 +144,7 @@ TaskSelection select_task(SharedVariable* sv, const int* aliveTasks, long long i
 
 	// Starter scheduler: Round robin
 	// It selects a next thread using aliveTasks.
-	int prev_selection = 0;
+	static int prev_selection = 0;
 
 	/*pthread_mutex_lock(&sv->lock);
 	if (sv->ordered == 0){
