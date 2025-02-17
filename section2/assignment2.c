@@ -45,7 +45,7 @@ void learn_workloads(SharedVariable* v) {
 		functions[i](v);
 		
 		time = get_current_time_us() - time;
-		//printDBG("Thread high %d has time %llu\n", workloads[i], time);
+		printDBG("Thread high %d has time %llu\n", workloads[i], time);
 		v->workloadExecution_ind[workloads[i]] = time;
 
 		// Low frequency
@@ -57,7 +57,7 @@ void learn_workloads(SharedVariable* v) {
 		functions[i](v);
 		
 		time = get_current_time_us() - time;
-		//printDBG("Thread low %d has time %llu\n", workloads[i], time);
+		printDBG("Thread low %d has time %llu\n", workloads[i], time);
 		v->workloadExecution_ind[workloads[i]+NUM_TASKS] = time;
     }
 
