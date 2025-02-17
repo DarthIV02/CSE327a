@@ -74,7 +74,7 @@ int main(int argc, char* argv[]) {
 	init_scheduler(runningTimeInSec);
 	set_by_max_freq(); // reset to the max freq
 
-	print("Start scheduling");
+	printf("Start scheduling");
 
 	printDBG("Start Scheduling with %d threads\n", NUM_TASKS);
 	TaskSelection sel;
