@@ -171,11 +171,6 @@ TaskSelection select_task(SharedVariable* sv, const int* aliveTasks, long long i
 
 				//Select the first task with earliest deadline
 				prev_selection = act_idx;
-
-				if(sv->prev_selected == act_idx){
-					prev_freq = sv->prev_freq;
-					break;
-				}
 			
 			}
 		}
@@ -215,18 +210,17 @@ TaskSelection select_task(SharedVariable* sv, const int* aliveTasks, long long i
 		sv->total_idle_time += idleTime;
 	}
 
-	if(prev_selection == sv->prev_selected){
-		if (prev_freq == 0){
-			sv->total_low_time += sv->workloadExecution_ind[prev_selection+NUM_TASKS];
-		} else {
-			sv->total_high_time += sv->workloadExecution_ind[prev_selection];
-		}
+	
+	if (prev_freq == 0){
+		sv->total_low_time += sv->workloadExecution_ind[prev_selection+NUM_TASKS];
+	} else {
+		sv->total_high_time += sv->workloadExecution_ind[prev_selection];
 	}
+	
 
 	printf("------Chosen task %d Freq %d \n", prev_selection, prev_freq);
-	printf("Start\n");
-	sv->prev_selected = prev_selection;
-	sv->prev_freq = prev_freq;
+	//sv->prev_selected = prev_selection;
+	//sv->prev_freq = prev_freq;
 	sel.freq = prev_freq;
 
     return sel;
