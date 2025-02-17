@@ -141,6 +141,8 @@ TaskSelection select_task(SharedVariable* sv, const int* aliveTasks, long long i
 	int prev_selection = -1;
 	int prev_freq = 0;
 
+	printf("Start\n");
+
 	/*for (int i = 0; i < NUM_TASKS; ++i) {
 		if (aliveTasks[i] == 1) {
 			prev_selection = i;
@@ -223,7 +225,6 @@ TaskSelection select_task(SharedVariable* sv, const int* aliveTasks, long long i
 	sv->prev_freq = prev_freq;
 	sel.freq = prev_freq; // Request the maximum frequency (if you want the minimum frequency, use 0 instead.)
 	/*How to determine the best tasks to run at low frequency?*/
-	printf("Finish\n");
 
     return sel;
 }
