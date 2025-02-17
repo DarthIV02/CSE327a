@@ -33,7 +33,7 @@ void learn_workloads(SharedVariable* v) {
 	// Tip 2. You can get the current time here like:
 	// long long curTime = get_current_time_us();
 
-	void *(*functions[])(void *) = { thread_button, thread_sound, thread_encoder, thread_motion,
+	/*void *(*functions[])(void *) = { thread_button, thread_sound, thread_encoder, thread_motion,
 		thread_twocolor, thread_rgbcolor, thread_aled, thread_buzzer };
 
 	int workloads[] = { BUTTON, SOUND, ENCODER, MOTION, TWOCOLOR, RGBCOLOR, ALED, BUZZER };
@@ -77,7 +77,7 @@ void learn_workloads(SharedVariable* v) {
 
 		//printDBG("Thread low %d has time %llu\n", workloads[i], max_time);
 		v->workloadExecution_ind[workloads[i]+8] = max_time;
-    }
+    }**/
 }
 
 // Struct to hold the value and its original index
