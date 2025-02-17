@@ -193,15 +193,15 @@ TaskSelection select_task(SharedVariable* sv, const int* aliveTasks, long long i
 	TaskSelection sel;
 	sel.task = prev_selection; // The thread ID which will be scheduled. i.e., 0(BUTTON) ~ 7(BUZZER)
 
-	/*for (int i = 0; i < NUM_TASKS; i++) { //Print alive tasks
+	for (int i = 0; i < NUM_TASKS; i++) { //Print alive tasks
         printDBG("%d ", aliveTasks[i]);
     }
-    printDBG("\n");*/
+    printDBG("\n");
 
-	/*for (int i = 0; i < NUM_TASKS; i++) { //Print deadline (they remain constant)
+	for (int i = 0; i < NUM_TASKS; i++) { //Print deadline (they remain constant)
         printDBG("%llu ", workloadDeadlines[i]);
     }
-    printDBG("\n");*/
+    printDBG("\n");
 
 	if (idleTime > 0){
 		sv->total_idle_time += idleTime;
