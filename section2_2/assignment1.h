@@ -68,6 +68,15 @@ typedef struct shared_variable {
     int past_click;
     int button_pressed;
     // You can add more variables if needed.
+
+    long long workloadExecution_ind[16];
+    int ordered;
+    int deadlinesIndices[8];
+    long long total_idle_time;
+    long long total_low_time;
+    long long total_high_time;
+    int prev_selected;
+    int prev_freq;
 } SharedVariable;
 
 // C. Functions
