@@ -156,16 +156,13 @@ TaskSelection select_task(SharedVariable* sv, const int* aliveTasks, long long i
 	int act_idx = 0;
 
 	for (int i = 0; i < NUM_TASKS; ++i) {
-		
-		act_idx = sv->deadlinesIndices[i];
-		printDBG("Task %d\n", act_idx);
 
-		if (aliveTasks[act_idx] == 1) { // For each alive task
+		if (aliveTasks[sv->deadlinesIndices[i]] == 1) { // For each alive task
 			if (prev_selection == -1){ 
 
 				//Select the first task with earliest deadline
-				prev_selection = act_idx;
-			
+				prev_selection = sv->deadlinesIndices[i];
+				printDBG("Task %d\n", prev_selection);
 			}
 		}
 
