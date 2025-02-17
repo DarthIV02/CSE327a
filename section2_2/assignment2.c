@@ -6,7 +6,7 @@
 
 #include <stdio.h>
 #include <limits.h>
-
+#include <stdlib.h>
 
 // Note: Deadline of each workload is defined in the "workloadDeadlines" variable.
 // i.e., You can access the dealine of the BUTTON thread using workloadDeadlines[BUTTON]
