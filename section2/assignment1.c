@@ -12,6 +12,8 @@ void init_shared_variable(SharedVariable* sv) {
 
     sv->ordered = 0;
     sv->total_idle_time = 0;
+    sv->total_high_time = 0;
+    sv->total_low_time = 0;
 // You can initialize the shared variable if needed.
 }
 

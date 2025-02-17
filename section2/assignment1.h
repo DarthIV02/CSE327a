@@ -72,6 +72,8 @@ typedef struct shared_variable {
     int ordered;
     int deadlinesIndices[NUM_TASKS];
     long long total_idle_time;
+    long long total_low_time;
+    long long total_high_time;
     // You can add more variables if needed.
 } SharedVariable;
 

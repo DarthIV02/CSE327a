@@ -58,7 +58,7 @@ void learn_workloads(SharedVariable* v) {
 		
 		time = get_current_time_us() - time;
 		//printDBG("Thread low %d has time %llu\n", workloads[i], time);
-		v->workloadExecution_ind[workloads[i]] = time;
+		v->workloadExecution_ind[workloads[i]+NUM_TASKS] = time;
     }
 
 }
@@ -190,8 +190,12 @@ TaskSelection select_task(SharedVariable* sv, const int* aliveTasks, long long i
 		sv->total_idle_time += idleTime;
 	}
 
+	if (prev_freq == 0){
+
+	}
+
 	//printDBG("Freq %d \n", prev_freq);
-	sel.freq = 1; // Request the maximum frequency (if you want the minimum frequency, use 0 instead.)
+	sel.freq = prev_freq; // Request the maximum frequency (if you want the minimum frequency, use 0 instead.)
 	/*How to determine the best tasks to run at low frequency?*/
 
     return sel;
