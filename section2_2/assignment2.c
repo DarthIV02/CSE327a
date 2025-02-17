@@ -177,7 +177,7 @@ TaskSelection select_task(SharedVariable* sv, const int* aliveTasks, long long i
 		}
 		if((time % closest_deadline) + pred_time > closest_deadline){ //Pass deadline
 			prev_freq = 1; //Run it fast
-			if (prev_freq != -1){
+			if (prev_selection != -1){
 				break;
 			}
 		} else {
