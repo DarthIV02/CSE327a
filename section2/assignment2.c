@@ -154,7 +154,7 @@ TaskSelection select_task(SharedVariable* sv, const int* aliveTasks, long long i
     // Get the sorted indices based on the array values
 	if (sv->ordered == 0){
 		getSortedIndices(workloadDeadlines, sv->deadlinesIndices); /*only run once*/
-		sv->ordered == 1;
+		sv->ordered = 1;
 	}
 
 	// Segmetation Fault with print here
