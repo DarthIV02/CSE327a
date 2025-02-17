@@ -3,6 +3,7 @@
 #define _ASSIGNMENT_BODY_
 
 #include <stdint.h>
+#include <pthread.h>
 
 // Macros
 #define TURN_ON(pin) digitalWrite(pin, 1)
@@ -76,6 +77,8 @@ typedef struct shared_variable {
     long long total_high_time;
     int prev_selected;
     int prev_freq;
+
+    pthread_mutex_t lock; // Add a mutex
     // You can add more variables if needed.
 } SharedVariable;
 

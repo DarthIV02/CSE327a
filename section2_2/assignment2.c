@@ -146,10 +146,12 @@ TaskSelection select_task(SharedVariable* sv, const int* aliveTasks, long long i
 	// It selects a next thread using aliveTasks.
 	int prev_selection = 0;
 
+	pthread_mutex_lock(&sv->lock);
 	if (sv->ordered == 0){
 		getSortedIndices(workloadDeadlines, sv->deadlinesIndices); /*only run once*/
 		sv->ordered = 1;
 	}
+	pthread_mutex_unlock(&sv->lock);
 
 	// The retun value can be specified like this:
 	TaskSelection sel;

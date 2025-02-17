@@ -15,6 +15,8 @@ void init_shared_variable(SharedVariable* sv) {
     sv->total_high_time = 0;
     sv->total_low_time = 0;
 
+    pthread_mutex_init(&sv->lock, NULL); // Initialize mutex
+
 // You can initialize the shared variable if needed.
 }
 
