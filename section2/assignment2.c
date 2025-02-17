@@ -186,7 +186,6 @@ TaskSelection select_task(SharedVariable* sv, const int* aliveTasks, long long i
 			time = get_scheduler_elapsed_time_us();
 			if((time % closest_deadline) + pred_time > closest_deadline){ //Pass deadline
 				prev_freq = 1; //Run it fast
-				break;
 			} else {
 				//printDBG("------Laxity is %llu, %llu for task %d\n", (time % closest_deadline) + pred_time, closest_deadline, act_idx);
 			}
