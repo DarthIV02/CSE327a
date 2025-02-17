@@ -76,7 +76,7 @@ void learn_workloads(SharedVariable* v) {
 		}
 
 		//printDBG("Thread low %d has time %llu\n", workloads[i], max_time);
-		v->workloadExecution_ind[workloads[i]+NUM_TASKS] = max_time;
+		v->workloadExecution_ind[workloads[i]+8] = max_time;
     }
 }
 
