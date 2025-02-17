@@ -98,6 +98,8 @@ int main(int argc, char* argv[]) {
 	}
 
 	printDBG("Total idle time: %llu\n", sv.total_idle_time);
+	printDBG("Total high time: %llu\n", sv.total_high_time);
+	printDBG("Total low time: %llu\n", sv.total_low_time);
 
 	finish_workload();
 	release_buffer(fileno(stdout));

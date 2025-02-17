@@ -203,10 +203,12 @@ TaskSelection select_task(SharedVariable* sv, const int* aliveTasks, long long i
 	}
 
 	if (prev_freq == 0){
-
+		sv->total_low_time += sv->workloadExecution_ind[prev_selection+NUM_TASKS];
+	} else {
+		sv->total_high_time += sv->workloadExecution_ind[prev_selection];
 	}
 
-	printDBG("Freq %d \n", prev_freq);
+	//printDBG("Freq %d \n", prev_freq);
 	sel.freq = prev_freq; // Request the maximum frequency (if you want the minimum frequency, use 0 instead.)
 	/*How to determine the best tasks to run at low frequency?*/
 
