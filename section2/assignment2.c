@@ -42,17 +42,22 @@ void learn_workloads(SharedVariable* v) {
 
 		long long max_time = 0;
 
-		for (int r = 0; r < 2; r++){
+		/*for (int r = 0; r < 2; r++){
 			time = get_current_time_us();
 			functions[i](v);
 			time = get_current_time_us() - time;
 			if (time > max_time){
 				max_time = time;
 			}
-		}
+		}*/
+
+		time = get_current_time_us();
+		functions[i](v);
+		time = get_current_time_us() - time;
+		
 		
 		//printDBG("Thread high %d has time %llu\n", workloads[i], max_time);
-		v->workloadExecution_ind[workloads[i]] = max_time;
+		v->workloadExecution_ind[workloads[i]] = time;
 
 		// Low frequency
 
@@ -60,17 +65,21 @@ void learn_workloads(SharedVariable* v) {
 		
 		max_time = 0;
 
-		for (int r = 0; r < 2; r++){
+		/*for (int r = 0; r < 2; r++){
 			time = get_current_time_us();
 			functions[i](v);
 			time = get_current_time_us() - time;
 			if (time > max_time){
 				max_time = time;
 			}
-		}
+		}*/
+
+		time = get_current_time_us();
+		functions[i](v);
+		time = get_current_time_us() - time;
 
 		//printDBG("Thread low %d has time %llu\n", workloads[i], max_time);
-		v->workloadExecution_ind[workloads[i]+NUM_TASKS] = max_time;
+		v->workloadExecution_ind[workloads[i]+NUM_TASKS] = time;
     }
 
 }
