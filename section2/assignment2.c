@@ -195,11 +195,11 @@ TaskSelection select_task(SharedVariable* sv, const int* aliveTasks, long long i
 	TaskSelection sel;
 	sel.task = prev_selection; // The thread ID which will be scheduled. i.e., 0(BUTTON) ~ 7(BUZZER)
 
-	printf("------");
+	/*printDBG("------");
 	for (int i = 0; i < NUM_TASKS; i++) { //Print alive tasks
-        printf("%d ", aliveTasks[i]);
+        printDBG("%d ", aliveTasks[i]);
     }
-    printf("\n");
+    printDBG("\n");*/
 
 	/*for (int i = 0; i < NUM_TASKS; i++) { //Print deadline (they remain constant)
         printDBG("%llu ", workloadDeadlines[i]);
@@ -218,7 +218,7 @@ TaskSelection select_task(SharedVariable* sv, const int* aliveTasks, long long i
 	}
 	
 
-	printf("------Chosen task %d Freq %d \n", prev_selection, prev_freq);
+	//printDBG("------Chosen task %d Freq %d \n", prev_selection, prev_freq);
 	//sv->prev_selected = prev_selection;
 	//sv->prev_freq = prev_freq;
 	sel.freq = prev_freq;
