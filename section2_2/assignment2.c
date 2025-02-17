@@ -18,6 +18,45 @@
 // - Parameters
 
 // sv: The variable which is shared for every function over all threads
+
+// Struct to hold values and their original indices
+typedef struct {
+    long long int value;
+    int original_index;
+} IndexedValue;
+
+// Function to swap two IndexedValue elements
+void swap(IndexedValue *a, IndexedValue *b) {
+    IndexedValue temp = *a;
+    *a = *b;
+    *b = temp;
+}
+
+// Function to get sorted indices using Bubble Sort
+void getSortedIndices(long long int arr[], int sortedIndices[]) {
+    IndexedValue indexedArr[NUM_TASKS];
+
+    // Populate the indexed array
+    for (int i = 0; i < NUM_TASKS; i++) {
+        indexedArr[i].value = arr[i];
+        indexedArr[i].original_index = i;
+    }
+
+    // Bubble Sort based on value
+    for (int i = 0; i < NUM_TASKS - 1; i++) {
+        for (int j = 0; j < NUM_TASKS - i - 1; j++) {
+            if (indexedArr[j].value > indexedArr[j + 1].value) {
+                swap(&indexedArr[j], &indexedArr[j + 1]);
+            }
+        }
+    }
+
+    // Extract the sorted indices
+    for (int i = 0; i < NUM_TASKS; i++) {
+        sortedIndices[i] = indexedArr[i].original_index;
+    }
+}
+
 void learn_workloads(SharedVariable* v) {
 	// TODO: Fill the body
 	// This function is executed before the scheduling simulation.
@@ -81,44 +120,6 @@ void learn_workloads(SharedVariable* v) {
 
 	getSortedIndices(workloadDeadlines, v->deadlinesIndices); /*only run once*/
 
-}
-
-// Struct to hold values and their original indices
-typedef struct {
-    long long int value;
-    int original_index;
-} IndexedValue;
-
-// Function to swap two IndexedValue elements
-void swap(IndexedValue *a, IndexedValue *b) {
-    IndexedValue temp = *a;
-    *a = *b;
-    *b = temp;
-}
-
-// Function to get sorted indices using Bubble Sort
-void getSortedIndices(long long int arr[], int sortedIndices[]) {
-    IndexedValue indexedArr[NUM_TASKS];
-
-    // Populate the indexed array
-    for (int i = 0; i < NUM_TASKS; i++) {
-        indexedArr[i].value = arr[i];
-        indexedArr[i].original_index = i;
-    }
-
-    // Bubble Sort based on value
-    for (int i = 0; i < NUM_TASKS - 1; i++) {
-        for (int j = 0; j < NUM_TASKS - i - 1; j++) {
-            if (indexedArr[j].value > indexedArr[j + 1].value) {
-                swap(&indexedArr[j], &indexedArr[j + 1]);
-            }
-        }
-    }
-
-    // Extract the sorted indices
-    for (int i = 0; i < NUM_TASKS; i++) {
-        sortedIndices[i] = indexedArr[i].original_index;
-    }
 }
 
 
