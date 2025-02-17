@@ -224,8 +224,8 @@ TaskSelection select_task(SharedVariable* sv, const int* aliveTasks, long long i
 	}
 
 	printf("------Chosen task %d Freq %d \n", prev_selection, prev_freq);
-	sv->prev_selected = prev_selection;
 	printf("Start\n");
+	sv->prev_selected = prev_selection;
 	sv->prev_freq = prev_freq;
 	sel.freq = prev_freq;
 
