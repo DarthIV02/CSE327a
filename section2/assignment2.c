@@ -139,7 +139,6 @@ TaskSelection select_task(SharedVariable* sv, const int* aliveTasks, long long i
 	// Starter scheduler: Round robin
 	// It selects a next thread using aliveTasks.
 
-	printf("Start\n");
 	int prev_selection = -1;
 	int prev_freq = 0;
 
@@ -226,9 +225,9 @@ TaskSelection select_task(SharedVariable* sv, const int* aliveTasks, long long i
 
 	printf("------Chosen task %d Freq %d \n", prev_selection, prev_freq);
 	sv->prev_selected = prev_selection;
+	printf("Start\n");
 	sv->prev_freq = prev_freq;
-	sel.freq = prev_freq; // Request the maximum frequency (if you want the minimum frequency, use 0 instead.)
-	/*How to determine the best tasks to run at low frequency?*/
+	sel.freq = prev_freq;
 
     return sel;
 }
