@@ -211,11 +211,11 @@ TaskSelection select_task(SharedVariable* sv, const int* aliveTasks, long long i
 	}
 
 	
-	if (prev_freq == 0){
+	/*if (prev_freq == 0){
 		sv->total_low_time += sv->workloadExecution_ind[prev_selection+NUM_TASKS];
 	} else {
 		sv->total_high_time += sv->workloadExecution_ind[prev_selection];
-	}
+	}*/
 	
 
 	//printDBG("------Chosen task %d Freq %d \n", prev_selection, prev_freq);
