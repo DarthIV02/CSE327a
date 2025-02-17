@@ -186,7 +186,7 @@ TaskSelection select_task(SharedVariable* sv, const int* aliveTasks, long long i
 		if((time % closest_deadline) + pred_time > closest_deadline){ //Pass deadline
 			prev_freq = 1; //Run it fast
 		} else {
-			//printDBG("------Laxity is %llu, %llu for task %d\n", (time % closest_deadline) + pred_time, closest_deadline, act_idx);
+			printf("------Laxity is %llu, %llu for task %d\n", (time % closest_deadline) + pred_time, closest_deadline, act_idx);
 		}
 		//}
 	}
@@ -195,11 +195,11 @@ TaskSelection select_task(SharedVariable* sv, const int* aliveTasks, long long i
 	TaskSelection sel;
 	sel.task = prev_selection; // The thread ID which will be scheduled. i.e., 0(BUTTON) ~ 7(BUZZER)
 
-	/*printDBG("------");
+	printf("------");
 	for (int i = 0; i < NUM_TASKS; i++) { //Print alive tasks
-        printDBG("%d ", aliveTasks[i]);
+        printf("%d ", aliveTasks[i]);
     }
-    printDBG("\n");*/
+    printf("\n");
 
 	/*for (int i = 0; i < NUM_TASKS; i++) { //Print deadline (they remain constant)
         printDBG("%llu ", workloadDeadlines[i]);
