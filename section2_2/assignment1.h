@@ -3,7 +3,7 @@
 #define _ASSIGNMENT_BODY_
 
 #include <stdint.h>
-#include <pthread.h>
+//#include <pthread.h>
 
 // Macros
 #define TURN_ON(pin) digitalWrite(pin, 1)
