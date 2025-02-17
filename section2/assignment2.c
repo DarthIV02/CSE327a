@@ -170,13 +170,13 @@ TaskSelection select_task(SharedVariable* sv, const int* aliveTasks, long long i
 			}
 				
 			//Check if you can run it at the slowest fequency
-			time = get_scheduler_elapsed_time_us();
 			long long closest_deadline = workloadDeadlines[act_idx];
 			if (prev_selection == act_idx){
 				pred_time += sv->workloadExecution_ind[act_idx + NUM_TASKS]; //Slowest it can run
 			} else {
 				pred_time += sv->workloadExecution_ind[act_idx]; //Fastest it can run
 			}
+			time = get_scheduler_elapsed_time_us();
 			if((time % closest_deadline) + pred_time > closest_deadline){ //Pass deadline
 				prev_freq = 1; //Run it fast
 				break;
