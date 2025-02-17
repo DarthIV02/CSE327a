@@ -69,7 +69,7 @@ typedef struct shared_variable {
     int past_click;
     int button_pressed;
 
-    long long workloadExecution_ind[16];
+    /*long long workloadExecution_ind[16];
     int ordered;
     int deadlinesIndices[8];
     long long total_idle_time;
@@ -78,7 +78,7 @@ typedef struct shared_variable {
     int prev_selected;
     int prev_freq;
 
-    pthread_mutex_t lock; // Add a mutex
+    pthread_mutex_t lock; // Add a mutex*/
     // You can add more variables if needed.
 } SharedVariable;
 
