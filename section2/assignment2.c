@@ -186,7 +186,7 @@ TaskSelection select_task(SharedVariable* sv, const int* aliveTasks, long long i
 				prev_freq = 1; //Run it fast
 				break;
 			} else {
-				printDBG("Laxity is %llu for task %d\n", (time % closest_deadline), act_idx);
+				printDBG("Laxity is %llu for task %d\n", (time % closest_deadline) + pred_time, act_idx);
 			}
 		}
 	}
