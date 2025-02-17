@@ -155,7 +155,7 @@ TaskSelection select_task(SharedVariable* sv, const int* aliveTasks, long long i
 
 	// Starter scheduler: Round robin
 	// It selects a next thread using aliveTasks.
-	int prev_selection = 0;
+	int prev_selection = -1;
 	int prev_freq = 0;
 
 	long long pred_time = 0;
@@ -167,7 +167,7 @@ TaskSelection select_task(SharedVariable* sv, const int* aliveTasks, long long i
 		act_idx = sv->deadlinesIndices[i];
 
 		if (aliveTasks[act_idx] == 1) { // For each alive task
-			if (prev_selection == 0){ 
+			if (prev_selection == -1){ 
 
 				//Select the first task with earliest deadline
 				prev_selection = act_idx;
