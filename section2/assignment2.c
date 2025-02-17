@@ -154,7 +154,7 @@ TaskSelection select_task(SharedVariable* sv, const int* aliveTasks, long long i
 	}
 
 	long long pred_time = 0;
-	long long time;
+	long long time = get_scheduler_elapsed_time_us();
 	int act_idx = 0;
 
 	for (int i = 0; i < NUM_TASKS; ++i) {
@@ -175,21 +175,20 @@ TaskSelection select_task(SharedVariable* sv, const int* aliveTasks, long long i
 			}
 		}
 
-		if (aliveTasks[act_idx] == 1 || prev_selection == -1 ){
+		//if (aliveTasks[act_idx] == 1 || prev_selection == -1 ){
 			//Check if you can run it at the slowest fequency
-			long long closest_deadline = workloadDeadlines[act_idx];
-			if (prev_selection == act_idx){
-				pred_time += sv->workloadExecution_ind[act_idx + NUM_TASKS]; //Slowest it can run
-			} else {
-				pred_time += sv->workloadExecution_ind[act_idx]; //Fastest it can run
-			}
-			time = get_scheduler_elapsed_time_us();
-			if((time % closest_deadline) + pred_time > closest_deadline){ //Pass deadline
-				prev_freq = 1; //Run it fast
-			} else {
-				printDBG("------Laxity is %llu, %llu for task %d\n", (time % closest_deadline) + pred_time, closest_deadline, act_idx);
-			}
+		long long closest_deadline = workloadDeadlines[act_idx];
+		if (prev_selection == act_idx){
+			pred_time += sv->workloadExecution_ind[act_idx + NUM_TASKS]; //Slowest it can run
+		} else {
+			pred_time += sv->workloadExecution_ind[act_idx]; //Fastest it can run
 		}
+		if((time % closest_deadline) + pred_time > closest_deadline){ //Pass deadline
+			prev_freq = 1; //Run it fast
+		} else {
+			printDBG("------Laxity is %llu, %llu for task %d\n", (time % closest_deadline) + pred_time, closest_deadline, act_idx);
+		}
+		//}
 	}
 
 	// The retun value can be specified like this:
