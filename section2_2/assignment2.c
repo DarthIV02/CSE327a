@@ -114,6 +114,16 @@ void learn_workloads(SharedVariable* v) {
 
 	getSortedIndices(workloadDeadlines, v->deadlinesIndices); /*only run once*/
 
+	for (int i = 0; i < NUM_TASKS; i++) { //Print deadline (they remain constant)
+        printDBG("%llu ", workloadDeadlines[i]);
+    }
+    printDBG("\n");
+
+	for (int i = 0; i < NUM_TASKS; i++) { //Print deadline (they remain constant)
+        printDBG("%d ", v->deadlinesIndices[i]);
+    }
+    printDBG("\n");
+
 }
 
 
