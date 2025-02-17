@@ -163,9 +163,14 @@ TaskSelection select_task(SharedVariable* sv, const int* aliveTasks, long long i
 
 		if (aliveTasks[act_idx] == 1) { // For each alive task
 			if (prev_selection == -1){ 
-				
+
 				//Select the first task with earliest deadline
 				prev_selection = act_idx;
+
+				if(sv->prev_selected == act_idx){
+					prev_freq = sv->prev_freq;
+					break;
+				}
 			
 			}
 				
@@ -202,14 +207,18 @@ TaskSelection select_task(SharedVariable* sv, const int* aliveTasks, long long i
 		sv->total_idle_time += idleTime;
 	}
 
-	if (prev_freq == 2){
-		sv->total_low_time += sv->workloadExecution_ind[prev_selection+NUM_TASKS];
-	} else {
-		sv->total_high_time += sv->workloadExecution_ind[prev_selection];
+	if(prev_selection == sv->prev_selected){
+		if (prev_freq == 0){
+			sv->total_low_time += sv->workloadExecution_ind[prev_selection+NUM_TASKS];
+		} else {
+			sv->total_high_time += sv->workloadExecution_ind[prev_selection];
+		}
 	}
 
 	//printDBG("Freq %d \n", prev_freq);
-	sel.freq = 1; // Request the maximum frequency (if you want the minimum frequency, use 0 instead.)
+	sv->prev_selected = prev_selection;
+	sv->prev_freq = prev_freq;
+	sel.freq = prev_freq; // Request the maximum frequency (if you want the minimum frequency, use 0 instead.)
 	/*How to determine the best tasks to run at low frequency?*/
 
     return sel;
