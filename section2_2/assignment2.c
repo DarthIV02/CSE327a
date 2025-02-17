@@ -150,23 +150,16 @@ TaskSelection select_task(SharedVariable* sv, const int* aliveTasks, long long i
 	// Starter scheduler: Round robin
 	// It selects a next thread using aliveTasks.
 	static int prev_selection = -1;
-
+	
 	long long pred_time = 0;
 	long long time = get_scheduler_elapsed_time_us();
 	int act_idx = 0;
 
 	for (int i = 0; i < NUM_TASKS; ++i) {
-
-		if (aliveTasks[sv->deadlinesIndices[i]] == 1) { // For each alive task
-			if (prev_selection == -1){ 
-
-				//Select the first task with earliest deadline
-				prev_selection = sv->deadlinesIndices[i];
-				printDBG("Task %d\n", prev_selection);
-			}
+		if (aliveTasks[i] == 1) {
+			prev_selection = i;
+			break;
 		}
-
-		printDBG("Next\n");
 	}
 
 	// The retun value can be specified like this:
