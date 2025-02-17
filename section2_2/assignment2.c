@@ -80,20 +80,21 @@ void learn_workloads(SharedVariable* v) {
     }
 }
 
-// Struct to hold the value and its original index
+// Struct to hold values and their original indices
 typedef struct {
     long long int value;
     int original_index;
 } IndexedValue;
 
-// Comparison function to sort based on value
-int compare(const void *a, const void *b) {
-    return ((IndexedValue*)a)->value - ((IndexedValue*)b)->value;
+// Function to swap two IndexedValue elements
+void swap(IndexedValue *a, IndexedValue *b) {
+    IndexedValue temp = *a;
+    *a = *b;
+    *b = temp;
 }
 
-// Function to get the sorted indices based on the values
+// Function to get sorted indices using Bubble Sort
 void getSortedIndices(long long int arr[], int sortedIndices[]) {
-    // Create an array of IndexedValue structs
     IndexedValue indexedArr[NUM_TASKS];
 
     // Populate the indexed array
@@ -102,8 +103,14 @@ void getSortedIndices(long long int arr[], int sortedIndices[]) {
         indexedArr[i].original_index = i;
     }
 
-    // Sort the indexed array based on the value field using qsort
-    qsort(indexedArr, NUM_TASKS, sizeof(IndexedValue), compare);
+    // Bubble Sort based on value
+    for (int i = 0; i < NUM_TASKS - 1; i++) {
+        for (int j = 0; j < NUM_TASKS - i - 1; j++) {
+            if (indexedArr[j].value > indexedArr[j + 1].value) {
+                swap(&indexedArr[j], &indexedArr[j + 1]);
+            }
+        }
+    }
 
     // Extract the sorted indices
     for (int i = 0; i < NUM_TASKS; i++) {
