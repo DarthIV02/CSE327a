@@ -10,13 +10,10 @@ void init_shared_variable(SharedVariable* sv) {
     sv->detect_direction = 0; // cw = 1 and ccw = 2
     sv->button_pressed = 1; // not pressed
 
-    /*sv->ordered = 0;
+    sv->ordered = 0;
     sv->total_idle_time = 0;
     sv->total_high_time = 0;
     sv->total_low_time = 0;
-
-    pthread_mutex_init(&sv->lock, NULL); // Initialize mutex*/
-
 // You can initialize the shared variable if needed.
 }
 
