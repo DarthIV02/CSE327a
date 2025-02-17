@@ -155,14 +155,10 @@ TaskSelection select_task(SharedVariable* sv, const int* aliveTasks, long long i
 	long long time = get_scheduler_elapsed_time_us();
 	int act_idx = 0;
 
-	for (int i = 0; i < NUM_TASKS; i++) { //Print deadline (they remain constant)
-        printDBG("%d ", sv->deadlinesIndices[i]);
-    }
-    printDBG("\n");
-
 	for (int i = 0; i < NUM_TASKS; ++i) {
 		
 		act_idx = sv->deadlinesIndices[i];
+		printDBG("Task %d\n", act_idx);
 
 		if (aliveTasks[act_idx] == 1) { // For each alive task
 			if (prev_selection == -1){ 
@@ -172,6 +168,8 @@ TaskSelection select_task(SharedVariable* sv, const int* aliveTasks, long long i
 			
 			}
 		}
+
+		printDGB("Next\n");
 	}
 
 	// The retun value can be specified like this:
