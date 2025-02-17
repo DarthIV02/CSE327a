@@ -6,7 +6,7 @@
 
 #include <stdio.h>
 #include <limits.h>
-//#include <stdlib.h>
+#include <stdlib.h>
 
 // Note: Deadline of each workload is defined in the "workloadDeadlines" variable.
 // i.e., You can access the dealine of the BUTTON thread using workloadDeadlines[BUTTON]
@@ -20,20 +20,20 @@
 // sv: The variable which is shared for every function over all threads
 
 // Struct to hold values and their original indices
+// Struct to hold the value and its original index
 typedef struct {
     long long int value;
     int original_index;
 } IndexedValue;
 
-// Function to swap two IndexedValue elements
-void swap(IndexedValue *a, IndexedValue *b) {
-    IndexedValue temp = *a;
-    *a = *b;
-    *b = temp;
+// Comparison function to sort based on value
+int compare(const void *a, const void *b) {
+    return ((IndexedValue*)a)->value - ((IndexedValue*)b)->value;
 }
 
-// Function to get sorted indices using Bubble Sort
+// Function to get the sorted indices based on the values
 void getSortedIndices(long long int arr[], int sortedIndices[]) {
+    // Create an array of IndexedValue structs
     IndexedValue indexedArr[NUM_TASKS];
 
     // Populate the indexed array
@@ -42,14 +42,8 @@ void getSortedIndices(long long int arr[], int sortedIndices[]) {
         indexedArr[i].original_index = i;
     }
 
-    // Bubble Sort based on value
-    for (int i = 0; i < NUM_TASKS - 1; i++) {
-        for (int j = 0; j < NUM_TASKS - i - 1; j++) {
-            if (indexedArr[j].value > indexedArr[j + 1].value) {
-                swap(&indexedArr[j], &indexedArr[j + 1]);
-            }
-        }
-    }
+    // Sort the indexed array based on the value field using qsort
+    qsort(indexedArr, NUM_TASKS, sizeof(IndexedValue), compare);
 
     // Extract the sorted indices
     for (int i = 0; i < NUM_TASKS; i++) {
@@ -156,7 +150,7 @@ TaskSelection select_task(SharedVariable* sv, const int* aliveTasks, long long i
 	// Starter scheduler: Round robin
 	// It selects a next thread using aliveTasks.
 	static int prev_selection = -1;
-	
+
 	long long pred_time = 0;
 	long long time = get_scheduler_elapsed_time_us();
 	int act_idx = 0;
