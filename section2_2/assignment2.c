@@ -81,7 +81,7 @@ void learn_workloads(SharedVariable* v) {
 }
 
 // Struct to hold the value and its original index
-/*typedef struct {
+typedef struct {
     long long int value;
     int original_index;
 } IndexedValue;
@@ -109,7 +109,7 @@ void getSortedIndices(long long int arr[], int sortedIndices[]) {
     for (int i = 0; i < NUM_TASKS; i++) {
         sortedIndices[i] = indexedArr[i].original_index;
     }
-}*/
+}
 
 
 // select_task(SharedVariable* sv, const int* aliveTasks):
