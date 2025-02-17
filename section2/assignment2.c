@@ -51,7 +51,7 @@ void learn_workloads(SharedVariable* v) {
 			}
 		}
 		
-		printDBG("Thread high %d has time %llu\n", workloads[i], max_time);
+		//printDBG("Thread high %d has time %llu\n", workloads[i], max_time);
 		v->workloadExecution_ind[workloads[i]] = max_time;
 
 		// Low frequency
@@ -69,7 +69,7 @@ void learn_workloads(SharedVariable* v) {
 			}
 		}
 
-		printDBG("Thread low %d has time %llu\n", workloads[i], max_time);
+		//printDBG("Thread low %d has time %llu\n", workloads[i], max_time);
 		v->workloadExecution_ind[workloads[i]+NUM_TASKS] = max_time;
     }
 
