@@ -140,7 +140,7 @@ TaskSelection select_task(SharedVariable* sv, const int* aliveTasks, long long i
 	// It selects a next thread using aliveTasks.
 
 	printf("Start\n");
-	static int prev_selection = -1;
+	int prev_selection = -1;
 	int prev_freq = 0;
 
 	/*for (int i = 0; i < NUM_TASKS; ++i) {
