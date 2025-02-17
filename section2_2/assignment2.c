@@ -189,7 +189,7 @@ TaskSelection select_task(SharedVariable* sv, const int* aliveTasks, long long i
 	sel.freq = 0; // Request the maximum frequency (if you want the minimum frequency, use 0 instead.)
 
 	//printDBG("Task %d ", sel.task);
-	printDBG("Freq %d\n", prev_freq);
+	//printDBG("Freq %d\n", prev_freq);
 
     return sel;
 }
