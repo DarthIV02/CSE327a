@@ -80,6 +80,37 @@ void learn_workloads(SharedVariable* v) {
     }
 }
 
+// Struct to hold the value and its original index
+typedef struct {
+    long long int value;
+    int original_index;
+} IndexedValue;
+
+// Comparison function to sort based on value
+int compare(const void *a, const void *b) {
+    return ((IndexedValue*)a)->value - ((IndexedValue*)b)->value;
+}
+
+// Function to get the sorted indices based on the values
+void getSortedIndices(long long int arr[], int sortedIndices[]) {
+    // Create an array of IndexedValue structs
+    IndexedValue indexedArr[NUM_TASKS];
+
+    // Populate the indexed array
+    for (int i = 0; i < NUM_TASKS; i++) {
+        indexedArr[i].value = arr[i];
+        indexedArr[i].original_index = i;
+    }
+
+    // Sort the indexed array based on the value field using qsort
+    qsort(indexedArr, NUM_TASKS, sizeof(IndexedValue), compare);
+
+    // Extract the sorted indices
+    for (int i = 0; i < NUM_TASKS; i++) {
+        sortedIndices[i] = indexedArr[i].original_index;
+    }
+}
+
 
 // select_task(SharedVariable* sv, const int* aliveTasks):
 // This function is called while runnning the actual scheduler
@@ -113,7 +144,7 @@ TaskSelection select_task(SharedVariable* sv, const int* aliveTasks, long long i
 
 	// Starter scheduler: Round robin
 	// It selects a next thread using aliveTasks.
-	static int prev_selection = -1;
+	int prev_selection = -1;
 
 	for (int i = 0; i < NUM_TASKS; ++i) {
 		if (aliveTasks[i] == 1) {
