@@ -42,7 +42,7 @@ void learn_workloads(SharedVariable* v) {
 
 		long long max_time = 0;
 
-		for (int r = 0; r < 2; r++){
+		for (int r = 0; r < 10; r++){
 			time = get_current_time_us();
 			functions[i](v);
 			time = get_current_time_us() - time;
@@ -60,7 +60,7 @@ void learn_workloads(SharedVariable* v) {
 		
 		max_time = 0;
 
-		for (int r = 0; r < 2; r++){
+		for (int r = 0; r < 10; r++){
 			time = get_current_time_us();
 			functions[i](v);
 			time = get_current_time_us() - time;
