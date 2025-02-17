@@ -78,6 +78,9 @@ void learn_workloads(SharedVariable* v) {
 		//printDBG("Thread low %d has time %llu\n", workloads[i], max_time);
 		v->workloadExecution_ind[workloads[i]+8] = max_time;
     }
+
+	getSortedIndices(workloadDeadlines, v->deadlinesIndices); /*only run once*/
+
 }
 
 // Struct to hold values and their original indices
