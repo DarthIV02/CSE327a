@@ -155,19 +155,73 @@ TaskSelection select_task(SharedVariable* sv, const int* aliveTasks, long long i
 
 	// Starter scheduler: Round robin
 	// It selects a next thread using aliveTasks.
-	static int prev_selection = 0;
+	int prev_selection = 0;
+	int prev_freq = 0;
+
+	long long pred_time = 0;
+	long long time = get_scheduler_elapsed_time_us();
+	int act_idx = 0;
 
 	for (int i = 0; i < NUM_TASKS; ++i) {
-		if (aliveTasks[i] == 1) {
-			prev_selection = i;
-			break;
+
+		act_idx = sv->deadlinesIndices[i];
+
+		if (aliveTasks[act_idx] == 1) { // For each alive task
+			if (prev_selection == 0){ 
+
+				//Select the first task with earliest deadline
+				prev_selection = act_idx;
+			
+			}
 		}
+
+		//if (aliveTasks[act_idx] == 1 || prev_selection == -1 ){
+			//Check if you can run it at the slowest fequency
+		long long closest_deadline = workloadDeadlines[act_idx];
+		if (prev_selection == act_idx){
+			pred_time += sv->workloadExecution_ind[act_idx + NUM_TASKS]; //Slowest it can run
+		} else {
+			pred_time += sv->workloadExecution_ind[act_idx]; //Fastest it can run
+		}
+		if((time % closest_deadline) + pred_time > closest_deadline){ //Pass deadline
+			prev_freq = 1; //Run it fast
+		} else {
+			//printDBG("------Laxity is %llu, %llu for task %d\n", (time % closest_deadline) + pred_time, closest_deadline, act_idx);
+		}
+		//}
 	}
 
 	// The retun value can be specified like this:
 	TaskSelection sel;
 	sel.task = prev_selection; // The thread ID which will be scheduled. i.e., 0(BUTTON) ~ 7(BUZZER)
-	sel.freq = 1; // Request the maximum frequency (if you want the minimum frequency, use 0 instead.)
+
+	/*printDBG("------");
+	for (int i = 0; i < NUM_TASKS; i++) { //Print alive tasks
+        printDBG("%d ", aliveTasks[i]);
+    }
+    printDBG("\n");*/
+
+	/*for (int i = 0; i < NUM_TASKS; i++) { //Print deadline (they remain constant)
+        printDBG("%llu ", workloadDeadlines[i]);
+    }
+    printDBG("\n");*/
+
+	/*if (idleTime > 0){
+		sv->total_idle_time += idleTime;
+	}*/
+
+	
+	/*if (prev_freq == 0){
+		sv->total_low_time += sv->workloadExecution_ind[prev_selection+NUM_TASKS];
+	} else {
+		sv->total_high_time += sv->workloadExecution_ind[prev_selection];
+	}*/
+	
+
+	//printDBG("------Chosen task %d Freq %d \n", prev_selection, prev_freq);
+	//sv->prev_selected = prev_selection;
+	//sv->prev_freq = prev_freq;
+	sel.freq = prev_freq;
 
     return sel;
 }
