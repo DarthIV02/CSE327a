@@ -138,6 +138,8 @@ TaskSelection select_task(SharedVariable* sv, const int* aliveTasks, long long i
 
 	// Starter scheduler: Round robin
 	// It selects a next thread using aliveTasks.
+
+	printf("Start\n");
 	static int prev_selection = -1;
 	int prev_freq = 0;
 
@@ -148,7 +150,7 @@ TaskSelection select_task(SharedVariable* sv, const int* aliveTasks, long long i
 		}
 	}*/
 
-	printf("Start\n");
+	//Seg Fault here
 
     // Get the sorted indices based on the array values
 	if (sv->ordered == 0){
