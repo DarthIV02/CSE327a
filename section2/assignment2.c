@@ -191,7 +191,7 @@ TaskSelection select_task(SharedVariable* sv, const int* aliveTasks, long long i
 	}
 
 	//printDBG("Freq %d \n", prev_freq);
-	sel.freq = prev_freq; // Request the maximum frequency (if you want the minimum frequency, use 0 instead.)
+	sel.freq = 1; // Request the maximum frequency (if you want the minimum frequency, use 0 instead.)
 	/*How to determine the best tasks to run at low frequency?*/
 
     return sel;
