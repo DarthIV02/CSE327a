@@ -173,7 +173,9 @@ TaskSelection select_task(SharedVariable* sv, const int* aliveTasks, long long i
 				}
 			
 			}
-				
+		}
+
+		if (aliveTasks[act_idx] == 1 || prev_selection == -1 ){
 			//Check if you can run it at the slowest fequency
 			long long closest_deadline = workloadDeadlines[act_idx];
 			if (prev_selection == act_idx){
