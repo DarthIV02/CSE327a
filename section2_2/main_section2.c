@@ -83,14 +83,14 @@ int main(int argc, char* argv[]) {
 		// This function is implemented in scheduler.o, hidden to you
 		idleTime = prepare_tasks(aliveTasks, &sv);
 		if (idleTime < 0)
-			printf("Iddle time fail");
+			//printf("Iddle time fail");
 			break;
 
 		// 2. Select a process: You need to implement.
 		// Skeleton is given in assignment2.c
 		sel = select_task(&sv, aliveTasks, idleTime); 
 		if (sel.task < 0)
-			printf("FAIL Wrong task");
+			//printf("FAIL Wrong task");
 			break;
 		
 		// printf("selected task %d at frequency %d\n", sel.task, sel.freq);
@@ -102,10 +102,10 @@ int main(int argc, char* argv[]) {
 
 	finish_workload();
 
-	printDBG("Total idle time: %llu\n", sv.total_idle_time);
-	printDBG("Total high time: %llu\n", sv.total_high_time);
-	printDBG("Total low time: %llu\n", sv.total_low_time);
-	printDBG("Total energy: %llu\n", ((sv.total_idle_time * 50) + (sv.total_low_time * 1200) + (sv.total_high_time * 2000)) / 1000000);
+	//printDBG("Total idle time: %llu\n", sv.total_idle_time);
+	//printDBG("Total high time: %llu\n", sv.total_high_time);
+	//printDBG("Total low time: %llu\n", sv.total_low_time);
+	//printDBG("Total energy: %llu\n", ((sv.total_idle_time * 50) + (sv.total_low_time * 1200) + (sv.total_high_time * 2000)) / 1000000);
 
 	release_buffer(fileno(stdout));
 	printf("Scheduler program finished.\n");
