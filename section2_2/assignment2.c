@@ -125,7 +125,6 @@ TaskSelection select_task(SharedVariable* sv, const int* aliveTasks, long long i
 	for (int i = 0; i < NUM_TASKS; i++) {
 
 		act_idx = sv->deadlinesIndices[i];
-		long long closest_deadline = workloadDeadlines[act_idx];
 
 		if (aliveTasks[act_idx] == 1) {
 			if (prev_selection == -1){ 
@@ -140,16 +139,17 @@ TaskSelection select_task(SharedVariable* sv, const int* aliveTasks, long long i
 				pred_time += sv->workloadExecution_ind[act_idx]; //Fastest it can run
 			}
 
+			long long closest_deadline = workloadDeadlines[act_idx];
+
 			if((time % closest_deadline) + pred_time > closest_deadline){ //Past and previous deadline
 				prev_freq = 1; //Run it fast
 				if (prev_selection != -1){
 					break;
 				}
 			}
-		}
-
-		if (prev_selection == -1){
+		} else if (prev_selection == -1){
 			pred_time += sv->workloadExecution_ind[act_idx]; //Fastest it can run
+			long long closest_deadline = workloadDeadlines[act_idx];
 			if((time % closest_deadline) + pred_time > closest_deadline){ //Past and previous deadline
 				prev_freq = 1; //Run it fast
 			}
