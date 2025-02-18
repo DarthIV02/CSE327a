@@ -154,7 +154,7 @@ TaskSelection select_task(SharedVariable* sv, const int* aliveTasks, long long i
 	
 	long long pred_time = 0;
 	long long time = get_scheduler_elapsed_time_us();
-	int act_idx;
+	static int act_idx;
 
 	for (int i = 0; i < NUM_TASKS; i++) {
 
