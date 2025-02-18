@@ -83,14 +83,14 @@ int main(int argc, char* argv[]) {
 		// This function is implemented in scheduler.o, hidden to you
 		idleTime = prepare_tasks(aliveTasks, &sv);
 		if (idleTime < 0)
-			//printf("Iddle time fail");
+			printDBG("Iddle time fail");
 			break;
 
 		// 2. Select a process: You need to implement.
 		// Skeleton is given in assignment2.c
 		sel = select_task(&sv, aliveTasks, idleTime); 
 		if (sel.task < 0)
-			//printf("FAIL Wrong task");
+			printDBG("FAIL Wrong task");
 			break;
 		
 		// printf("selected task %d at frequency %d\n", sel.task, sel.freq);
