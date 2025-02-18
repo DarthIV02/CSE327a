@@ -83,6 +83,7 @@ int main(int argc, char* argv[]) {
 		// This function is implemented in scheduler.o, hidden to you
 		idleTime = prepare_tasks(aliveTasks, &sv);
 		if (idleTime < 0)
+			printf("Iddle time fail");
 			break;
 
 		// 2. Select a process: You need to implement.
