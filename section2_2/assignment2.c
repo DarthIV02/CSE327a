@@ -161,7 +161,7 @@ TaskSelection select_task(SharedVariable* sv, const int* aliveTasks, long long i
 
 	/*Remove comment if you want to keep tabs of the overall time*/
 
-	if (idleTime > 0){
+	/*if (idleTime > 0){
 		sv->total_idle_time += idleTime;
 	}
 
@@ -169,7 +169,7 @@ TaskSelection select_task(SharedVariable* sv, const int* aliveTasks, long long i
 		sv->total_low_time += ((time) - sv->prev_time);
 	} else {
 		sv->total_high_time += ((time) - sv->prev_time);
-	}
+	}*/
 
 	// The retun value can be specified like this:
 	TaskSelection sel;
@@ -177,8 +177,8 @@ TaskSelection select_task(SharedVariable* sv, const int* aliveTasks, long long i
 	sel.freq = prev_freq; // Request the maximum frequency (if you want the minimum frequency, use 0 instead.)
 	
 	/*Remove comment if you want to keep tabs of the overall time*/
-	sv->prev_time = time;
-	sv->prev_freq = prev_freq;
+	/*sv->prev_time = time;
+	sv->prev_freq = prev_freq;*/
 
     return sel;
 }

@@ -71,14 +71,15 @@ typedef struct shared_variable {
 
     long long workloadExecution_ind[16];
     int deadlinesIndices[8];
-    long long total_idle_time;
+
+    /*Remove comment to print individual times*/
+    /*long long total_idle_time;
     long long total_low_time;
     long long total_high_time;
-    int prev_selected;
     int prev_freq;
-    long long prev_time;
+    long long prev_time;*/
 
-    
+
 } SharedVariable;
 
 // C. Functions
