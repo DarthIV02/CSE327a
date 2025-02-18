@@ -131,6 +131,9 @@ TaskSelection select_task(SharedVariable* sv, const int* aliveTasks, long long i
 
 				//Select the first task with earliest deadline
 				prev_selection = act_idx;
+				if (prev_freq == 1){
+					break;
+				}
 			}
 
 			if (prev_selection == act_idx){
