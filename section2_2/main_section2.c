@@ -89,7 +89,7 @@ int main(int argc, char* argv[]) {
 		// Skeleton is given in assignment2.c
 		sel = select_task(&sv, aliveTasks, idleTime); 
 		if (sel.task < 0)
-			printf("FAIL Wrong task")
+			printf("FAIL Wrong task");
 			break;
 		
 		// printf("selected task %d at frequency %d\n", sel.task, sel.freq);
