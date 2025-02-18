@@ -175,7 +175,7 @@ TaskSelection select_task(SharedVariable* sv, const int* aliveTasks, long long i
 		} else {
 			pred_time += sv->workloadExecution_ind[act_idx]; //Fastest it can run
 		}
-		if((time % closest_deadline) + pred_time > closest_deadline){ //Pass deadline
+		if((time % closest_deadline) + pred_time > closest_deadline){ //Past and previous deadline
 			prev_freq = 1; //Run it fast
 			if (prev_selection != -1){
 				break;
@@ -189,6 +189,10 @@ TaskSelection select_task(SharedVariable* sv, const int* aliveTasks, long long i
 			break;
 		}
 	}*/
+
+	if (idleTime > 0){
+		sv->total_idle_time += idleTime;
+	}
 
 	// The retun value can be specified like this:
 	TaskSelection sel;
