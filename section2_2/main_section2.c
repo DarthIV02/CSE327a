@@ -102,10 +102,10 @@ int main(int argc, char* argv[]) {
 
 	finish_workload();
 
-	//printDBG("Total idle time: %llu\n", sv.total_idle_time);
-	//printDBG("Total high time: %llu\n", sv.total_high_time);
-	//printDBG("Total low time: %llu\n", sv.total_low_time);
-	//printDBG("Total energy: %llu\n", ((sv.total_idle_time * 50) + (sv.total_low_time * 1200) + (sv.total_high_time * 2000)) / 1000000);
+	printDBG("Total idle time: %llu\n", sv.total_idle_time);
+	printDBG("Total high time: %llu\n", sv.total_high_time);
+	printDBG("Total low time: %llu\n", sv.total_low_time);
+	printDBG("Total energy: %llu\n", ((sv.total_idle_time * 50) + (sv.total_low_time * 1200) + (sv.total_high_time * 2000)) / 1000000);
 
 	release_buffer(fileno(stdout));
 	printf("Scheduler program finished.\n");
