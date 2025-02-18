@@ -167,18 +167,18 @@ TaskSelection select_task(SharedVariable* sv, const int* aliveTasks, long long i
 				prev_selection = act_idx;
 			
 			}
-		}
 
-		long long closest_deadline = workloadDeadlines[act_idx];
-		if (prev_selection == act_idx){
-			pred_time += sv->workloadExecution_ind[act_idx + 8]; //Slowest it can run
-		} else {
-			pred_time += sv->workloadExecution_ind[act_idx]; //Fastest it can run
-		}
-		if((time % closest_deadline) + pred_time > closest_deadline){ //Past and previous deadline
-			prev_freq = 1; //Run it fast
-			if (prev_selection != -1){
-				break;
+			long long closest_deadline = workloadDeadlines[act_idx];
+			if (prev_selection == act_idx){
+				pred_time += sv->workloadExecution_ind[act_idx + 8]; //Slowest it can run
+			} else {
+				pred_time += sv->workloadExecution_ind[act_idx]; //Fastest it can run
+			}
+			if((time % closest_deadline) + pred_time > closest_deadline){ //Past and previous deadline
+				prev_freq = 1; //Run it fast
+				if (prev_selection != -1){
+					break;
+				}
 			}
 		}
 	}
