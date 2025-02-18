@@ -209,6 +209,7 @@ TaskSelection select_task(SharedVariable* sv, const int* aliveTasks, long long i
     }
     printDBG("\n");
 
+	printDBG("------");
 	for (int i = 0; i < NUM_TASKS; i++) { //Print deadline (they remain constant)
         printDBG("%llu ", workloadDeadlines[i]);
     }
@@ -222,7 +223,7 @@ TaskSelection select_task(SharedVariable* sv, const int* aliveTasks, long long i
 	//printDBG("Time: %llu\n", sv->prev_time);
 	sv->prev_freq = prev_freq;
 
-	printDBG("Task %d ", sel.task);
+	printDBG("------Task %d ", sel.task);
 	printDBG("Freq %d\n", prev_freq);
 
     return sel;
