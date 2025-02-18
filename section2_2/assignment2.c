@@ -194,18 +194,11 @@ TaskSelection select_task(SharedVariable* sv, const int* aliveTasks, long long i
 		sv->total_idle_time += idleTime;
 	}
 
-	/*if (prev_freq == 0){
-		if(10000 > time-sv->prev_time){
-			sv->total_low_time += 10000;
-		} else {
-			sv->total_low_time += 10000;
-		}
-		
+	if (sv->prev_freq == 0){
+		sv->total_low_time += (time - sv->prev_time);
+	} else {
+		sv->total_high_time += (time - sv->prev_time);
 	}
-
-	if (prev_freq == 1){
-		sv->total_high_time += 10000;
-	}*/
 
 	// The retun value can be specified like this:
 	TaskSelection sel;
