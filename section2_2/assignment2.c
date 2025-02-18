@@ -21,6 +21,7 @@
 
 // Struct to hold values and their original indices
 // Struct to hold the value and its original index
+
 typedef struct {
     long long int value;
     int original_index;
@@ -52,19 +53,6 @@ void getSortedIndices(long long int arr[], int sortedIndices[]) {
 }
 
 void learn_workloads(SharedVariable* v) {
-	// TODO: Fill the body
-	// This function is executed before the scheduling simulation.
-	// You need to calculate the execution time of each thread here.
-	//
-	// Thread functions: 
-	// thread_button, thread_touch, thread_encoder, thread_tilt,
-	// thread_twocolor, thread_rgbcolor, thread_aled, thread_buzzer
-
-	// Tip 1. You can call each workload function here like:
-	// thread_button();
-
-	// Tip 2. You can get the current time here like:
-	// long long curTime = get_current_time_us();
 
 	void *(*functions[])(void *) = { thread_button, thread_sound, thread_encoder, thread_motion,
 		thread_twocolor, thread_rgbcolor, thread_aled, thread_buzzer };
@@ -90,7 +78,6 @@ void learn_workloads(SharedVariable* v) {
 			}
 		}
 		
-		//printDBG("Thread high %d has time %llu\n", workloads[i], max_time);
 		v->workloadExecution_ind[workloads[i]] = max_time;
 
 		// Low frequency
@@ -108,7 +95,6 @@ void learn_workloads(SharedVariable* v) {
 			}
 		}
 
-		//printDBG("Thread low %d has time %llu\n", workloads[i], max_time);
 		v->workloadExecution_ind[workloads[i]+8] = max_time;
     }
 
@@ -126,29 +112,9 @@ void learn_workloads(SharedVariable* v) {
 //           (i.e., it's larger than 0 only when all threads are finished and not reach the next preiod.)
 // - Return value
 // TaskSelection structure which indicates the scheduled task and the CPU frequency
+
 TaskSelection select_task(SharedVariable* sv, const int* aliveTasks, long long idleTime) {
-	// TODO: Fill the body
-	// This function is executed inside of the scheduling simulation.
-    // You need to implement a EDF scheduler.
-
-    // Goal: Select a task that has the earliest deadline among the ready tasks.
-
-	// Tip 1. You may get the current time elapsed in the scheduler here like:
-	// long long curTime = get_scheduler_elapsed_time_us();
-
-	// Tip 2. The readiness and completeness of tasks are indicated by
-	// the flip of aliveTasks.
-	// For example, when aliveTasks[i] switches from 1 (alive) to 0 
-	// (not alive), it indicates that task i is finished for the current
-	// round.
-	// When aliveTasks[i] switches from 0 to 1, it means task i is ready
-	// to schedule for its next period.
-
-	// DO NOT make any interruptable / IO tasks in this function.
-	// You can use printDBG instead of printf.
-
-	// Starter scheduler: Round robin
-	// It selects a next thread using aliveTasks.
+	
 	int prev_selection = -1;
 	int prev_freq = 0;
 	
@@ -187,14 +153,9 @@ TaskSelection select_task(SharedVariable* sv, const int* aliveTasks, long long i
 		}
 	}
 
-	/*for (int i = 0; i < NUM_TASKS; ++i) {
-		if (aliveTasks[i] == 1) {
-			prev_selection = i;
-			break;
-		}
-	}*/
+	/*Remove comment if you want to keep tabs of the overall time*/
 
-	if (idleTime > 0){
+	/*if (idleTime > 0){
 		sv->total_idle_time += idleTime;
 	}
 
@@ -202,30 +163,16 @@ TaskSelection select_task(SharedVariable* sv, const int* aliveTasks, long long i
 		sv->total_low_time += ((time) - sv->prev_time);
 	} else {
 		sv->total_high_time += ((time) - sv->prev_time);
-	}
-
-	/*printDBG("------");
-	for (int i = 0; i < NUM_TASKS; i++) { //Print alive tasks
-        printDBG("%d ", aliveTasks[i]);
-    }
-    printDBG("\n");
-
-	printDBG("------");
-	for (int i = 0; i < NUM_TASKS; i++) { //Print deadline (they remain constant)
-        printDBG("%llu ", workloadDeadlines[i]);
-    }
-    printDBG("\n");*/
+	}*/
 
 	// The retun value can be specified like this:
 	TaskSelection sel;
 	sel.task = prev_selection; // The thread ID which will be scheduled. i.e., 0(BUTTON) ~ 7(BUZZER)
 	sel.freq = prev_freq; // Request the maximum frequency (if you want the minimum frequency, use 0 instead.)
-	sv->prev_time = time;
-	//printDBG("Time: %llu\n", sv->prev_time);
-	sv->prev_freq = prev_freq;
-
-	//printDBG("------Task %d ", sel.task);
-	//printDBG("Freq %d\n", prev_freq);
+	
+	/*Remove comment if you want to keep tabs of the overall time*/
+	//sv->prev_time = time;
+	//sv->prev_freq = prev_freq;
 
     return sel;
 }
