@@ -77,6 +77,8 @@ typedef struct shared_variable {
     int prev_selected;
     int prev_freq;
     long long prev_time;
+
+    
 } SharedVariable;
 
 // C. Functions
