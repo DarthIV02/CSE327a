@@ -156,7 +156,7 @@ TaskSelection select_task(SharedVariable* sv, const int* aliveTasks, long long i
 	long long time = get_scheduler_elapsed_time_us();
 	int act_idx;
 
-	for (int i = 0; i < NUM_TASKS; i++) {
+	/*for (int i = 0; i < NUM_TASKS; i++) {
 
 		act_idx = sv->deadlinesIndices[i];
 
@@ -180,6 +180,13 @@ TaskSelection select_task(SharedVariable* sv, const int* aliveTasks, long long i
 			if (prev_selection != -1){
 				break;
 			}
+		}
+	}*/
+
+	for (int i = 0; i < NUM_TASKS; ++i) {
+		if (aliveTasks[i] == 1) {
+			prev_selection = i;
+			break;
 		}
 	}
 
