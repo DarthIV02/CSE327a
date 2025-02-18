@@ -190,9 +190,9 @@ TaskSelection select_task(SharedVariable* sv, const int* aliveTasks, long long i
 		}
 	}*/
 
-	if (idleTime > 0){
+	/*if (idleTime > 0){
 		sv->total_idle_time += idleTime;
-	}
+	}*/
 
 
 
