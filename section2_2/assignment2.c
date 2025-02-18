@@ -194,13 +194,17 @@ TaskSelection select_task(SharedVariable* sv, const int* aliveTasks, long long i
 		sv->total_idle_time += idleTime;
 	}
 
+	if (prev_freq == 0){
+		sv->total_low_time += 10000;
+	}
+
 	// The retun value can be specified like this:
 	TaskSelection sel;
 	sel.task = prev_selection; // The thread ID which will be scheduled. i.e., 0(BUTTON) ~ 7(BUZZER)
 	sel.freq = prev_freq; // Request the maximum frequency (if you want the minimum frequency, use 0 instead.)
 
-	//printDBG("Task %d ", sel.task);
-	//printDBG("Freq %d\n", prev_freq);
+	printDBG("Task %d ", sel.task);
+	printDBG("Freq %d\n", prev_freq);
 
     return sel;
 }
