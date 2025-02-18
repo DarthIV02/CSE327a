@@ -203,6 +203,17 @@ TaskSelection select_task(SharedVariable* sv, const int* aliveTasks, long long i
 		sv->total_high_time += ((time) - sv->prev_time);
 	}
 
+	printDBG("------");
+	for (int i = 0; i < NUM_TASKS; i++) { //Print alive tasks
+        printDBG("%d ", aliveTasks[i]);
+    }
+    printDBG("\n");
+
+	for (int i = 0; i < NUM_TASKS; i++) { //Print deadline (they remain constant)
+        printDBG("%llu ", workloadDeadlines[i]);
+    }
+    printDBG("\n");
+
 	// The retun value can be specified like this:
 	TaskSelection sel;
 	sel.task = prev_selection; // The thread ID which will be scheduled. i.e., 0(BUTTON) ~ 7(BUZZER)
@@ -211,8 +222,8 @@ TaskSelection select_task(SharedVariable* sv, const int* aliveTasks, long long i
 	//printDBG("Time: %llu\n", sv->prev_time);
 	sv->prev_freq = prev_freq;
 
-	//printDBG("Task %d ", sel.task);
-	//printDBG("Freq %d\n", prev_freq);
+	printDBG("Task %d ", sel.task);
+	printDBG("Freq %d\n", prev_freq);
 
     return sel;
 }
