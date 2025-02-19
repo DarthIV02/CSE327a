@@ -175,7 +175,9 @@ void playTone(int frequency, int duration) {
 
 // 8. Buzzer
 void body_buzzer(SharedVariable* sv) {
-    if (sv->detection_sound == 1){
-        playTone(3136, 300); //Play for 3 seconds
+    if (sv->bProgramExit == 0){ // Make sure to only turn on when running
+        if (sv->detection_sound == 1){
+            playTone(3136, 300); //Play for 3 seconds
+        }
     }
 }

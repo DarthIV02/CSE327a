@@ -69,8 +69,8 @@ typedef struct shared_variable {
     int button_pressed;
     // You can add more variables if needed.
 
-    long long workloadExecution_ind[16];
-    int deadlinesIndices[8];
+    long long workloadExecution_ind[16]; //How much time does it take to run a task
+    int deadlinesIndices[8];// Ordered tasks based on deadline
 
     /*Remove comment to print individual times*/
     /*long long total_idle_time;
