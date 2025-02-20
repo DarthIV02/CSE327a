@@ -22,6 +22,7 @@
 
 #include <wiringPi.h>
 #include <stdio.h>
+#include <stdlib.h>
 
 // GPIO Pins, BCM numbering
 #define BUTTON 7
