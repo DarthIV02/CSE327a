@@ -14,6 +14,7 @@ def call_for_help(channel):
     call_caretaker(client, CARETAKER_NUMBER)
 
 CARETAKER_NUMBER = os.getenv("CARETAKER_NUMBER", "") # your relative numbers comma-separated
+print("Calling Phone Number: ", CARETAKER_NUMBER)
 ORGINATE_NUMBER = os.getenv("TWILIO_NUMBER", "") # should be one of your Twilio active number
 PATIENT = os.getenv("PATIENT_NAME", "") # should be one of your Twilio active number
 HELP_TEXT = f"Help call from {PATIENT} !"
