@@ -43,6 +43,7 @@ int main(void) {
         {
             if (called == 0){
                 printf("Help button pressed...\n");
+                system("call.sh");
                 called = 1;
             }
         }
