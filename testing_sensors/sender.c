@@ -18,9 +18,9 @@ int main(void) {
     while(1){
         /* send 0x0 code (8 bits)*/ 
         softPwmWrite(OUTPUT_PIN, 0);
-        Delay (200); 
+        delay(200); 
         softPwmWrite(OUTPUT_PIN, 1);
-        Delay (200);
+        delay(200);
     }
     return 0;
 }
