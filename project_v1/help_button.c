@@ -41,12 +41,12 @@ int main(void) {
         if (val == HIGH)         //when the shock sensor have signal, LED blink
         {
             printf("button not pressed...\n");
-            delay(500);
+            delay(50);
         }
         else
         {
             printf("button pressed...\n");
-            delay(500);
+            delay(50);
         }
     }
     return 0;
