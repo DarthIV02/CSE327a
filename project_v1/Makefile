@@ -1,5 +1,5 @@
 all:
-	gcc -o set_env set_env.c
+	gcc -o button help_button.c -lwiringPi
 
 clean:
-	rm -rf main_section1
+	rm -rf button
