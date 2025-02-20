@@ -9,7 +9,7 @@ def call_caretaker(client, caretaker_number):
     print(call.sid)
     return call
 
-def call_for_help(channel):
+def call_for_help():
     client = Client(ACCOUNT_SID, AUTH_TOKEN)
     call_caretaker(client, CARETAKER_NUMBER)
 
