@@ -1,0 +1,1 @@
+gcc -o set_env set_env.c
