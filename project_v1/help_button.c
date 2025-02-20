@@ -35,19 +35,18 @@ int main(void) {
     }
     pinMode(BUTTON, INPUT);
     int val = 0;
+    int called = 0;
 
     while(1){
         val = digitalRead(BUTTON); //read the value of the digital interface 3 assigned to val
-        if (val == HIGH)         //when the shock sensor have signal, LED blink
+        if (val == LOW)         //when the shock sensor have signal, LED blink
         {
-            printf("button not pressed...\n");
-            delay(50);
+            if (called == 0){
+                printf("Help button pressed...\n");
+                called = 1;
+            }
         }
-        else
-        {
-            printf("button pressed...\n");
-            delay(50);
-        }
+        delay(50);
     }
     return 0;
 }
