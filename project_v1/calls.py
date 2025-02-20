@@ -14,8 +14,8 @@ def call_for_help(channel):
     call_caretaker(client, CARETAKER_NUMBER)
 
 CARETAKER_NUMBER = os.getenv("CARETAKER_NUMBER", "") # your relative numbers comma-separated
-ORGINATE_NUMBER = os.getenv("RELATIVE_NUMBERS", "") # should be one of your Twilio active number
-PATIENT = os.getenv("PATIENT NAME", "") # should be one of your Twilio active number
+ORGINATE_NUMBER = os.getenv("TWILIO_NUMBER", "") # should be one of your Twilio active number
+PATIENT = os.getenv("PATIENT_NAME", "") # should be one of your Twilio active number
 HELP_TEXT = f"Help call from {PATIENT} !"
 # Find your Account SID and Auth Token at twilio.com/console
 # and set the environment variables. See http://twil.io/secure
