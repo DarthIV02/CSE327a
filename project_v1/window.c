@@ -45,6 +45,14 @@ activate (GtkApplication* app,
   gtk_grid_set_column_spacing(GTK_GRID(grid),10);
   gtk_grid_set_row_spacing(GTK_GRID(grid), 6);
 
+  // Allow grid to expand in both horizontal and vertical directions
+  gtk_widget_set_hexpand(grid, TRUE);
+
+  // Allow widgets inside the grid to expand
+  gtk_widget_set_hexpand(label, TRUE);
+  gtk_widget_set_hexpand(button1, TRUE);
+  gtk_widget_set_hexpand(button2, TRUE);
+
   // Apply CSS class to grid
   gtk_widget_set_name(grid, "grid");
   apply_css(grid);
