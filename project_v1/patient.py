@@ -25,6 +25,9 @@ class PatientForm(Gtk.Window):
         # Create a large text box for the notes
         self.notes_textview = Gtk.TextView()
         self.notes_textview.set_size_request(250,200) # W x H
+        # Disable horizontal and vertical resizing
+        self.notes_textview.set_property("hexpand", False)
+        self.notes_textview.set_property("vexpand", False)
         self.notes_buffer = self.notes_textview.get_buffer()
 
         # Add the widgets to the grid
