@@ -35,7 +35,9 @@ static void patient_clicked(GtkButton *button, gpointer user_data) {
   // Your custom instructions
   g_print("Button 1 was clicked!\n");
   // You can add more actions here, such as closing the window or performing other tasks.
-  gtk_window_close(GTK_WINDOW(user_data)); // Close the window as an example
+  // Correctly cast user_data to GtkWindow* before using it
+  GtkWindow *window = GTK_WINDOW(user_data);
+  gtk_window_close(window);  // Close the window
 }
 
 // Custom callback for button2
@@ -43,7 +45,9 @@ static void schedule_clicked(GtkButton *button, gpointer user_data) {
   // Your custom instructions
   g_print("Button 2 was clicked!\n");
   // Perform other tasks here
-  gtk_window_close(GTK_WINDOW(user_data)); // Close the window as an example
+  // Correctly cast user_data to GtkWindow* before using it
+  GtkWindow *window = GTK_WINDOW(user_data);
+  gtk_window_close(window);  // Close the window
 }
 
 static void
