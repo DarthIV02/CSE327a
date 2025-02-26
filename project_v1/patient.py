@@ -8,6 +8,7 @@ class PatientForm(Gtk.Window):
         super().__init__(title="Patient Information")
         self.set_default_size(400, 300)
         self.set_border_width(15)
+        self.set_border_height(5)
 
         # Create a grid to organize the form elements
         grid = Gtk.Grid()
@@ -24,7 +25,7 @@ class PatientForm(Gtk.Window):
 
         # Create a large text box for the notes
         self.notes_textview = Gtk.TextView()
-        self.notes_textview.set_size_request(300,200) # W x H
+        self.notes_textview.set_size_request(250,200) # W x H
         self.notes_buffer = self.notes_textview.get_buffer()
 
         # Add the widgets to the grid
