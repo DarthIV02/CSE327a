@@ -1,4 +1,26 @@
 #include <gtk/gtk.h>
+#include <time.h>
+
+static void update_time(GtkLabel *label) { // Modify with real time clock ...
+  time_t now = time(NULL);
+  struct tm *t = localtime(&now);
+  
+  char time_str[9]; // HH:MM:SS
+  strftime(time_str, sizeof(time_str), "%H:%M:%S", t);
+
+  gtk_label_set_text(label, time_str);
+}
+
+// Function to apply CSS
+static void apply_css(GtkWidget *widget) {
+  GtkCssProvider *provider = gtk_css_provider_new();
+  gtk_css_provider_load_from_path(provider, "style.css", NULL);
+  
+  GtkStyleContext *context = gtk_widget_get_style_context(widget);
+  gtk_style_context_add_provider(context, GTK_STYLE_PROVIDER(provider), GTK_STYLE_PROVIDER_PRIORITY_USER);
+
+  g_object_unref(provider);
+}
 
 static void
 activate (GtkApplication* app,
@@ -6,7 +28,7 @@ activate (GtkApplication* app,
 {
   GtkWidget *window = gtk_application_window_new(app);
   GtkWidget *grid   = gtk_grid_new();
-  GtkWidget *label  = gtk_label_new("6:59 pm");
+  GtkWidget *label = gtk_label_new("00:00:00");
 
   gtk_window_set_title (GTK_WINDOW (window), "Elder Care System");
   gtk_window_set_position(GTK_WINDOW(window), GTK_WIN_POS_CENTER); // Center the window
@@ -14,7 +36,12 @@ activate (GtkApplication* app,
 
   gtk_grid_set_column_spacing(GTK_GRID(grid),10);
   gtk_grid_set_row_spacing(GTK_GRID(grid), 6);
-  // Create a new button
+
+  // Add CSS class
+  gtk_widget_set_name(label, "clock-label");
+  apply_css(label);
+
+  // Create buttons
   GtkWidget *button1 = gtk_button_new_with_label ("Patient Details");
   GtkWidget *button2 = gtk_button_new_with_label ("Schedule");
 

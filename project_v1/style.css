@@ -1,0 +1,10 @@
+/* style.css */
+.clock-label {
+    font-size: 40px;
+    font-weight: bold;
+    font-family: "Courier New", monospace;
+    color: white;
+    background-color: black;
+    padding: 10px;
+    border-radius: 10px;
+}
