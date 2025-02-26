@@ -8,7 +8,8 @@ activate (GtkApplication* app,
 
   window = gtk_application_window_new (app);
   gtk_window_set_title (GTK_WINDOW (window), "Elder Care System");
-  gtk_window_set_default_size (GTK_WINDOW (window), 400, 400);
+  gtk_window_set_default_size (GTK_WINDOW (window), 400, 800);
+  gtk_window_set_position(GTK_WINDOW(window), GTK_WIN_POS_CENTER); // Center the window
   gtk_widget_show_all (window);
 }
 
