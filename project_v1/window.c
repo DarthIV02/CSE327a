@@ -48,9 +48,9 @@ activate (GtkApplication* app,
   // Allow grid to expand in both horizontal and vertical directions
   gtk_widget_set_hexpand(grid, TRUE);
 
-  // Apply CSS class to grid
-  gtk_widget_set_name(grid, "grid");
-  apply_css(grid);
+  // Apply border class to grid
+  //gtk_widget_set_name(grid, "grid");
+  //apply_css(grid);
 
   // Add CSS class
   gtk_widget_set_name(label, "clock-label");
