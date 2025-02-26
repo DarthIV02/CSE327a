@@ -17,7 +17,7 @@ static void apply_css(GtkWidget *widget) {
 
   GError *error = NULL;
 
-  if (!gtk_css_provider_load_from_path(css_provider, "./style.css", &error)) {
+  if (!gtk_css_provider_load_from_path(provider, "./style.css", &error)) {
     g_warning("Failed to load CSS file: %s", error->message);
   } else {
     g_print("CSS file loaded successfully!\n");
