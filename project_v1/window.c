@@ -1,7 +1,8 @@
 #include <gtk/gtk.h>
 #include <time.h>
 
-static void update_time(GtkWidget *label) { // Modify with real time clock ...
+static void update_time(gpointer *sudo_label) { // Modify with real time clock ...
+  GtkLabel *label = GTK_LABEL(sudo_label);
   time_t now = time(NULL);
   struct tm *t = localtime(&now);
   
