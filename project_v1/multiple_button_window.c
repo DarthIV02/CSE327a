@@ -31,7 +31,7 @@ static void activate(GtkApplication *app, void *user_data)
   g_signal_connect_swapped (button3, "clicked", G_CALLBACK (gtk_window_close),
   window);
 
-  gtk_window_present(GTK_WINDOW(window));
+  gtk_widget_show_all(window);
 }
 
 int main(int argc, char *argv[])
