@@ -45,6 +45,10 @@ activate (GtkApplication* app,
   gtk_grid_set_column_spacing(GTK_GRID(grid),10);
   gtk_grid_set_row_spacing(GTK_GRID(grid), 6);
 
+  // Apply CSS class to grid
+  gtk_widget_set_name(grid, "grid");
+  apply_css(grid);
+
   // Add CSS class
   gtk_widget_set_name(label, "clock-label");
   apply_css(label);

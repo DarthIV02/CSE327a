@@ -8,3 +8,7 @@
     padding: 10px;
     border-radius: 10px;
 }
+
+#grid {
+    border: 5px solid red; /* Set a 5px solid red border */
+  }
