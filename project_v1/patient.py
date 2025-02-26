@@ -24,6 +24,7 @@ class PatientForm(Gtk.Window):
 
         # Create a large text box for the notes
         self.notes_textview = Gtk.TextView()
+        self.notes_textview.set_size_request(300,200) # W x H
         self.notes_buffer = self.notes_textview.get_buffer()
 
         # Add the widgets to the grid
@@ -35,7 +36,7 @@ class PatientForm(Gtk.Window):
 
         grid.attach(label3, 0, 2, 1, 1)  # Label 3
         grid.attach(self.notes_textview, 1, 2, 2, 3)  # Notes text box
-        
+
         grid.set_column_spacing(15)
 
         # Add a submit button
@@ -52,13 +53,13 @@ class PatientForm(Gtk.Window):
         notes = self.notes_buffer.get_text(start_iter, end_iter, True)
 
         # Print the values (you can also do other actions like saving them)
-        print(f"Name: {name}")
-        print(f"Age: {age}")
-        print(f"Notes: {notes}")
+        #print(f"Name: {name}")
+        #print(f"Age: {age}")
+        #print(f"Notes: {notes}")
 
         # Optionally, you could show a confirmation dialog or clear the form
-        dialog = Gtk.MessageDialog(self, 0, Gtk.MessageType.INFO, Gtk.ButtonsType.OK, "Data Updated")
-        dialog.format_secondary_text(f"Name: {name}\nAge: {age}\nNotes: {notes}")
+        dialog = Gtk.MessageDialog(self, 0, Gtk.MessageType.INFO, Gtk.ButtonsType.OK, "Data Updated!")
+        #dialog.format_secondary_text(f"Name: {name}\nAge: {age}\nNotes: {notes}")
         dialog.run()
         dialog.destroy()
 
