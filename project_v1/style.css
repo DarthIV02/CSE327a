@@ -1,5 +1,5 @@
 /* style.css */
-.clock-label {
+#clock-label {
     font-size: 40px;
     font-weight: bold;
     font-family: "Courier New", monospace;
