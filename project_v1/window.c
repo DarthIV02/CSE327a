@@ -56,6 +56,10 @@ activate (GtkApplication* app,
   gtk_grid_attach(GTK_GRID(grid), button1, 0, 1, 1, 1);
   gtk_grid_attach(GTK_GRID(grid), button2, 1, 1, 1, 1);
 
+  // Create a container to center the grid
+  GtkWidget *align = gtk_alignment_new(0.5, 0.5, 0, 0); // xalign, yalign, xscale, yscale
+  gtk_container_add(GTK_CONTAINER(align), grid);
+
   gtk_container_add(GTK_CONTAINER(window), grid);
   // When the button is clicked, close the window passed as an argument
   g_signal_connect_swapped (button1, "clicked", G_CALLBACK (gtk_window_close), 
