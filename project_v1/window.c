@@ -1,8 +1,8 @@
 #include <gtk/gtk.h>
 #include <time.h>
 
-static void update_time() { // Modify with real time clock ...
-  GtkLabel *label = GTK_LABEL();
+static void update_time(gpointer *user_data) { // Modify with real time clock ...
+  GtkLabel *label = GTK_LABEL(user_data);
   time_t now = time(NULL);
   struct tm *t = localtime(&now);
   
@@ -72,7 +72,7 @@ activate (GtkApplication* app,
   // Add CSS class
   gtk_widget_set_name(label, "clock-label");
   apply_css(label);
-  update_time(label);
+  update_time(user_data);
 
   // Create buttons
   GtkWidget *patient_button = gtk_button_new_with_label ("Patient Details");
