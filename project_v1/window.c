@@ -40,6 +40,7 @@ activate (GtkApplication* app,
   gtk_window_set_title (GTK_WINDOW (window), "Elder Care System");
   gtk_window_set_position(GTK_WINDOW(window), GTK_WIN_POS_CENTER); // Center the window
   gtk_window_set_default_size (GTK_WINDOW (window), 600, 400);
+  gtk_container_set_border_width(GTK_CONTAINER(window), 15);
 
   gtk_grid_set_column_spacing(GTK_GRID(grid),10);
   gtk_grid_set_row_spacing(GTK_GRID(grid), 6);
@@ -52,7 +53,7 @@ activate (GtkApplication* app,
   GtkWidget *button1 = gtk_button_new_with_label ("Patient Details");
   GtkWidget *button2 = gtk_button_new_with_label ("Schedule");
 
-  gtk_grid_attach(GTK_GRID(grid), label, 0, 0, 3, 1);
+  gtk_grid_attach(GTK_GRID(grid), label, 0, 0, 2, 1);
   gtk_grid_attach(GTK_GRID(grid), button1, 0, 1, 1, 1);
   gtk_grid_attach(GTK_GRID(grid), button2, 1, 1, 1, 1);
 
