@@ -30,6 +30,9 @@ class PatientForm(Gtk.Window):
         self.notes_textview.set_property("vexpand", False)
         self.notes_buffer = self.notes_textview.get_buffer()
 
+        scrollable = Gtk.ScrolledWindow()
+        scrollable.add(self.notes_textview)
+
         # Add the widgets to the grid
         grid.attach(label1, 0, 0, 1, 1)  # Label 1
         grid.attach(self.name_entry, 1, 0, 2, 1)  # Name input
