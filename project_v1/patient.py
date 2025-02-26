@@ -30,8 +30,8 @@ class PatientForm(Gtk.Window):
         self.notes_textview.set_property("vexpand", False)
         self.notes_buffer = self.notes_textview.get_buffer()
 
-        scrollable = Gtk.ScrolledWindow()
-        scrollable.add(self.notes_textview)
+        self.scrollable = Gtk.ScrolledWindow()
+        self.scrollable.add(self.notes_textview)
 
         # Add the widgets to the grid
         grid.attach(label1, 0, 0, 1, 1)  # Label 1
@@ -41,7 +41,7 @@ class PatientForm(Gtk.Window):
         grid.attach(self.age_entry, 1, 1, 2, 1)  # Age input
 
         grid.attach(label3, 0, 2, 1, 1)  # Label 3
-        grid.attach(self.notes_textview, 1, 2, 2, 3)  # Notes text box
+        grid.attach(self.scrollable, 1, 2, 2, 3)  # Notes text box
 
         grid.set_column_spacing(15)
         grid.set_row_spacing(5)
