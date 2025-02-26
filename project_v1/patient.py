@@ -38,7 +38,7 @@ class PatientForm(Gtk.Window):
         grid.attach(self.notes_textview, 1, 2, 2, 3)  # Notes text box
 
         grid.set_column_spacing(15)
-        grid.set_row_spacings(5)
+        grid.set_row_spacing(5)
 
         # Add a submit button
         submit_button = Gtk.Button(label="Save")
