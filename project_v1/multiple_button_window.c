@@ -22,7 +22,7 @@ static void activate(GtkApplication *app, void *user_data)
   gtk_grid_attach(GTK_GRID(grid), button2, 1, 1, 1, 1);
   gtk_grid_attach(GTK_GRID(grid), button3, 2, 1, 1, 1);
 
-  gtk_container_add (GTK_WINDOW (window), grid);
+  gtk_container_add(GTK_CONTAINER(window), grid);
   // When the button is clicked, close the window passed as an argument
   g_signal_connect_swapped (button1, "clicked", G_CALLBACK (gtk_window_close), 
   window);
