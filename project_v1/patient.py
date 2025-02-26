@@ -2,11 +2,12 @@ import gi
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk
 
-class SimpleForm(Gtk.Window):
+class PatientForm(Gtk.Window):
     def __init__(self):
         # Initialize the window
-        super().__init__(title="Simple Form")
+        super().__init__(title="Patient Information")
         self.set_default_size(400, 300)
+        self.set_border_width(15)
 
         # Create a grid to organize the form elements
         grid = Gtk.Grid()
@@ -34,9 +35,11 @@ class SimpleForm(Gtk.Window):
 
         grid.attach(label3, 0, 2, 1, 1)  # Label 3
         grid.attach(self.notes_textview, 1, 2, 2, 3)  # Notes text box
+        
+        grid.set_column_spacing(15)
 
         # Add a submit button
-        submit_button = Gtk.Button(label="Submit")
+        submit_button = Gtk.Button(label="Save")
         submit_button.connect("clicked", self.on_submit_clicked)
         grid.attach(submit_button, 1, 5, 1, 1)  # Button below the form
 
@@ -54,14 +57,14 @@ class SimpleForm(Gtk.Window):
         print(f"Notes: {notes}")
 
         # Optionally, you could show a confirmation dialog or clear the form
-        dialog = Gtk.MessageDialog(self, 0, Gtk.MessageType.INFO, Gtk.ButtonsType.OK, "Form Submitted")
+        dialog = Gtk.MessageDialog(self, 0, Gtk.MessageType.INFO, Gtk.ButtonsType.OK, "Data Updated")
         dialog.format_secondary_text(f"Name: {name}\nAge: {age}\nNotes: {notes}")
         dialog.run()
         dialog.destroy()
 
 
 # Create and run the form
-win = SimpleForm()
+win = PatientForm()
 win.connect("destroy", Gtk.main_quit)
 win.show_all()
 Gtk.main()
