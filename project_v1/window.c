@@ -29,6 +29,22 @@ static void apply_css(GtkWidget *widget) {
   g_object_unref(provider);
 }
 
+// Custom callback for button1
+static void patient_clicked(GtkButton *button, gpointer user_data) {
+  // Your custom instructions
+  g_print("Button 1 was clicked!\n");
+  // You can add more actions here, such as closing the window or performing other tasks.
+  gtk_window_close(GTK_WINDOW(user_data)); // Close the window as an example
+}
+
+// Custom callback for button2
+static void schedule_clicked(GtkButton *button, gpointer user_data) {
+  // Your custom instructions
+  g_print("Button 2 was clicked!\n");
+  // Perform other tasks here
+  gtk_window_close(GTK_WINDOW(user_data)); // Close the window as an example
+}
+
 static void
 activate (GtkApplication* app,
           gpointer        user_data)
@@ -55,19 +71,20 @@ activate (GtkApplication* app,
   // Add CSS class
   gtk_widget_set_name(label, "clock-label");
   apply_css(label);
+  update_time(label);
 
   // Create buttons
-  GtkWidget *button1 = gtk_button_new_with_label ("Patient Details");
-  GtkWidget *button2 = gtk_button_new_with_label ("Schedule");
+  GtkWidget *patient_button = gtk_button_new_with_label ("Patient Details");
+  GtkWidget *schedule_button = gtk_button_new_with_label ("Schedule");
 
   gtk_grid_attach(GTK_GRID(grid), label, 0, 0, 2, 1);
-  gtk_grid_attach(GTK_GRID(grid), button1, 0, 1, 1, 1);
-  gtk_grid_attach(GTK_GRID(grid), button2, 1, 1, 1, 1);
+  gtk_grid_attach(GTK_GRID(grid), patient_button, 0, 1, 1, 1);
+  gtk_grid_attach(GTK_GRID(grid), schedule_button, 1, 1, 1, 1);
 
   // Allow widgets inside the grid to expand
   gtk_widget_set_hexpand(label, TRUE);
-  gtk_widget_set_hexpand(button1, TRUE);
-  gtk_widget_set_hexpand(button2, TRUE);
+  gtk_widget_set_hexpand(patient_button, TRUE);
+  gtk_widget_set_hexpand(schedule_button, TRUE);
 
   // Create a container to center the grid
   gtk_widget_set_halign (grid, GTK_ALIGN_FILL);
@@ -75,10 +92,8 @@ activate (GtkApplication* app,
 
   gtk_container_add(GTK_CONTAINER(window), grid);
   // When the button is clicked, close the window passed as an argument
-  g_signal_connect_swapped (button1, "clicked", G_CALLBACK (gtk_window_close), 
-  window);
-  g_signal_connect_swapped (button2, "clicked", G_CALLBACK (gtk_window_close), 
-  window);
+  g_signal_connect_swapped (patient_button, "clicked", G_CALLBACK (patient_clicked), window);
+  g_signal_connect_swapped (schedule_button, "clicked", G_CALLBACK (schedule_clicked), window);
 
   gtk_widget_show_all(window);
 }
