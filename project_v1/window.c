@@ -72,7 +72,7 @@ activate (GtkApplication* app,
   // Add CSS class
   gtk_widget_set_name(label, "clock-label");
   apply_css(label);
-  update_time(user_data);
+  update_time(label);
 
   // Create buttons
   GtkWidget *patient_button = gtk_button_new_with_label ("Patient Details");
