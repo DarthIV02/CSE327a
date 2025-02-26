@@ -24,7 +24,6 @@ class PatientForm(Gtk.Window):
 
         # Create a large text box for the notes
         self.notes_textview = Gtk.TextView()
-        self.notes_textview.set_size_request(250,200) # W x H
         # Disable horizontal and vertical resizing
         self.notes_textview.set_property("hexpand", False)
         self.notes_textview.set_property("vexpand", False)
@@ -32,6 +31,7 @@ class PatientForm(Gtk.Window):
 
         self.scrollable = Gtk.ScrolledWindow()
         self.scrollable.add(self.notes_textview)
+        self.scrollable.set_size_request(250,200) # W x H
 
         # Add the widgets to the grid
         grid.attach(label1, 0, 0, 1, 1)  # Label 1
