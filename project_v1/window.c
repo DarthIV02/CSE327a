@@ -97,8 +97,8 @@ activate (GtkApplication* app,
 
   gtk_container_add(GTK_CONTAINER(window), grid);
   // When the button is clicked, close the window passed as an argument
-  g_signal_connect_swapped (patient_button, "clicked", G_CALLBACK (patient_clicked), window);
-  g_signal_connect_swapped (schedule_button, "clicked", G_CALLBACK (schedule_clicked), window);
+  g_signal_connect(patient_button, "clicked", G_CALLBACK (patient_clicked), window);
+  g_signal_connect(schedule_button, "clicked", G_CALLBACK (schedule_clicked), window);
 
   gtk_widget_show_all(window);
 }
