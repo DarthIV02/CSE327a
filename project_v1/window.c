@@ -14,8 +14,15 @@ static void update_time(GtkLabel *label) { // Modify with real time clock ...
 // Function to apply CSS
 static void apply_css(GtkWidget *widget) {
   GtkCssProvider *provider = gtk_css_provider_new();
-  gtk_css_provider_load_from_path(provider, "./style.css", NULL);
-  
+
+  GError *error = NULL;
+
+  if (!gtk_css_provider_load_from_path(css_provider, "./style.css", &error)) {
+    g_warning("Failed to load CSS file: %s", error->message);
+  } else {
+    g_print("CSS file loaded successfully!\n");
+  }
+
   GtkStyleContext *context = gtk_widget_get_style_context(widget);
   gtk_style_context_add_provider(context, GTK_STYLE_PROVIDER(provider), GTK_STYLE_PROVIDER_PRIORITY_USER);
 
