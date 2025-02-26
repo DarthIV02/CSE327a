@@ -2,17 +2,14 @@
 
 static void
 activate (GtkApplication* app,
-          void        user_data)
+          gpointer        user_data)
 {
   GtkWidget *window = gtk_application_window_new(app);
   GtkWidget *grid   = gtk_grid_new();
-  GtkWidget *label  = gtk_label_new("6:59 pm");
+  GtkWidget *label  = gtk_label_new("6:59");
 
   gtk_window_set_title (GTK_WINDOW (window), "Elder Care System");
   gtk_window_set_position(GTK_WINDOW(window), GTK_WIN_POS_CENTER); // Center the window
-
-  //gtk_window_set_child(GTK_WINDOW(window), gtk_label_new("Hello World!"));
-
   gtk_window_set_default_size (GTK_WINDOW (window), 600, 400);
 
   gtk_grid_set_column_spacing(GTK_GRID(grid),10);
@@ -42,8 +39,13 @@ activate (GtkApplication* app,
 int
 main (int argc, char **argv)
 {
-  g_autoptr(GtkApplication) app = gtk_application_new(NULL, G_APPLICATION_DEFAULT_FLAGS);
-  g_signal_connect(app, "activate", G_CALLBACK(activate), NULL);
+  GtkApplication *app;
+  int status;
 
-  return g_application_run(G_APPLICATION(app), argc, argv);
+  app = gtk_application_new ("org.gtk.example", G_APPLICATION_DEFAULT_FLAGS);
+  g_signal_connect (app, "activate", G_CALLBACK (activate), NULL);
+  status = g_application_run (G_APPLICATION (app), argc, argv);
+  g_object_unref (app);
+
+  return status;
 }
