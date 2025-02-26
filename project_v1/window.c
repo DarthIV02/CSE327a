@@ -1,7 +1,7 @@
 #include <gtk/gtk.h>
 #include <time.h>
 
-static void update_time(gpointer *user_data) { // Modify with real time clock ...
+static void update_time(gpointer user_data) { // Modify with real time clock ...
   GtkLabel *label = GTK_LABEL(user_data);
   time_t now = time(NULL);
   struct tm *t = localtime(&now);
@@ -9,7 +9,7 @@ static void update_time(gpointer *user_data) { // Modify with real time clock ..
   char time_str[9]; // HH:MM:SS
   strftime(time_str, sizeof(time_str), "%H:%M:%S", t);
 
-  gtk_label_set_text(GTK_LABEL(label), time_str);
+  gtk_label_set_text(label, time_str);
 }
 
 // Function to apply CSS
