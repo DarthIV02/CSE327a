@@ -7,14 +7,13 @@ activate (GtkApplication* app,
   GtkWidget *window;
 
   window = gtk_application_window_new (app);
-  gtk_window_set_title (GTK_WINDOW (window), "Window");
-  gtk_window_set_default_size (GTK_WINDOW (window), 200, 200);
+  gtk_window_set_title (GTK_WINDOW (window), "Elder Care System");
+  gtk_window_set_default_size (GTK_WINDOW (window), 400, 400);
   gtk_widget_show_all (window);
 }
 
 int
-main (int    argc,
-      char **argv)
+main (int argc, char **argv)
 {
   GtkApplication *app;
   int status;
