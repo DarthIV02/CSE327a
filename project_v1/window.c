@@ -48,11 +48,6 @@ activate (GtkApplication* app,
   // Allow grid to expand in both horizontal and vertical directions
   gtk_widget_set_hexpand(grid, TRUE);
 
-  // Allow widgets inside the grid to expand
-  gtk_widget_set_hexpand(label, TRUE);
-  gtk_widget_set_hexpand(button1, TRUE);
-  gtk_widget_set_hexpand(button2, TRUE);
-
   // Apply CSS class to grid
   gtk_widget_set_name(grid, "grid");
   apply_css(grid);
@@ -68,6 +63,11 @@ activate (GtkApplication* app,
   gtk_grid_attach(GTK_GRID(grid), label, 0, 0, 2, 1);
   gtk_grid_attach(GTK_GRID(grid), button1, 0, 1, 1, 1);
   gtk_grid_attach(GTK_GRID(grid), button2, 1, 1, 1, 1);
+
+  // Allow widgets inside the grid to expand
+  gtk_widget_set_hexpand(label, TRUE);
+  gtk_widget_set_hexpand(button1, TRUE);
+  gtk_widget_set_hexpand(button2, TRUE);
 
   // Create a container to center the grid
   gtk_widget_set_halign (grid, GTK_ALIGN_FILL);
