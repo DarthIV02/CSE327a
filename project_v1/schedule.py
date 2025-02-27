@@ -5,7 +5,7 @@ from gi.repository import Gtk
 class MedicineSchedule(Gtk.Window):
     def __init__(self):
         super().__init__(title="Medicine Schedule")
-        self.set_default_size(500, 400)
+        self.set_default_size(600, 400)
 
         # Main vertical layout
         self.vbox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=10)
@@ -14,11 +14,11 @@ class MedicineSchedule(Gtk.Window):
         # Labels row at the top
         label_box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=10)
 
-        name_label = Gtk.Label(label="Medicine Name")
+        name_label = Gtk.Label(label="Medicine")
         name_label.set_xalign(0)  # Left-align the label
         label_box.pack_start(name_label, True, True, 0)
 
-        time_label = Gtk.Label(label="Every X Time")
+        time_label = Gtk.Label(label="Repeat every")
         time_label.set_xalign(0)
         label_box.pack_start(time_label, True, True, 0)
 
