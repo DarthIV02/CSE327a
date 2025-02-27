@@ -91,9 +91,13 @@ class MedicineSchedule(Gtk.Window):
     def remove_medicine_entry(self, widget, medicine_box):
         # Remove the selected medicine block
         self.medicine_list.remove(medicine_box)
+        for i, box in enumerate(self.medicine_list):
+            if box == medicine_box:
+                self.medicine_array.pop(i)
+            self.store_vals(saved_press=False)
         self.show_all()
 
-    def store_vals(self, widget, label_box):
+    def store_vals(self, widget=None, label_box=None, saved_press = True):
         json_save = {}
         filename = "user_data/schedule.json"
 
@@ -107,9 +111,10 @@ class MedicineSchedule(Gtk.Window):
         with open(filename, "w") as file:
             json.dump(json_save, file)
 
-        dialog = Gtk.MessageDialog(self, 0, Gtk.MessageType.INFO, Gtk.ButtonsType.OK, "Data Updated!")
-        dialog.run()
-        dialog.destroy()
+        if saved_press:
+            dialog = Gtk.MessageDialog(self, 0, Gtk.MessageType.INFO, Gtk.ButtonsType.OK, "Data Updated!")
+            dialog.run()
+            dialog.destroy()
     
     def restore_vals(self):
         #try:
@@ -129,7 +134,6 @@ class MedicineSchedule(Gtk.Window):
                 if isinstance(child, Gtk.Entry):
                     child.set_text(data[str(i)][val[val_i]])
                     val_i += 1
-
         #except:  
         #    print("No saved data")
         #    self.add_medicine_entry()
