@@ -9,6 +9,7 @@ class PatientForm(Gtk.Window):
         super().__init__(title="Patient Information")
         self.set_default_size(400, 300)
         self.set_border_width(15)
+        self.set_position(Gtk.WindowPosition.CENTER)
 
         # Create a grid to organize the form elements
         grid = Gtk.Grid()

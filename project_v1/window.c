@@ -32,12 +32,12 @@ static void apply_css(GtkWidget *widget) {
 
 // Custom callback for button1
 static void patient_clicked(GtkButton *button, gpointer user_data) {
-  // Your custom instructions
-  system("./patient.sh");
   // You can add more actions here, such as closing the window or performing other tasks.
   // Correctly cast user_data to GtkWindow* before using it
   GtkWindow *window = GTK_WINDOW(user_data);
   gtk_window_close(window);  // Close the window
+  // Your custom instructions
+  system("./patient.sh");
 }
 
 // Custom callback for button2
