@@ -7,6 +7,7 @@ class MedicineSchedule(Gtk.Window):
     def __init__(self):
         super().__init__(title="Medicine Schedule")
         self.set_default_size(600, 400)
+        self.set_position(Gtk.WindowPosition.CENTER)
         self.medicine_array = [] # Store pointers for each medicine
 
         # Main vertical layout
