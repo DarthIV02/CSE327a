@@ -75,7 +75,7 @@ class MedicineSchedule(Gtk.Window):
 
         # Delete Button
         delete_button = Gtk.Button(label="❌")
-        delete_button.connect("clicked", self.remove_medicine_entry, row)
+        delete_button.connect("clicked", self.remove_medicine_entry, row-1)
         self.grid.attach(delete_button, 4, row, 1, 1)
 
         # Store reference
