@@ -1,6 +1,7 @@
 import gi
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk
+import json
 
 class MedicineSchedule(Gtk.Window):
     def __init__(self):
@@ -50,7 +51,7 @@ class MedicineSchedule(Gtk.Window):
         self.vbox.pack_start(self.add_medicine_button, False, False, 10)
 
         # Add first medicine block by default
-        self.add_medicine_entry()
+        
 
         self.show_all()
 
@@ -82,6 +83,7 @@ class MedicineSchedule(Gtk.Window):
         self.medicine_list.pack_start(medicine_box, False, False, 0)
         
         # Store pointer
+        
         self.medicine_array.append(medicine_box)
 
         self.show_all()
@@ -92,12 +94,42 @@ class MedicineSchedule(Gtk.Window):
         self.show_all()
 
     def store_vals(self, widget, label_box):
-        for box in self.medicine_list:
+        json_save = {}
+        filename = "user_data/schedule.json"
+
+        for i, box in enumerate(self.medicine_list):
             entry_values = []
             for child in box.get_children():
                 if isinstance(child, Gtk.Entry):
                     entry_values.append(child.get_text())
-            print(entry_values)
+            json_save[i] = {'name': entry_values[0], 'repeat': entry_values[1], 'start': entry_values[2]}
+
+        with open(filename, "w") as file:
+            json.dump(json_save, file)
+
+        dialog = Gtk.MessageDialog(self, 0, Gtk.MessageType.INFO, Gtk.ButtonsType.OK, "Data Updated!")
+        dialog.run()
+        dialog.destroy()
+    
+    def restore_vals(self, medicine_box):
+        try:
+            with open('user_data/schedule.json') as f:
+                data = json.load(f)
+            
+            for _ in data: # Add the previous boxes
+                self.add_medicine_entry()
+            
+            # Add the text
+            for i, box in enumerate(self.medicine_array):
+                val = ['name', 'repeat', 'start']
+                val_i = 0
+                for child in box.get_children():
+                    if isinstance(child, Gtk.Entry):
+                        child.set_text(data[i][val[val_i]])
+                        val_i += 1
+
+        except:  
+            self.add_medicine_entry()
 
 # Run the application
 win = MedicineSchedule()
