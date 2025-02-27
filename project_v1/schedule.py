@@ -51,7 +51,7 @@ class MedicineSchedule(Gtk.Window):
         self.vbox.pack_start(self.add_medicine_button, False, False, 10)
 
         # Add first medicine block by default
-        self.store_vals()
+        self.restore_vals()
 
         self.show_all()
 
