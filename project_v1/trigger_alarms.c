@@ -160,7 +160,7 @@ int main() {
             // If its a new day -> check if medicine needs to be taken today
 
             for(int i = 0; i < num_medicine; i++){
-                med = medicines[i];
+                Medicine med = medicines[i];
                 DateTime temp;
                 date_add_hours(&time_struct, med->repeat_hour);
                 date_add_minutes(&time_struct, med->repeat_minute);
