@@ -115,8 +115,10 @@ class MedicineSchedule(Gtk.Window):
         try:
             with open('user_data/schedule.json') as f:
                 data = json.load(f)
+
+            print(data)
             
-            for _ in data: # Add the previous boxes
+            for _ in range(len(data)): # Add the previous boxes
                 self.add_medicine_entry()
             
             # Add the text
