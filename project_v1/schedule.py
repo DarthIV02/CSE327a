@@ -112,27 +112,27 @@ class MedicineSchedule(Gtk.Window):
         dialog.destroy()
     
     def restore_vals(self):
-        try:
-            with open('user_data/schedule.json') as f:
-                data = json.load(f)
+        #try:
+        with open('user_data/schedule.json') as f:
+            data = json.load(f)
 
-            print(data)
-            
-            for _ in range(len(data)): # Add the previous boxes
-                self.add_medicine_entry()
-            
-            # Add the text
-            for i, box in enumerate(self.medicine_array):
-                val = ['name', 'repeat', 'start']
-                val_i = 0
-                for child in box.get_children():
-                    if isinstance(child, Gtk.Entry):
-                        child.set_text(data[i][val[val_i]])
-                        val_i += 1
-
-        except:  
-            print("No saved data")
+        print(data)
+        
+        for _ in range(len(data)): # Add the previous boxes
             self.add_medicine_entry()
+        
+        # Add the text
+        for i, box in enumerate(self.medicine_array):
+            val = ['name', 'repeat', 'start']
+            val_i = 0
+            for child in box.get_children():
+                if isinstance(child, Gtk.Entry):
+                    child.set_text(data[i][val[val_i]])
+                    val_i += 1
+
+        #except:  
+        #    print("No saved data")
+        #    self.add_medicine_entry()
 
 # Run the application
 win = MedicineSchedule()
