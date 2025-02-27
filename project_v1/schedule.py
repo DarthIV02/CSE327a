@@ -6,6 +6,7 @@ class MedicineSchedule(Gtk.Window):
     def __init__(self):
         super().__init__(title="Medicine Schedule")
         self.set_default_size(600, 400)
+        self.medicine_array = [] # Store pointers for each medicine
 
         # Main vertical layout
         self.vbox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=10)
@@ -79,6 +80,10 @@ class MedicineSchedule(Gtk.Window):
 
         # Add to the list and update UI
         self.medicine_list.pack_start(medicine_box, False, False, 0)
+        
+        # Store pointer
+        self.medicine_array.append(medicine_box)
+
         self.show_all()
 
     def remove_medicine_entry(self, widget, medicine_box):
@@ -86,8 +91,13 @@ class MedicineSchedule(Gtk.Window):
         self.medicine_list.remove(medicine_box)
         self.show_all()
 
-    def store_vals(self, widget, medicine_box):
-        pass
+    def store_vals(self):
+        for box in self.medicine_list:
+            entry_values = []
+            for child in box.get_children():
+                if isinstance(child, Gtk.Entry):
+                    entry_values.append(child.get_text())
+            print(entry_values)
 
 # Run the application
 win = MedicineSchedule()
