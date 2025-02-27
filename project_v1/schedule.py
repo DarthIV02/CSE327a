@@ -127,7 +127,7 @@ class MedicineSchedule(Gtk.Window):
             val_i = 0
             for child in box.get_children():
                 if isinstance(child, Gtk.Entry):
-                    child.set_text(data[i][val[val_i]])
+                    child.set_text(data[str(i)][val[val_i]])
                     val_i += 1
 
         #except:  
