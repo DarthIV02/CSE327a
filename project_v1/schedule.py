@@ -129,6 +129,7 @@ class MedicineSchedule(Gtk.Window):
                         val_i += 1
 
         except:  
+            print("No saved data")
             self.add_medicine_entry()
 
 # Run the application
