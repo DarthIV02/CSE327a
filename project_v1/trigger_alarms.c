@@ -106,16 +106,16 @@ int read_json(){
 
         // Ensure the fields are not null before accessing their values
         if (cJSON_IsString(name) && name->valuestring != NULL) {
-            strncpy(med.name, name->valuestring, sizeof(med.name) - 1);
+            strncpy(med->name, name->valuestring, sizeof(med->name) - 1);
         }
         if (cJSON_IsString(repeat) && repeat->valuestring != NULL) {
-            parse_time(repeat->valuestring, &med.repeat_hour, &med.repeat_minute);
+            parse_time(repeat->valuestring, &med->repeat_hour, &med->repeat_minute);
         }
         if (cJSON_IsString(start) && start->valuestring != NULL) {
-            parse_date(start->valuestring, &med.start_year, &med.start_month, &med.start_day);
+            parse_date(start->valuestring, &med->start_year, &med->start_month, &med->start_day);
         }
         if (cJSON_IsString(last_rec) && last_rec->valuestring != NULL) {
-            parse_time(last_rec->valuestring, &med.taken_hour, &med.taken_minute);
+            parse_time(last_rec->valuestring, &med->taken_hour, &med->taken_minute);
         }
         medicine_count += 1;
 
