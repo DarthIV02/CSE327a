@@ -29,6 +29,10 @@ class MedicineSchedule(Gtk.Window):
         start_label.set_xalign(0)
         label_box.pack_start(start_label, True, True, 0)
 
+        start_label = Gtk.Label(label="    Last Hour Administered")
+        start_label.set_xalign(0)
+        label_box.pack_start(start_label, True, True, 0)
+
         save_button = Gtk.Button(label="Save")
         save_button.connect("clicked", self.store_vals, label_box)
         label_box.pack_start(save_button, False, False, 0)
@@ -75,6 +79,10 @@ class MedicineSchedule(Gtk.Window):
         start_date_entry.set_placeholder_text("Start Date (YYYY-MM-DD)")
         medicine_box.pack_start(start_date_entry, True, True, 0)
 
+        last_time_entry = Gtk.Entry()
+        last_time_entry.set_placeholder_text("Last time (HH:MM)")
+        medicine_box.pack_start(last_time_entry, True, True, 0)
+
         # Delete Button
         delete_button = Gtk.Button(label="❌")
         delete_button.connect("clicked", self.remove_medicine_entry, medicine_box)
@@ -107,7 +115,7 @@ class MedicineSchedule(Gtk.Window):
             for child in box.get_children():
                 if isinstance(child, Gtk.Entry):
                     entry_values.append(child.get_text())
-            json_save[i] = {'name': entry_values[0], 'repeat': entry_values[1], 'start': entry_values[2]}
+            json_save[i] = {'name': entry_values[0], 'repeat': entry_values[1], 'start': entry_values[2], 'last_rec':entry_values[3]}
 
         with open(filename, "w") as file:
             json.dump(json_save, file)
@@ -127,7 +135,7 @@ class MedicineSchedule(Gtk.Window):
             
             # Add the text
             for i, box in enumerate(self.medicine_array):
-                val = ['name', 'repeat', 'start']
+                val = ['name', 'repeat', 'start', 'last_rec']
                 val_i = 0
                 for child in box.get_children():
                     if isinstance(child, Gtk.Entry):
