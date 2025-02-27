@@ -91,7 +91,7 @@ class MedicineSchedule(Gtk.Window):
         self.medicine_list.remove(medicine_box)
         self.show_all()
 
-    def store_vals(self):
+    def store_vals(self, widget, label_box):
         for box in self.medicine_list:
             entry_values = []
             for child in box.get_children():
