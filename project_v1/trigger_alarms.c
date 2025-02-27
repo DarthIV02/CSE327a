@@ -131,7 +131,7 @@ int main() {
     DateTime last_dt = {-1}; // Initialize to zero = -1;
 
     // Read JSON to find active medicines
-    
+    read_json();
 
     while (1) {
         DateTime current_dt = get_minutes_from_hwclock();
