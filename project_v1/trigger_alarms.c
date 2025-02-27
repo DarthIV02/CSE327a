@@ -166,7 +166,7 @@ int main() {
                 date_add_minutes(&time_struct, med.repeat_minute);
                 char buffer[80];
                 strftime(buffer, 80, "%Y-%m-%d %H:%M", &time_struct); 
-                parse_complete(buffer, &temp->year, &temp->month, &temp->day, &temp->hour)
+                parse_complete(buffer, temp.year, temp.month, temp.day, temp.hour)
                 if (temp->day == current_dt->day){
                     medicine_active[i] = 1;
                 } else {
