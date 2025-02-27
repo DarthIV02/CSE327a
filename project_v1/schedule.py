@@ -12,7 +12,7 @@ class MedicineSchedule(Gtk.Window):
         self.add(self.vbox)
 
         # Labels row at the top
-        label_box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=10)
+        label_box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=20)
 
         name_label = Gtk.Label(label="Medicine")
         name_label.set_xalign(0)  # Left-align the label
