@@ -14,15 +14,15 @@ class MedicineSchedule(Gtk.Window):
         # Labels row at the top
         label_box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=20)
 
-        name_label = Gtk.Label(label="Medicine")
+        name_label = Gtk.Label(label="    Medicine")
         name_label.set_xalign(0)  # Left-align the label
         label_box.pack_start(name_label, True, True, 0)
 
-        time_label = Gtk.Label(label="Repeat every")
+        time_label = Gtk.Label(label="    Repeat every")
         time_label.set_xalign(0)
         label_box.pack_start(time_label, True, True, 0)
 
-        start_label = Gtk.Label(label="Start Date")
+        start_label = Gtk.Label(label="    Start Date")
         start_label.set_xalign(0)
         label_box.pack_start(start_label, True, True, 0)
 
