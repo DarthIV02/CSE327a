@@ -3,6 +3,7 @@
 #include <string.h>
 #include <unistd.h>
 #include <cjson/cJSON.h>
+#include <date.h>
 
 typedef struct {
     int year, month, day;
@@ -18,6 +19,7 @@ typedef struct {
 
 int num_medicine;
 Medicine *medicines = NULL;  // Array of Medicine structs
+struct tm time_struct = {0}; // Time for date.h
 
 DateTime get_minutes_from_hwclock() {
     char buffer[128];
@@ -40,6 +42,8 @@ DateTime get_minutes_from_hwclock() {
 
     pclose(fp);
 
+    strptime(buffer, "%Y-%m-%d %H:%M:%S", &time_struct);
+
     // Extract the minute from the time string
     int year, month, day, hour, minute, second;
     if (sscanf(buffer, "%d-%d-%d %d:%d:%d", &dt.year, &dt.month, &dt.day, &dt.hour, &dt.minute, &dt.second) != 6) 
@@ -56,6 +60,10 @@ int parse_time(const char *time_str, int *hour, int *minute) {
 
 int parse_date(const char *date_str, int *year, int *month, int *day) {
     return sscanf(date_str, "%d-%d-%d", year, month, day);  // Parses YYYY-MM-DD format
+}
+
+int parse_complete(const char *date_str, int *year, int *month, int *day, int *hour, int *minute) {
+    return sscanf(date_str, "%d-%d-%d %d:%d", year, month, day, hour, minute);  // Parses YYYY-MM-DD format
 }
 
 int read_json(){
@@ -127,11 +135,19 @@ int read_json(){
     return 0;
 }
 
+int isMedtriggered(Medicine med, DateTime current_time){
+
+    return 0;
+}
+
 int main() {
     DateTime last_dt = {-1}; // Initialize to zero = -1;
 
     // Read JSON to find active medicines
     read_json();
+
+    int medicine_active[num_medicine]; // Medicine needs to be taken today
+    int medicine_triggered[num_medicine]; // Medicine flag is triggered
 
     while (1) {
         DateTime current_dt = get_minutes_from_hwclock();
@@ -140,13 +156,43 @@ int main() {
             continue;
         }
 
-        // Check if 5 minutes have passed
-        if (last_dt.minute == -1 || (current_dt.minute - last_dt.minute + 60) % 60 >= 1) {
-            printf("1 minutes have passed! Current time from RTC: %d minutes\n", current_dt.minute);
-            last_dt.minute = current_dt.minute;
+        if (last_dt.day == -1 || current_dt.day != last_dt.day){ 
+            // If its a new day -> check if medicine needs to be taken today
+
+            for(int i = 0; i < num_medicine; i++){
+                med = medicines[i];
+                DateTime temp;
+                date_add_hours(&time_struct, med->repeat_hour);
+                date_add_minutes(&time_struct, med->repeat_minute);
+                char buffer[80];
+                strftime(buffer, 80, "%Y-%m-%d %H:%M", &time_struct); 
+                parse_complete(buffer, temp->year, temp->month, temp->day, temp->hour)
+                if (temp->day == current_dt->day){
+                    medicine_active[i] = 1;
+                } else {
+                    medicine_active[i] = 0;
+                }
+            }
         }
 
-        sleep(30); // Sleep for 30 seconds before checking again
+        for(int i = 0; i < num_medicine; i++){
+            // Only check active medicines every minute
+            if (medicine_active[i] = 1){
+                medicine_triggered = isMedtriggered(medicines[i], current_dt);
+            }
+        }
+
+        /*MEDICINE FLAG IS TRIGGERED -- ACTION ADDED HERE*/
+
+        last_dt.minute = current_dt.minute;
+
+        // Check if 5 minutes have passed
+        //if (last_dt.minute == -1 || (current_dt.minute - last_dt.minute + 60) % 60 >= 1) {
+        //    printf("1 minutes have passed! Current time from RTC: %d minutes\n", current_dt.minute);
+        //    
+        //}
+
+        sleep(60); // Sleep for 30 seconds before checking again
     }
 
     return 0;
