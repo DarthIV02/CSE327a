@@ -86,7 +86,7 @@ class MedicineSchedule(Gtk.Window):
     def remove_medicine_entry(self, widget, row):
         # Remove elements from grid
         for widget in self.medicine_array[row]:
-            self.medicine_list.remove(widget)
+            self.grid.remove(widget)
 
         del self.medicine_array[row]
         self.store_vals(saved_press=False)
