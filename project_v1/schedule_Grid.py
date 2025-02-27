@@ -14,30 +14,21 @@ class MedicineSchedule(Gtk.Window):
         self.vbox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=10)
         self.add(self.vbox)
 
-        # Labels row at the top
-        label_box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=20)
+        # Labels row at the top (Use a Grid for alignment)
+        self.grid_labels = Gtk.Grid()
+        self.grid_labels.set_column_spacing(10)
+        self.grid_labels.set_row_spacing(5)
 
-        name_label = Gtk.Label(label="Medicine")
-        name_label.set_xalign(0)  # Left-align the label
-        label_box.pack_start(name_label, True, True, 0)
-
-        time_label = Gtk.Label(label="Repeat every")
-        time_label.set_xalign(0)
-        label_box.pack_start(time_label, True, True, 0)
-
-        start_label = Gtk.Label(label="Start Date")
-        start_label.set_xalign(0)
-        label_box.pack_start(start_label, True, True, 0)
-
-        start_label = Gtk.Label(label="Last Hour Administered")
-        start_label.set_xalign(0)
-        label_box.pack_start(start_label, True, True, 0)
+        self.grid_labels.attach(Gtk.Label(label="Medicine", xalign=0), 0, 0, 1, 1)
+        self.grid_labels.attach(Gtk.Label(label="Repeat every", xalign=0), 1, 0, 1, 1)
+        self.grid_labels.attach(Gtk.Label(label="Start Date", xalign=0), 2, 0, 1, 1)
+        self.grid_labels.attach(Gtk.Label(label="Last Hour Administered", xalign=0), 3, 0, 1, 1)
 
         save_button = Gtk.Button(label="Save")
-        save_button.connect("clicked", self.store_vals, label_box)
-        label_box.pack_start(save_button, False, False, 0)
+        save_button.connect("clicked", self.store_vals)
+        self.grid_labels.attach(save_button, 4, 0, 1, 1)
 
-        self.vbox.pack_start(label_box, False, False, 5)
+        self.vbox.pack_start(self.grid_labels, False, False, 5)
 
         # Scrollable area
         self.scrolled_window = Gtk.ScrolledWindow()
@@ -61,49 +52,48 @@ class MedicineSchedule(Gtk.Window):
         self.show_all()
 
     def add_medicine_entry(self, widget=None):
-        # Horizontal box to hold medicine info
-        medicine_box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=10)
+        # Use a Grid instead of a Box for structured layout
+        medicine_grid = Gtk.Grid()
+        medicine_grid.set_column_spacing(10)
 
         # Medicine Name Entry
         name_entry = Gtk.Entry()
         name_entry.set_placeholder_text("Medicine Name")
-        medicine_box.pack_start(name_entry, True, True, 0)
+        medicine_grid.attach(name_entry, 0, 0, 1, 1)
 
         # Time to take medicine
         time_entry = Gtk.Entry()
         time_entry.set_placeholder_text("Time (HH:MM)")
-        medicine_box.pack_start(time_entry, True, True, 0)
+        medicine_grid.attach(time_entry, 1, 0, 1, 1)
 
         # Start date entry
         start_date_entry = Gtk.Entry()
         start_date_entry.set_placeholder_text("Start Date (YYYY-MM-DD)")
-        medicine_box.pack_start(start_date_entry, True, True, 0)
+        medicine_grid.attach(start_date_entry, 2, 0, 1, 1)
 
+        # Last time administered
         last_time_entry = Gtk.Entry()
         last_time_entry.set_placeholder_text("Last time (HH:MM)")
-        medicine_box.pack_start(last_time_entry, True, True, 0)
+        medicine_grid.attach(last_time_entry, 3, 0, 1, 1)
 
         # Delete Button
         delete_button = Gtk.Button(label="❌")
-        delete_button.connect("clicked", self.remove_medicine_entry, medicine_box)
-        medicine_box.pack_start(delete_button, False, False, 0)
+        delete_button.connect("clicked", self.remove_medicine_entry, medicine_grid)
+        medicine_grid.attach(delete_button, 4, 0, 1, 1)
 
         # Add to the list and update UI
-        self.medicine_list.pack_start(medicine_box, False, False, 0)
+        self.medicine_list.pack_start(medicine_grid, False, False, 0)
         
         # Store pointer
-        
-        self.medicine_array.append(medicine_box)
+        self.medicine_array.append(medicine_grid)
 
         self.show_all()
 
     def remove_medicine_entry(self, widget, medicine_box):
         # Remove the selected medicine block
         self.medicine_list.remove(medicine_box)
-        for i, box in enumerate(self.medicine_list):
-            if box == medicine_box:
-                self.medicine_array.pop(i)
-            self.store_vals(saved_press=False)
+        self.medicine_array.remove(medicine_box)
+        self.store_vals(saved_press=False)
         self.show_all()
 
     def store_vals(self, widget=None, label_box=None, saved_press = True):
