@@ -43,11 +43,11 @@ static void patient_clicked(GtkButton *button, gpointer user_data) {
 // Custom callback for button2
 static void schedule_clicked(GtkButton *button, gpointer user_data) {
   // Your custom instructions
-  g_print("Button 2 was clicked!\n");
   // Perform other tasks here
   // Correctly cast user_data to GtkWindow* before using it
-  GtkWindow *window = GTK_WINDOW(user_data);
-  gtk_window_close(window);  // Close the window
+  //GtkWindow *window = GTK_WINDOW(user_data);
+  //gtk_window_close(window);  // Close the window
+  system("./schedule.sh");
 }
 
 static void
