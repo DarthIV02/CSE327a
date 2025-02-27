@@ -8,7 +8,7 @@ typedef struct {
     int hour, minute, second;
 } DateTime;
 
-int get_minutes_from_hwclock() {
+DateTime get_minutes_from_hwclock() {
     char buffer[128];
     FILE *fp;
 
