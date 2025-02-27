@@ -37,9 +37,7 @@ class MedicineSchedule(Gtk.Window):
         self.scrolled_window.set_min_content_height(300)
 
         # Medicine list container (Grid-based)
-        self.medicine_list = Gtk.Grid()
-        self.medicine_list.set_column_spacing(10)
-        self.scrolled_window.add(self.medicine_list)
+        self.scrolled_window.add(self.grid)
 
         self.vbox.pack_start(self.scrolled_window, True, True, 0)
 
@@ -59,26 +57,26 @@ class MedicineSchedule(Gtk.Window):
         # Medicine Name Entry
         name_entry = Gtk.Entry()
         name_entry.set_placeholder_text("Medicine Name")
-        self.medicine_list.attach(name_entry, 0, row, 1, 1)
+        self.grid.attach(name_entry, 0, row, 1, 1)
 
         # Time to take medicine
         time_entry = Gtk.Entry()
         time_entry.set_placeholder_text("Time (HH:MM)")
-        self.medicine_list.attach(time_entry, 1, row, 1, 1)
+        self.grid.attach(time_entry, 1, row, 1, 1)
 
         # Start date entry
         start_date_entry = Gtk.Entry()
         start_date_entry.set_placeholder_text("Start Date (YYYY-MM-DD)")
-        self.medicine_list.attach(start_date_entry, 2, row, 1, 1)
+        self.grid.attach(start_date_entry, 2, row, 1, 1)
 
         last_time_entry = Gtk.Entry()
         last_time_entry.set_placeholder_text("Last time (HH:MM)")
-        self.medicine_list.attach(last_time_entry, 3, row, 1, 1)
+        self.grid.attach(last_time_entry, 3, row, 1, 1)
 
         # Delete Button
         delete_button = Gtk.Button(label="❌")
         delete_button.connect("clicked", self.remove_medicine_entry, row)
-        self.medicine_list.attach(delete_button, 4, row, 1, 1)
+        self.grid.attach(delete_button, 4, row, 1, 1)
 
         # Store reference
         self.medicine_array.append((name_entry, time_entry, start_date_entry, last_time_entry, delete_button))
