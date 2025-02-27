@@ -11,25 +11,25 @@ typedef struct {
 DateTime get_minutes_from_hwclock() {
     char buffer[128];
     FILE *fp;
+    DateTime dt = {0}; // Initialize to zero
 
     // Execute the hwclock command
     fp = popen("sudo hwclock -r", "r");
     if (fp == NULL) {
         perror("Failed to run hwclock");
-        return -1;
+        return dt;
     }
 
     // Read the output
     if (fgets(buffer, sizeof(buffer), fp) == NULL) {
         perror("Failed to read hwclock output");
         pclose(fp);
-        return -1;
+        return dt;
     }
 
     pclose(fp);
 
     // Extract the minute from the time string
-    DateTime dt = {0}; // Initialize to zero
     int year, month, day, hour, minute, second;
     if (sscanf(buffer, "%d-%d-%d %d:%d:%d", &dt.year, &dt.month, &dt.day, &dt.hour, &dt.minute, &dt.second) != 6) 
     {
