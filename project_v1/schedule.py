@@ -51,7 +51,7 @@ class MedicineSchedule(Gtk.Window):
         self.vbox.pack_start(self.add_medicine_button, False, False, 10)
 
         # Add first medicine block by default
-        
+        self.store_vals()
 
         self.show_all()
 
@@ -93,7 +93,7 @@ class MedicineSchedule(Gtk.Window):
         self.medicine_list.remove(medicine_box)
         self.show_all()
 
-    def store_vals(self, widget, label_box):
+    def store_vals(self):
         json_save = {}
         filename = "user_data/schedule.json"
 
