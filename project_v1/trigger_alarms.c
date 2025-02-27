@@ -51,7 +51,7 @@ int main() {
 
         // Check if 5 minutes have passed
         if (last_minute == -1 || (current_dt.minute - last_minute + 60) % 60 >= 1) {
-            printf("5 minutes have passed! Current time from RTC: %d minutes\n", current_minute);
+            printf("5 minutes have passed! Current time from RTC: %d minutes\n", current_dt.minute);
             last_minute = current_dt.minute;
         }
 
