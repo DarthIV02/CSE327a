@@ -167,7 +167,7 @@ int main() {
                 char buffer[80];
                 strftime(buffer, 80, "%Y-%m-%d %H:%M", &time_struct); 
                 parse_complete(buffer, temp.year, temp.month, temp.day, temp.hour, temp.minute);
-                if (temp->day == current_dt->day){
+                if (temp.day == current_dt.day){
                     medicine_active[i] = 1;
                 } else {
                     medicine_active[i] = 0;
@@ -178,7 +178,7 @@ int main() {
         for(int i = 0; i < num_medicine; i++){
             // Only check active medicines every minute
             if (medicine_active[i] = 1){
-                medicine_triggered = isMedtriggered(medicines[i], current_dt);
+                medicine_triggered[i] = isMedtriggered(medicines[i], current_dt);
             }
         }
 
