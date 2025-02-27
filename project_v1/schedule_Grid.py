@@ -14,20 +14,22 @@ class MedicineSchedule(Gtk.Window):
         self.vbox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=10)
         self.add(self.vbox)
 
-        # Grid for Labels (Aligned)
-        self.label_grid = Gtk.Grid()
-        self.label_grid.set_column_spacing(10)
+        # Grid for both Labels and Input Fields
+        self.grid = Gtk.Grid()
+        self.grid.set_column_spacing(10)
+        self.grid.set_row_spacing(10)
 
-        self.label_grid.attach(Gtk.Label(label="Medicine"), 0, 0, 1, 1)
-        self.label_grid.attach(Gtk.Label(label="Repeat every"), 1, 0, 1, 1)
-        self.label_grid.attach(Gtk.Label(label="Start Date"), 2, 0, 1, 1)
-        self.label_grid.attach(Gtk.Label(label="Last Hour Administered"), 3, 0, 1, 1)
+        # Labels row (first row in the grid)
+        self.grid.attach(Gtk.Label(label="Medicine"), 0, 0, 1, 1)
+        self.grid.attach(Gtk.Label(label="Repeat every"), 1, 0, 1, 1)
+        self.grid.attach(Gtk.Label(label="Start Date"), 2, 0, 1, 1)
+        self.grid.attach(Gtk.Label(label="Last Hour Administered"), 3, 0, 1, 1)
 
         save_button = Gtk.Button(label="Save")
         save_button.connect("clicked", self.store_vals)
-        self.label_grid.attach(save_button, 4, 0, 1, 1)
+        self.grid.attach(save_button, 4, 0, 1, 1)
 
-        self.vbox.pack_start(self.label_grid, False, False, 5)
+        self.vbox.pack_start(self.grid, False, False, 5)
 
         # Scrollable area
         self.scrolled_window = Gtk.ScrolledWindow()
@@ -52,16 +54,19 @@ class MedicineSchedule(Gtk.Window):
         self.show_all()
 
     def add_medicine_entry(self, widget=None):
-        row = len(self.medicine_array)  # Get current row index
+        row = len(self.medicine_array) + 1  # Get current row index (starting from row 1)
 
+        # Medicine Name Entry
         name_entry = Gtk.Entry()
         name_entry.set_placeholder_text("Medicine Name")
         self.medicine_list.attach(name_entry, 0, row, 1, 1)
 
+        # Time to take medicine
         time_entry = Gtk.Entry()
         time_entry.set_placeholder_text("Time (HH:MM)")
         self.medicine_list.attach(time_entry, 1, row, 1, 1)
 
+        # Start date entry
         start_date_entry = Gtk.Entry()
         start_date_entry.set_placeholder_text("Start Date (YYYY-MM-DD)")
         self.medicine_list.attach(start_date_entry, 2, row, 1, 1)
@@ -70,6 +75,7 @@ class MedicineSchedule(Gtk.Window):
         last_time_entry.set_placeholder_text("Last time (HH:MM)")
         self.medicine_list.attach(last_time_entry, 3, row, 1, 1)
 
+        # Delete Button
         delete_button = Gtk.Button(label="❌")
         delete_button.connect("clicked", self.remove_medicine_entry, row)
         self.medicine_list.attach(delete_button, 4, row, 1, 1)
