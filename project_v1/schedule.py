@@ -26,8 +26,9 @@ class MedicineSchedule(Gtk.Window):
         start_label.set_xalign(0)
         label_box.pack_start(start_label, True, True, 0)
 
-        delete_label = Gtk.Label(label="")  # Empty label to align delete buttons
-        label_box.pack_start(delete_label, False, False, 0)
+        save_button = Gtk.Button(label="Save")
+        save_button.connect("clicked", self.store_vals, label_box)
+        label_box.pack_start(save_button, False, False, 0)
 
         self.vbox.pack_start(label_box, False, False, 5)
 
@@ -84,6 +85,9 @@ class MedicineSchedule(Gtk.Window):
         # Remove the selected medicine block
         self.medicine_list.remove(medicine_box)
         self.show_all()
+
+    def store_vals(self, widget, medicine_box):
+        pass
 
 # Run the application
 win = MedicineSchedule()
