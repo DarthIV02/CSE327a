@@ -1,6 +1,7 @@
 import gi
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk
+import json
 
 class PatientForm(Gtk.Window):
     def __init__(self):
@@ -12,6 +13,13 @@ class PatientForm(Gtk.Window):
         # Create a grid to organize the form elements
         grid = Gtk.Grid()
         self.add(grid)
+
+        # Load stored info
+        try:
+            with open('user_data/patient.json') as f:
+                self.data = json.load(f)
+        except:
+            self.data = None
 
         # Create the labels
         label1 = Gtk.Label(label="Name:")
@@ -27,11 +35,18 @@ class PatientForm(Gtk.Window):
         # Disable horizontal and vertical resizing
         self.notes_textview.set_property("hexpand", False)
         self.notes_textview.set_property("vexpand", False)
+        
         self.notes_buffer = self.notes_textview.get_buffer()
 
         self.scrollable = Gtk.ScrolledWindow()
         self.scrollable.add(self.notes_textview)
         self.scrollable.set_size_request(250,200) # W x H
+
+        ## Load data if available
+        if self.data:
+            self.name_entry.set_text(self.data["name"])
+            self.age_entry.set_text(self.data["age"])
+            self.notes_buffer.set_text(self.data["notes"])
 
         # Add the widgets to the grid
         grid.attach(label1, 0, 0, 1, 1)  # Label 1
@@ -60,9 +75,11 @@ class PatientForm(Gtk.Window):
         notes = self.notes_buffer.get_text(start_iter, end_iter, True)
 
         # Print the values (you can also do other actions like saving them)
-        #print(f"Name: {name}")
-        #print(f"Age: {age}")
-        #print(f"Notes: {notes}")
+        data = {"name": name, "age": age, "notes": notes}
+        filename = "user_data/patient.json"
+
+        with open(filename, "w") as file:
+            json.dump(data, file)
 
         # Optionally, you could show a confirmation dialog or clear the form
         dialog = Gtk.MessageDialog(self, 0, Gtk.MessageType.INFO, Gtk.ButtonsType.OK, "Data Updated!")
