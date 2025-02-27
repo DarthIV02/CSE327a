@@ -40,7 +40,7 @@ DateTime get_minutes_from_hwclock() {
 }
 
 int main() {
-    int last_minute = -1;
+    DateTime last_dt = {-1}; // Initialize to zero = -1;
 
     while (1) {
         DateTime current_dt = get_minutes_from_hwclock();
@@ -50,9 +50,9 @@ int main() {
         }
 
         // Check if 5 minutes have passed
-        if (last_minute == -1 || (current_dt.minute - last_minute + 60) % 60 >= 1) {
+        if (last_dt.minute == -1 || (current_dt.minute - last_dt.minute + 60) % 60 >= 1) {
             printf("1 minutes have passed! Current time from RTC: %d minutes\n", current_dt.minute);
-            last_minute = current_dt.minute;
+            last_dt.minute = current_dt.minute;
         }
 
         sleep(30); // Sleep for 30 seconds before checking again
