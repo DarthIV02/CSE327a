@@ -93,7 +93,7 @@ class MedicineSchedule(Gtk.Window):
         self.medicine_list.remove(medicine_box)
         self.show_all()
 
-    def store_vals(self):
+    def store_vals(self, widget, label_box):
         json_save = {}
         filename = "user_data/schedule.json"
 
@@ -111,7 +111,7 @@ class MedicineSchedule(Gtk.Window):
         dialog.run()
         dialog.destroy()
     
-    def restore_vals(self, medicine_box):
+    def restore_vals(self):
         try:
             with open('user_data/schedule.json') as f:
                 data = json.load(f)
