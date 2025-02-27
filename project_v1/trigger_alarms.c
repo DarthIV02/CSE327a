@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
-#include <json/JSON.h>
+#include <cjson/cJSON.h>
 
 typedef struct {
     int year, month, day;
