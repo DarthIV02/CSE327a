@@ -162,8 +162,8 @@ int main() {
             for(int i = 0; i < num_medicine; i++){
                 Medicine med = medicines[i];
                 DateTime temp;
-                date_add_hours(&time_struct, med.repeat_hour);
-                date_add_minutes(&time_struct, med.repeat_minute);
+                //date_add_hours(&time_struct, med.repeat_hour);
+                //date_add_minutes(&time_struct, med.repeat_minute);
                 char buffer[80];
                 strftime(buffer, 80, "%Y-%m-%d %H:%M", &time_struct); 
                 parse_complete(buffer, temp.year, temp.month, temp.day, temp.hour, temp.minute);
