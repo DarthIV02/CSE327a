@@ -1,6 +1,16 @@
 #include <gtk/gtk.h>
 #include <time.h>
 
+// Global variables
+
+GtkApplication *app;
+int status;
+
+app = gtk_application_new ("org.gtk.example", G_APPLICATION_DEFAULT_FLAGS);
+g_signal_connect (app, "activate", G_CALLBACK (activate), NULL);
+
+GtkWidget *alarm;
+
 static void update_time(gpointer user_data) { // Modify with real time clock ...
   GtkLabel *label = GTK_LABEL(user_data);
   time_t now = time(NULL);
@@ -50,14 +60,22 @@ static void schedule_clicked(GtkButton *button, gpointer user_data) {
   system("./schedule.sh");
 }
 
-static void
-activate (GtkApplication* app,
-          gpointer        user_data)
+static void change_alarm(int alarm_active){
+  if (alarm_active == 1){
+    gtk_widget_set_name(alarm, "alarm-label");
+    apply_css(alarm);
+  } else {
+    gtk_widget_set_name(alarm, "alarm-label-invisible");
+    apply_css(alarm);
+  }
+}
+
+static void activate (GtkApplication* app, gpointer user_data)
 {
   GtkWidget *window = gtk_application_window_new(app);
   GtkWidget *grid   = gtk_grid_new();
   GtkWidget *label = gtk_label_new("00:00:00");
-  GtkWidget *alarm = gtk_label_new("Time for medicine !");
+  alarm = gtk_label_new("Time for medicine !");
 
   gtk_window_set_title (GTK_WINDOW (window), "Elder Care System");
   gtk_window_set_position(GTK_WINDOW(window), GTK_WIN_POS_CENTER); // Center the window
@@ -111,15 +129,17 @@ activate (GtkApplication* app,
   gtk_widget_show_all(window);
 }
 
-int
-main (int argc, char **argv)
+int start_window (int argc, char **argv)
 {
-  GtkApplication *app;
-  int status;
-
-  app = gtk_application_new ("org.gtk.example", G_APPLICATION_DEFAULT_FLAGS);
-  g_signal_connect (app, "activate", G_CALLBACK (activate), NULL);
   status = g_application_run (G_APPLICATION (app), argc, argv);
+  g_object_unref (app);
+
+  return status;
+}
+
+int stop_window (int argc)
+{
+  status = g_application_quit (G_APPLICATION (app));
   g_object_unref (app);
 
   return status;

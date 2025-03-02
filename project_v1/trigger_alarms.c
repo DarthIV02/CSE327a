@@ -6,6 +6,7 @@
 #include <unistd.h>
 #include <cjson/cJSON.h>
 #include <time.h>
+#include "window.c"
 
 typedef struct {
     char name[45];
@@ -210,6 +211,7 @@ int main() {
 
     int medicine_active[num_medicine]; // Medicine needs to be taken today
     int medicine_triggered[num_medicine]; // Medicine flag is triggered
+    start_window(); // Starts gui
 
     while (1) {
         //Debugging purposes
