@@ -82,7 +82,7 @@ activate (GtkApplication* app,
   //Configure style and visibility of alarm
   gtk_widget_set_name(alarm, "alarm-label");
   apply_css(alarm);
-  gtk_widget_hide(alarm);
+  //gtk_widget_hide(alarm);
   g_timeout_add_seconds(3, (GSourceFunc)gtk_widget_show, alarm);
 
   // Create buttons
