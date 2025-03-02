@@ -82,7 +82,8 @@ activate (GtkApplication* app,
   //Configure style and visibility of alarm
   gtk_widget_set_name(alarm, "alarm-label");
   apply_css(alarm);
-  gtk_widget_set_visible(alarm, false);
+  gboolean visible = false;
+  gtk_widget_set_visible(alarm, visible);
 
   // Create buttons
   GtkWidget *patient_button = gtk_button_new_with_label ("Patient Details");
