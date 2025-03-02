@@ -4,7 +4,7 @@
 // Global variables
 
 int status;
-GtkWidget *alarm;
+gpointer alarm_pointer;
 
 static void update_time(gpointer user_data) { // Modify with real time clock ...
   GtkLabel *label = GTK_LABEL(user_data);
@@ -56,6 +56,7 @@ static void schedule_clicked(GtkButton *button, gpointer user_data) {
 }
 
 static void change_alarm(int alarm_active){
+  GtkLabel *alarm = GTK_LABEL(alarm_pointer);
   if (alarm_active == 1){
     gtk_widget_set_name(alarm, "alarm-label");
     apply_css(alarm);
@@ -70,7 +71,8 @@ static void activate (GtkApplication* app, gpointer user_data)
   GtkWidget *window = gtk_application_window_new(app);
   GtkWidget *grid   = gtk_grid_new();
   GtkWidget *label = gtk_label_new("00:00:00");
-  alarm = gtk_label_new("Time for medicine !");
+  GtkWidget *alarm = gtk_label_new("Time for medicine !");
+  alarm_pointer = alarm;
 
   gtk_window_set_title (GTK_WINDOW (window), "Elder Care System");
   gtk_window_set_position(GTK_WINDOW(window), GTK_WIN_POS_CENTER); // Center the window
