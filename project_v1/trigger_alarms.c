@@ -168,7 +168,7 @@ int main() {
 
         //Debugging purposes
         printf("Medicine Active: [ ");
-        for (int i = 0; i < size; i++) {
+        for (int i = 0; i < num_medicine; i++) {
             printf("%d ", medicine_active[i]);  // Print each element
         }
         printf("]\n");
@@ -182,7 +182,7 @@ int main() {
 
         //Debugging purposes
         printf("Medicine Triggered: [ ");
-        for (int i = 0; i < size; i++) {
+        for (int i = 0; i < num_medicine; i++) {
             printf("%d ", medicine_active[i]);  // Print each element
         }
         printf("]\n");
