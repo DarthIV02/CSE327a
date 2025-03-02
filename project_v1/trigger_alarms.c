@@ -118,7 +118,7 @@ int update_taken_json(int item_change, struct tm new_time){
 
     int i = 0;
     // Buffer to hold the formatted string
-    char buffer[80];
+    char buffer_time[80];
     
     FILE *fp = fopen("user_data/schedule.json", "r");
     if (fp == NULL) {
@@ -146,8 +146,8 @@ int update_taken_json(int item_change, struct tm new_time){
             cJSON *last_rec = cJSON_GetObjectItemCaseSensitive(item, "last_rec");
             if (last_rec != NULL) {
                 // Format the time using strftime()
-                strftime(buffer, sizeof(buffer), "%Y-%m-%d %H:%M", &new_time);
-                cJSON_SetNumberValue(last_rec, buffer);  // Change age to 35
+                strftime(buffer_time, sizeof(buffer_time), "%Y-%m-%d %H:%M", &new_time);
+                cJSON_SetNumberValue(last_rec, buffer_time);  // Change age to 35
             } else {
                 printf("Key 'last_rec' not found.\n");
             }
