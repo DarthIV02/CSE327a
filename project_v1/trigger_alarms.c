@@ -231,7 +231,7 @@ void* countdown_alarms() {
                 struct tm temp = med.taken;
                 temp.tm_hour += med.repeat.tm_hour;
                 temp.tm_min += med.repeat.tm_min; 
-                mktime(&temp);          
+                mktime(*temp);          
                 if (temp.tm_yday <= current_dt.tm_yday){
                     medicine_active[i] = 1;
                 } else {
