@@ -117,7 +117,7 @@ int read_json(){
 int isMedtriggered(Medicine med, struct tm current_time){
 
     time_t current = mktime(&current_time);
-    time_t last = mktime(&med->taken);
+    time_t last = mktime(&med.taken);
 
     if (difftime(current, last) > (med.taken.tm_hour * 60 * 60 + med.taken.tm_min * 60)){
         return 1;
