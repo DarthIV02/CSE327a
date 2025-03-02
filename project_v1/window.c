@@ -9,8 +9,7 @@ gpointer alarm_pointer;
 
 static void update_time(gpointer user_data) { // Modify with real time clock ...
   GtkLabel *label = GTK_LABEL(user_data);
-  time_t now = time(NULL);
-  struct tm *t = localtime(&now);
+  struct tm *t = get_time_from_hwclock();
   
   char time_str[9]; // HH:MM:SS
   strftime(time_str, sizeof(time_str), "%H:%M:%S", t);
