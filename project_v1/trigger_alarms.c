@@ -124,7 +124,7 @@ int isMedtriggered(Medicine med, struct tm current_time){
     time_t last = mktime(&med.taken);
 
     // Debug
-    printf("Last time med taken: %s\n", ctime(&last))
+    printf("Last time med taken: %s\n", ctime(&last));
     printf("Difference: %lf\n", difftime(current, last));
 
     if (difftime(current, last) > (med.repeat.tm_hour * 60 * 60 + med.repeat.tm_min * 60)){
