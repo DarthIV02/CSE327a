@@ -7,6 +7,7 @@
 #include <cjson/cJSON.h>
 #include <time.h>
 #include "window.h"
+#include "trigger_alarms.h"
 
 typedef struct {
     char name[45];

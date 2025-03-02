@@ -1,6 +1,7 @@
 #include <gtk/gtk.h>
 #include <time.h>
 #include "window.h"
+#include "trigger_alarms.h"
 
 // Global variables
 
