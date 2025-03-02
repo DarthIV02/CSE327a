@@ -216,6 +216,9 @@ void* countdown_alarms() {
 
     while (1) {
         //Debugging purposes
+        while (priority_clock == 1){
+            // wait until lock of clock is done
+        }
         struct tm current_dt = get_time_from_hwclock();
         if (current_dt.tm_min == 0) {
             sleep(10); // Retry after 10 seconds if there was an error

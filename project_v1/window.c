@@ -131,10 +131,11 @@ static void activate (GtkApplication* app, gpointer user_data)
 
 void* start_window ()
 {
-  t = get_time_from_hwclock();
-  while (t.tm_sec == 0){
+  while (priority_clock == 1){
     t = get_time_from_hwclock();
+    priority_clock = 0;
   }
+  
   GtkApplication *app = gtk_application_new("org.gtk.example", G_APPLICATION_DEFAULT_FLAGS);
   g_signal_connect(app, "activate", G_CALLBACK(activate), NULL);
   
