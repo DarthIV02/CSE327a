@@ -127,13 +127,13 @@ static void activate (GtkApplication* app, gpointer user_data)
   gtk_widget_show_all(window);
 }
 
-void* start_window (int argc, char **argv)
+void* start_window ()
 {
   GtkApplication *app = gtk_application_new("org.gtk.example", G_APPLICATION_DEFAULT_FLAGS);
   g_signal_connect(app, "activate", G_CALLBACK(activate), NULL);
   
   // Run the application
-  status = g_application_run(G_APPLICATION(app), argc, argv);
+  status = g_application_run(G_APPLICATION(app));
   
   // Clean up
   g_object_unref(app);
@@ -141,7 +141,7 @@ void* start_window (int argc, char **argv)
   return NULL;
 }
 
-void* stop_window (int argc)
+void* stop_window ()
 {
   GtkApplication *app = gtk_application_new("org.gtk.example", G_APPLICATION_DEFAULT_FLAGS);
   
