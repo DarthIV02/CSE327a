@@ -83,7 +83,8 @@ activate (GtkApplication* app,
   gtk_widget_set_name(alarm, "alarm-label");
   apply_css(alarm);
   //gtk_widget_hide(alarm);
-  g_timeout_add_seconds(3, (GSourceFunc)gtk_widget_show, alarm);
+  gtk_widget_set_visible(alarm, FALSE);
+  g_timeout_add_seconds(3, (GSourceFunc)gtk_widget_set_visible, alarm, TRUE);
 
   // Create buttons
   GtkWidget *patient_button = gtk_button_new_with_label ("Patient Details");
