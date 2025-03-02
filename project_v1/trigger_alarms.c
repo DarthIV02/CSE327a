@@ -114,6 +114,10 @@ int read_json(){
     return 0;
 }
 
+int write_json(){
+
+}
+
 int isMedtriggered(Medicine med, struct tm current_time){
 
     time_t current = mktime(&current_time);
@@ -156,7 +160,7 @@ int main() {
                 struct tm temp = med.taken;
                 temp.tm_hour += med.repeat.tm_hour;
                 temp.tm_min += med.repeat.tm_min;           
-                if (temp.tm_yday < current_dt.tm_yday){
+                if (temp.tm_yday <= current_dt.tm_yday){
                     medicine_active[i] = 1;
                 } else {
                     medicine_active[i] = 0;
@@ -187,13 +191,19 @@ int main() {
 
         /*MEDICINE FLAG IS TRIGGERED -- ACTION ADDED HERE*/
 
-        last_dt = current_dt;
+        //Medicine has been taken
+        for(int i = 0; i < num_medicine; i++){
+            // Only check active medicines every minute
+            if (medicine_triggered[i] = 1){
+                medicines[i].taken = current_dt;
+                medicine_triggered[i] = 0
+            }
+        }
 
-        // Check if 5 minutes have passed
-        //if (last_dt.minute == -1 || (current_dt.minute - last_dt.minute + 60) % 60 >= 1) {
-        //    printf("1 minutes have passed! Current time from RTC: %d minutes\n", current_dt.minute);
-        //    
-        //}
+        /*MISSING UPDATING THE JSON FILE*/
+
+
+        last_dt = current_dt;
 
         sleep(60); // Sleep for 30 seconds before checking again
     }
