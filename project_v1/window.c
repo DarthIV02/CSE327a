@@ -130,6 +130,7 @@ static void activate (GtkApplication* app, gpointer user_data)
 
 void* start_window ()
 {
+  t = get_time_from_hwclock();
   GtkApplication *app = gtk_application_new("org.gtk.example", G_APPLICATION_DEFAULT_FLAGS);
   g_signal_connect(app, "activate", G_CALLBACK(activate), NULL);
   
@@ -145,8 +146,7 @@ void* start_window ()
 void* stop_window ()
 {
   GtkApplication *app = gtk_application_new("org.gtk.example", G_APPLICATION_DEFAULT_FLAGS);
-  t = get_time_from_hwclock();
-  
+
   // Quit the application
   g_application_quit(G_APPLICATION(app));
 
