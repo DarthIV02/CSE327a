@@ -202,7 +202,7 @@ int isMedtriggered(Medicine med, struct tm current_time){
     return 0;
 }
 
-int main(int argc, char **argv) {
+int countdown_alarms(int argc, char **argv) {
     struct tm last_dt = {0}; // Initialize to -1;
 
     // Read JSON to find active medicines
@@ -211,7 +211,7 @@ int main(int argc, char **argv) {
 
     int medicine_active[num_medicine]; // Medicine needs to be taken today
     int medicine_triggered[num_medicine]; // Medicine flag is triggered
-    int window_status = start_window(argc, argv); // Starts gui
+    int window_changed = 0;
 
     while (1) {
         //Debugging purposes
@@ -249,6 +249,9 @@ int main(int argc, char **argv) {
             // Only check active medicines every minute
             if (medicine_active[i] == 1){
                 medicine_triggered[i] = isMedtriggered(medicines[i], current_dt);
+                if(window_changed == 0 && medicine_triggered[i] == 1){
+                    change_alarm(1);
+                }
             }
         }
 
@@ -260,6 +263,7 @@ int main(int argc, char **argv) {
         printf("]\n---------------------\n");*/
 
         /*MEDICINE FLAG IS TRIGGERED -- ACTION ADDED HERE*/
+        sleep(10);
 
         //Medicine has been taken
         for(int i = 0; i < num_medicine; i++){
@@ -270,6 +274,7 @@ int main(int argc, char **argv) {
                 medicine_triggered[i] = 0;
             }
         }
+        change_alarm(0);
 
         last_dt = current_dt;
 
