@@ -114,7 +114,7 @@ int read_json(){
     return 0;
 }
 
-int isMedtriggered(struct Medicine med, struct tm current_time){
+int isMedtriggered(Medicine med, struct tm current_time){
 
     time_t current = mktime(&current_time);
     time_t last = mktime(&med->taken);
