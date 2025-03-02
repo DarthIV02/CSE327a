@@ -123,7 +123,7 @@ int isMedtriggered(Medicine med, struct tm current_time){
         return 1;
 
         //Debugging print
-        printf("Medicine %c triggered at time: %d:%d", med.name, current_time.tm_hour, current_time.tm_min)
+        printf("Medicine %c triggered at time: %d:%d", med.name, current_time.tm_hour, current_time.tm_min);
     }
 
     return 0;
@@ -144,7 +144,7 @@ int main() {
 
     while (1) {
         //Debugging purposes
-        printf("Loop\n")
+        printf("Loop\n");
         struct tm current_dt = get_minutes_from_hwclock();
         if (current_dt.tm_min == -1) {
             sleep(10); // Retry after 10 seconds if there was an error
