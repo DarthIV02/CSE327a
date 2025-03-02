@@ -202,7 +202,7 @@ int isMedtriggered(Medicine med, struct tm current_time){
     return 0;
 }
 
-int main() {
+int main(int argc, char **argv) {
     struct tm last_dt = {0}; // Initialize to -1;
 
     // Read JSON to find active medicines
@@ -211,7 +211,7 @@ int main() {
 
     int medicine_active[num_medicine]; // Medicine needs to be taken today
     int medicine_triggered[num_medicine]; // Medicine flag is triggered
-    start_window(); // Starts gui
+    start_window(argc, argv); // Starts gui
 
     while (1) {
         //Debugging purposes
