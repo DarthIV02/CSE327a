@@ -6,25 +6,19 @@
 #include <time.h>
 
 typedef struct {
-    int year, month, day;
-    int hour, minute, second;
-} DateTime;
-
-typedef struct {
     char name[45];
-    int start_year, start_month, start_day;
-    int repeat_hour, repeat_minute;
-    int taken_hour, taken_minute;
+    struct tm start = {0};
+    struct tm repeat = {0}; 
+    struct tm taken = {0};
 } Medicine;
 
 int num_medicine;
 Medicine *medicines = NULL;  // Array of Medicine structs
-struct tm time_struct = {0}; // Time for date.h
 
-DateTime get_minutes_from_hwclock() {
+struct tm get_minutes_from_hwclock() {
     char buffer[128];
     FILE *fp;
-    DateTime dt = {0}; // Initialize to zero
+    struct tm dt = {0}; // Initialize to zero
 
     // Execute the hwclock command
     fp = popen("sudo hwclock -r", "r");
@@ -42,28 +36,12 @@ DateTime get_minutes_from_hwclock() {
 
     pclose(fp);
 
-    strptime(buffer, "%Y-%m-%d %H:%M:%S", &time_struct);
-
     // Extract the minute from the time string
-    int year, month, day, hour, minute, second;
-    if (sscanf(buffer, "%d-%d-%d %d:%d:%d", &dt.year, &dt.month, &dt.day, &dt.hour, &dt.minute, &dt.second) != 6) 
-    {
-        fprintf(stderr, "Failed to parse date-time.\n");
-        exit(EXIT_FAILURE);
+    if (strptime(buffer, "%Y-%m-%d %H:%M:%S", &dt) == NULL) {
+        printf("Failed to parse date string\n");
+        return 1;
     }
     return dt;
-}
-
-int parse_time(const char *time_str, int *hour, int *minute) {
-    return sscanf(time_str, "%d:%d", hour, minute);  // Parses HH:MM format
-}
-
-int parse_date(const char *date_str, int *year, int *month, int *day) {
-    return sscanf(date_str, "%d-%d-%d", year, month, day);  // Parses YYYY-MM-DD format
-}
-
-int parse_complete(const char *date_str, int *year, int *month, int *day, int *hour, int *minute) {
-    return sscanf(date_str, "%d-%d-%d %d:%d", year, month, day, hour, minute);  // Parses YYYY-MM-DD format
 }
 
 int read_json(){
@@ -117,13 +95,13 @@ int read_json(){
             strncpy(med->name, name->valuestring, sizeof(med->name) - 1);
         }
         if (cJSON_IsString(repeat) && repeat->valuestring != NULL) {
-            parse_time(repeat->valuestring, &med->repeat_hour, &med->repeat_minute);
+            strptime(repeat->valuestring, "%H:%M", &med->repeat);
         }
         if (cJSON_IsString(start) && start->valuestring != NULL) {
-            parse_date(start->valuestring, &med->start_year, &med->start_month, &med->start_day);
+            strptime(start->valuestring, "%Y-%m-%d %H:%M", &med->start);
         }
         if (cJSON_IsString(last_rec) && last_rec->valuestring != NULL) {
-            parse_time(last_rec->valuestring, &med->taken_hour, &med->taken_minute);
+            strptime(last_rec->valuestring, "%Y-%m-%d %H:%M", &med->taken);
         }
         medicine_count += 1;
 
@@ -135,13 +113,20 @@ int read_json(){
     return 0;
 }
 
-int isMedtriggered(Medicine med, DateTime current_time){
+int isMedtriggered(struct Medicine med, struct tm current_time){
+
+    time_t current = mktime(&current_time);
+    time_t last = mktime(&med->taken);
+
+    if (difftime(current, last) > (med.taken.tm_hour * 60 * 60 + med.taken.tm_min * 60)){
+        return 1;
+    }
 
     return 0;
 }
 
 int main() {
-    DateTime last_dt = {-1}; // Initialize to zero = -1;
+    struct tm last_dt = {-1}; // Initialize to -1;
 
     // Read JSON to find active medicines
     read_json();
@@ -150,24 +135,20 @@ int main() {
     int medicine_triggered[num_medicine]; // Medicine flag is triggered
 
     while (1) {
-        DateTime current_dt = get_minutes_from_hwclock();
-        if (current_dt.minute == -1) {
+        struct tm current_dt = get_minutes_from_hwclock();
+        if (current_dt.tm_min == -1) {
             sleep(10); // Retry after 10 seconds if there was an error
             continue;
         }
 
-        if (last_dt.day == -1 || current_dt.day != last_dt.day){ 
+        if (last_dt.tm_mday == -1 || current_dt.tm_mday != last_dt.tm_mday){ 
             // If its a new day -> check if medicine needs to be taken today
 
             for(int i = 0; i < num_medicine; i++){
                 Medicine med = medicines[i];
-                DateTime temp;
-                //date_add_hours(&time_struct, med.repeat_hour);
-                //date_add_minutes(&time_struct, med.repeat_minute);
-                char buffer[80];
-                strftime(buffer, 80, "%Y-%m-%d %H:%M", &time_struct); 
-                parse_complete(buffer, temp.year, temp.month, temp.day, temp.hour, temp.minute);
-                if (temp.day == current_dt.day){
+                struct tm temp = med.taken
+                temp.tm_hour += med.repeat.tm_hour;           
+                if (temp.tm_yday == current_dt.tm_yday){
                     medicine_active[i] = 1;
                 } else {
                     medicine_active[i] = 0;
@@ -184,7 +165,7 @@ int main() {
 
         /*MEDICINE FLAG IS TRIGGERED -- ACTION ADDED HERE*/
 
-        last_dt.minute = current_dt.minute;
+        last_dt = current_dt;
 
         // Check if 5 minutes have passed
         //if (last_dt.minute == -1 || (current_dt.minute - last_dt.minute + 60) % 60 >= 1) {
