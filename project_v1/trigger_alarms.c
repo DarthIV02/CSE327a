@@ -202,7 +202,7 @@ int isMedtriggered(Medicine med, struct tm current_time){
     return 0;
 }
 
-int countdown_alarms(int argc, char **argv) {
+void* countdown_alarms(int argc, char **argv) {
     struct tm last_dt = {0}; // Initialize to -1;
 
     // Read JSON to find active medicines
@@ -281,5 +281,5 @@ int countdown_alarms(int argc, char **argv) {
         sleep(60); // Sleep for 30 seconds before checking again
     }
 
-    return 0;
+    return NULL;
 }
