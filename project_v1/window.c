@@ -7,7 +7,7 @@
 
 int status;
 gpointer alarm_pointer;
-struct tm t = get_time_from_hwclock();
+struct tm t;
 
 static void update_time(gpointer user_data) { // Modify with real time clock ...
   GtkLabel *label = GTK_LABEL(user_data);
@@ -132,6 +132,7 @@ void* start_window ()
 {
   GtkApplication *app = gtk_application_new("org.gtk.example", G_APPLICATION_DEFAULT_FLAGS);
   g_signal_connect(app, "activate", G_CALLBACK(activate), NULL);
+  t = get_time_from_hwclock();
   
   // Run the application
   status = g_application_run(G_APPLICATION(app), NULL, NULL);
