@@ -300,7 +300,7 @@ void* countdown_alarms() {
 
         last_dt = current_dt;
 
-        sleep(60); // Sleep for 30 seconds before checking again
+        sleep(50); // Sleep for 30 seconds before checking again
     }
 
     return NULL;
