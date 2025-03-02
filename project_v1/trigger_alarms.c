@@ -134,11 +134,15 @@ int main() {
 
     // Read JSON to find active medicines
     read_json();
+    //Debugging purposes
+    printf("JSON finished reading\n")
 
     int medicine_active[num_medicine]; // Medicine needs to be taken today
     int medicine_triggered[num_medicine]; // Medicine flag is triggered
 
     while (1) {
+        //Debugging purposes
+        printf("Loop\n")
         struct tm current_dt = get_minutes_from_hwclock();
         if (current_dt.tm_min == -1) {
             sleep(10); // Retry after 10 seconds if there was an error
