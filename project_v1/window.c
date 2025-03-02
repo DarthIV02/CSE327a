@@ -56,13 +56,13 @@ static void schedule_clicked(GtkButton *button, gpointer user_data) {
 }
 
 static void change_alarm(int alarm_active){
-  GtkLabel *alarm = GTK_LABEL(alarm_pointer);
+  GtkLabel *alarm_here = GTK_LABEL(alarm_pointer);
   if (alarm_active == 1){
-    gtk_widget_set_name(alarm, "alarm-label");
-    apply_css(alarm);
+    gtk_widget_set_name(alarm_here, "alarm-label");
+    apply_css(alarm_here);
   } else {
-    gtk_widget_set_name(alarm, "alarm-label-invisible");
-    apply_css(alarm);
+    gtk_widget_set_name(alarm_here, "alarm-label-invisible");
+    apply_css(alarm_here);
   }
 }
 
