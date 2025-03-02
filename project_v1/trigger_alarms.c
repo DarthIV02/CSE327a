@@ -8,6 +8,7 @@
 #include <time.h>
 #include "window.h"
 #include "trigger_alarms.h"
+#include <semaphore.h>
 
 typedef struct {
     char name[45];
@@ -18,6 +19,7 @@ typedef struct {
 
 int num_medicine;
 Medicine *medicines = NULL;  // Array of Medicine structs
+#define SEM_NAME "/sem_clock"
 
 struct tm get_time_from_hwclock() {
     char buffer[128];
@@ -213,13 +215,24 @@ void* countdown_alarms() {
     int medicine_active[num_medicine]; // Medicine needs to be taken today
     int medicine_triggered[num_medicine]; // Medicine flag is triggered
     int window_changed = 0;
+    int sem_done = 0;
 
     while (1) {
         //Debugging purposes
-        while (priority_clock == 1){
-            // wait until lock of clock is done
+        if (sem_done == 0){
+            sem_t *sem = sem_open(SEM_NAME, 0);
+            if (sem == SEM_FAILED) {
+                perror("sem_open");
+                exit(EXIT_FAILURE);
+            }
+
+            sem_wait(sem); // Wait for Script A to signal
+            sem_unlink(SEM_NAME);
+            sem_done = 1;
         }
+
         struct tm current_dt = get_time_from_hwclock();
+
         if (current_dt.tm_min == 0) {
             sleep(10); // Retry after 10 seconds if there was an error
             continue;

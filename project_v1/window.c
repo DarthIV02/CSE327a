@@ -2,12 +2,14 @@
 #include <time.h>
 #include "window.h"
 #include "trigger_alarms.h"
+#include <semaphore.h>
 
 // Global variables
 
 int status;
 gpointer alarm_pointer;
 struct tm t;
+#define SEM_NAME "/sem_clock"
 
 static void update_time(gpointer user_data) { // Modify with real time clock ...
   GtkLabel *label = GTK_LABEL(user_data);
@@ -131,10 +133,17 @@ static void activate (GtkApplication* app, gpointer user_data)
 
 void* start_window ()
 {
-  while (priority_clock == 1){
-    t = get_time_from_hwclock();
-    priority_clock = 0;
+  sem_t *sem = sem_open(SEM_NAME, O_CREAT, 0666, 0);
+  if (sem == SEM_FAILED) {
+      perror("sem_open");
+      exit(EXIT_FAILURE);
   }
+    
+  t = get_time_from_hwclock();
+  
+  sem_post(sem); // Notify that data is ready
+
+  sem_close(sem);
   
   GtkApplication *app = gtk_application_new("org.gtk.example", G_APPLICATION_DEFAULT_FLAGS);
   g_signal_connect(app, "activate", G_CALLBACK(activate), NULL);

@@ -4,6 +4,7 @@
 #include <pthread.h>
 #include <unistd.h>
 #include <stdio.h>
+#include <semaphore.h>
 
 int main(int argc, char **argv) {
 
