@@ -124,20 +124,18 @@ int isMedtriggered(Medicine med, struct tm current_time){
     time_t last = mktime(&med.taken);
 
     // Debug
-    printf("Med %s needs to be taken every %d h %d m\n", med.name, med.repeat.tm_hour, med.repeat.tm_min);
 
     if (difftime(current, last) > (med.repeat.tm_hour * 60 * 60 + med.repeat.tm_min * 60)){
-        return 1;
-
         //Debugging print
         printf("Medicine %c triggered at time: %d:%d\n", med.name, current_time.tm_hour, current_time.tm_min);
+        
+        return 1;
     }
 
     return 0;
 }
 
 int main() {
-    printf("Start");
     struct tm last_dt = {0}; // Initialize to -1;
 
     // Read JSON to find active medicines
