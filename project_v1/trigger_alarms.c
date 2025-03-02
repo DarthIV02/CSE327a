@@ -211,7 +211,7 @@ int main(int argc, char **argv) {
 
     int medicine_active[num_medicine]; // Medicine needs to be taken today
     int medicine_triggered[num_medicine]; // Medicine flag is triggered
-    start_window(argc, argv); // Starts gui
+    int window_status = start_window(argc, argv); // Starts gui
 
     while (1) {
         //Debugging purposes
