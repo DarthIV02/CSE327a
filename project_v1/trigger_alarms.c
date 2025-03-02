@@ -157,7 +157,7 @@ int main() {
 
         if (last_dt.tm_mday == 0 || current_dt.tm_mday != last_dt.tm_mday){ 
             // If its a new day -> check if medicine needs to be taken today
-            printf("Checked day\n;")
+            printf("Checked day\n");
             for(int i = 0; i < num_medicine; i++){
                 Medicine med = medicines[i];
                 struct tm temp = med.taken;
