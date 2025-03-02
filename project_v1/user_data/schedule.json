@@ -1,4 +1,4 @@
-{"0": {"name": "Paracetamol", "repeat": "00:05", "start": "2025-02-26 11:00", "last_rec": "2025-02-26 23:00"}, 
-"1": {"name": "Ibuprofen", "repeat": "00:06", "start": "2025-02-27 23:05", "last_rec": "2025-02-27 23:05"},
-"2": {"name": "Celestamine", "repeat": "00:10", "start": "2025-02-27 23:05", "last_rec": "2025-02-27 23:05"}
+{"0": {"name": "Paracetamol", "repeat": "00:01", "start": "2025-02-26 11:00", "last_rec": "2025-02-26 23:00"}, 
+"1": {"name": "Ibuprofen", "repeat": "00:02", "start": "2025-02-27 23:05", "last_rec": "2025-02-27 23:05"},
+"2": {"name": "Celestamine", "repeat": "00:03", "start": "2025-02-27 23:05", "last_rec": "2025-02-27 23:05"}
 }
