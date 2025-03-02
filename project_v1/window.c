@@ -72,7 +72,6 @@ static void activate (GtkApplication* app, gpointer user_data)
   GtkWidget *grid   = gtk_grid_new();
   GtkWidget *label = gtk_label_new("00:00:00");
   GtkWidget *alarm = gtk_label_new("Time for medicine !");
-  alarm_pointer = alarm;
 
   gtk_window_set_title (GTK_WINDOW (window), "Elder Care System");
   gtk_window_set_position(GTK_WINDOW(window), GTK_WIN_POS_CENTER); // Center the window
@@ -98,6 +97,7 @@ static void activate (GtkApplication* app, gpointer user_data)
   gtk_widget_set_name(alarm, "alarm-label-invisible");
   apply_css(alarm);
   //gtk_widget_hide(alarm);
+  alarm_pointer = alarm;
 
   // Create buttons
   GtkWidget *patient_button = gtk_button_new_with_label ("Patient Details");
