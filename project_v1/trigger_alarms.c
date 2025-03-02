@@ -269,9 +269,6 @@ int main() {
             }
         }
 
-        /*MISSING UPDATING THE JSON FILE*/
-
-
         last_dt = current_dt;
 
         sleep(60); // Sleep for 30 seconds before checking again

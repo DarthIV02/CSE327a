@@ -57,6 +57,7 @@ activate (GtkApplication* app,
   GtkWidget *window = gtk_application_window_new(app);
   GtkWidget *grid   = gtk_grid_new();
   GtkWidget *label = gtk_label_new("00:00:00");
+  GtkWidget *alarm = gtk_label_new("Time for medicine!");
 
   gtk_window_set_title (GTK_WINDOW (window), "Elder Care System");
   gtk_window_set_position(GTK_WINDOW(window), GTK_WIN_POS_CENTER); // Center the window
@@ -78,16 +79,23 @@ activate (GtkApplication* app,
   apply_css(label);
   g_timeout_add_seconds(1, (GSourceFunc) update_time, label);
 
+  //Configure style and visibility of alarm
+  gtk_widget_set_name(alarm, "alarm-label");
+  apply_css(alarm);
+  //gtk_widget_set_visible(alarm, false);
+
   // Create buttons
   GtkWidget *patient_button = gtk_button_new_with_label ("Patient Details");
   GtkWidget *schedule_button = gtk_button_new_with_label ("Schedule");
 
   gtk_grid_attach(GTK_GRID(grid), label, 0, 0, 2, 1);
-  gtk_grid_attach(GTK_GRID(grid), patient_button, 0, 1, 1, 1);
-  gtk_grid_attach(GTK_GRID(grid), schedule_button, 1, 1, 1, 1);
+  gtk_grid_attach(GTK_GRID(grid), alarm, 0, 1, 2, 1);
+  gtk_grid_attach(GTK_GRID(grid), patient_button, 0, 2, 1, 1);
+  gtk_grid_attach(GTK_GRID(grid), schedule_button, 1, 2, 1, 1);
 
   // Allow widgets inside the grid to expand
   gtk_widget_set_hexpand(label, TRUE);
+  gtk_widget_set_hexpand(alarm, TRUE);
   gtk_widget_set_hexpand(patient_button, TRUE);
   gtk_widget_set_hexpand(schedule_button, TRUE);
 

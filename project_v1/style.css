@@ -9,6 +9,14 @@
     border-radius: 10px;
 }
 
+#alarm-label {
+    font-size: 35px;
+    font-weight: bold;
+    color: rgb(203, 20, 20);
+    padding: 10px;
+    border-radius: 10px;
+}
+
 #grid {
     border: 5px solid red; /* Set a 5px solid red border */
   }
