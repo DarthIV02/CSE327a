@@ -3,6 +3,7 @@
 #include "window.h"
 #include "trigger_alarms.h"
 #include <semaphore.h>
+#include <fcntl.h>
 
 // Global variables
 
