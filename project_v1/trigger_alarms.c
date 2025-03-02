@@ -114,8 +114,71 @@ int read_json(){
     return 0;
 }
 
-int write_json(){
+int update_taken_json(int item_change, struct tm new_time){
 
+    int i = 0;
+    // Buffer to hold the formatted string
+    char buffer[80];
+    
+    FILE *fp = fopen("user_data/schedule.json", "r");
+    if (fp == NULL) {
+        printf("Error: Unable to open file.\n");
+        return 1;
+    }
+
+    // Read the entire file into a buffer
+    char buffer[1024];
+    size_t len = fread(buffer, 1, sizeof(buffer) - 1, fp);
+    buffer[len] = '\0'; // Null-terminate the buffer
+    fclose(fp);
+
+    // Parse the JSON data
+    cJSON *json = cJSON_Parse(buffer);
+    if (json == NULL) {
+        printf("Error parsing JSON.\n");
+        return 1;
+    }
+
+    cJSON *item = NULL;
+    cJSON_ArrayForEach(item, json) {
+        if (i == item_change){
+            // Update the "last_rec" field
+            cJSON *last_rec = cJSON_GetObjectItemCaseSensitive(item, "last_rec");
+            if (last_rec != NULL) {
+                // Format the time using strftime()
+                strftime(buffer, sizeof(buffer), "%Y-%m-%d %H:%M", &new_time);
+                cJSON_SetNumberValue(last_rec, buffer);  // Change age to 35
+            } else {
+                printf("Key 'last_rec' not found.\n");
+            }
+
+            // Open the file for writing
+            fp = fopen("user_data/schedule.json", "w");
+            if (fp == NULL) {
+                printf("Error: Unable to open file for writing.\n");
+                cJSON_Delete(json);
+                return 1;
+            }
+
+            // Convert the modified JSON object back to a string
+            char *updated_json = cJSON_Print(json);
+            if (updated_json == NULL) {
+                printf("Error printing JSON.\n");
+                cJSON_Delete(json);
+                return 1;
+            }
+
+            // Write the updated JSON back to the file
+            fwrite(updated_json, 1, strlen(updated_json), fp);
+            fclose(fp);
+
+            // Clean up
+            cJSON_Delete(json);
+            free(updated_json);
+            return 1;
+        }
+        i += 1;
+    }
 }
 
 int isMedtriggered(Medicine med, struct tm current_time){
@@ -200,6 +263,7 @@ int main() {
             // Only check active medicines every minute
             if (medicine_triggered[i] == 1){
                 medicines[i].taken = current_dt;
+                update_taken_json(i, current_dt);
                 medicine_triggered[i] = 0;
             }
         }
