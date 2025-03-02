@@ -7,9 +7,9 @@
 
 typedef struct {
     char name[45];
-    struct tm start = {0};
-    struct tm repeat = {0}; 
-    struct tm taken = {0};
+    struct tm start;
+    struct tm repeat; 
+    struct tm taken;
 } Medicine;
 
 int num_medicine;
