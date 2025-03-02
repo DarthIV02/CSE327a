@@ -147,7 +147,7 @@ int update_taken_json(int item_change, struct tm new_time){
             if (last_rec != NULL) {
                 // Format the time using strftime()
                 strftime(buffer_time, sizeof(buffer_time), "%Y-%m-%d %H:%M", &new_time);
-                cJSON_SetNumberValue(last_rec, buffer_time);  // Change age to 35
+                cJSON_SetStringValue(last_rec, buffer_time);  // Change age to 35
             } else {
                 printf("Key 'last_rec' not found.\n");
             }
