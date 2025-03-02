@@ -121,6 +121,9 @@ int isMedtriggered(Medicine med, struct tm current_time){
 
     if (difftime(current, last) > (med.taken.tm_hour * 60 * 60 + med.taken.tm_min * 60)){
         return 1;
+
+        //Debugging print
+        printf("Medicine %c triggered at time: %d:%d", med.name, current_time.tm_hour, current_time.tm_min)
     }
 
     return 0;
