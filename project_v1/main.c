@@ -13,8 +13,14 @@ int main(int argc, char **argv) {
     // Wait for the background thread to finish
     pthread_join(countdown_alarm_thread, NULL);
 
-    // Create GTK application
-    int status = start_window(argc, argv);
+    pthread_t window_thread;
+    pthread_create(&window_thread, NULL, start_window, NULL);
 
-    return status;
+    // Wait for the background thread to finish
+    pthread_join(window_thread, NULL);
+
+    // Create GTK application
+    //int status = start_window(argc, argv);
+
+    return 1;
 }
