@@ -133,7 +133,7 @@ void* start_window ()
   g_signal_connect(app, "activate", G_CALLBACK(activate), NULL);
   
   // Run the application
-  status = g_application_run(G_APPLICATION(app));
+  status = g_application_run(G_APPLICATION(app), NULL, NULL);
   
   // Clean up
   g_object_unref(app);
