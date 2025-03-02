@@ -41,7 +41,6 @@ struct tm get_minutes_from_hwclock() {
     // Extract the minute from the time string
     if (strptime(buffer, "%Y-%m-%d %H:%M:%S", &dt) == NULL) {
         printf("Failed to parse date string\n");
-        return 1;
     }
     return dt;
 }
