@@ -7,7 +7,7 @@
 
 int main(int argc, char **argv) {
     // Create GTK application
-    status = start_window(argc, argv);
+    int status = start_window(argc, argv);
 
     // Start the background task in a separate thread
     pthread_t countdown_alarms;
