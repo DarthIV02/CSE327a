@@ -1,5 +1,6 @@
 #include <gtk/gtk.h>
 #include <time.h>
+#include "window.h"
 
 // Global variables
 

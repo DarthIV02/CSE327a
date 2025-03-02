@@ -6,7 +6,7 @@
 #include <unistd.h>
 #include <cjson/cJSON.h>
 #include <time.h>
-#include "window.c"
+#include "window.h"
 
 typedef struct {
     char name[45];
