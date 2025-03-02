@@ -73,7 +73,6 @@ static void activate (GtkApplication* app, gpointer user_data)
   GtkWidget *window = gtk_application_window_new(app);
   GtkWidget *grid   = gtk_grid_new();
   GtkWidget *label = gtk_label_new("00:00:00");
-  t = get_time_from_hwclock();
   GtkWidget *alarm = gtk_label_new("Time for medicine !");
 
   gtk_window_set_title (GTK_WINDOW (window), "Elder Care System");
@@ -146,6 +145,7 @@ void* start_window ()
 void* stop_window ()
 {
   GtkApplication *app = gtk_application_new("org.gtk.example", G_APPLICATION_DEFAULT_FLAGS);
+  t = get_time_from_hwclock();
   
   // Quit the application
   g_application_quit(G_APPLICATION(app));
