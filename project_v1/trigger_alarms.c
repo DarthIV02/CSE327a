@@ -196,7 +196,7 @@ int main() {
             // Only check active medicines every minute
             if (medicine_triggered[i] = 1){
                 medicines[i].taken = current_dt;
-                medicine_triggered[i] = 0
+                medicine_triggered[i] = 0;
             }
         }
 
