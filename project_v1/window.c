@@ -12,6 +12,7 @@ struct tm t;
 static void update_time(gpointer user_data) { // Modify with real time clock ...
   GtkLabel *label = GTK_LABEL(user_data);
   t.tm_sec += 1;
+  mktime(t);
   
   char time_str[9]; // HH:MM:SS
   strftime(time_str, sizeof(time_str), "%H:%M:%S", &t);
