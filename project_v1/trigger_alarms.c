@@ -205,7 +205,7 @@ int main() {
 
         last_dt = current_dt;
 
-        sleep(60); // Sleep for 30 seconds before checking again
+        sleep(10); // Sleep for 30 seconds before checking again
     }
 
     return 0;
