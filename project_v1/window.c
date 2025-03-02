@@ -80,7 +80,7 @@ activate (GtkApplication* app,
   g_timeout_add_seconds(1, (GSourceFunc) update_time, label);
 
   //Configure style and visibility of alarm
-  gtk_widget_hide(alarm, FALSE);
+  gtk_widget_hide(alarm);
   gtk_widget_set_name(alarm, "alarm-label");
   apply_css(alarm);
 
