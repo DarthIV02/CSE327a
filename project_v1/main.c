@@ -7,8 +7,6 @@
 #include <semaphore.h>
 
 int main(int argc, char **argv) {
-
-    priority_clock = 1;
     
     // Create GTK application
     pthread_t window_thread;
