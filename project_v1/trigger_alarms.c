@@ -134,7 +134,7 @@ int isMedtriggered(Medicine med, struct tm current_time){
 }
 
 int main() {
-    printf("Start?");
+    printf("Start");
     struct tm last_dt = {0}; // Initialize to -1;
 
     // Read JSON to find active medicines
