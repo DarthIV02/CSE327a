@@ -17,7 +17,7 @@ typedef struct {
 int num_medicine;
 Medicine *medicines = NULL;  // Array of Medicine structs
 
-struct tm get_minutes_from_hwclock() {
+struct tm get_time_from_hwclock() {
     char buffer[128];
     FILE *fp;
     struct tm dt = {0}; // Initialize to zero
@@ -123,11 +123,13 @@ int isMedtriggered(Medicine med, struct tm current_time){
     time_t current = mktime(&current_time);
     time_t last = mktime(&med.taken);
 
-    if (difftime(current, last) > (med.taken.tm_hour * 60 * 60 + med.taken.tm_min * 60)){
+    print("Med %s needs to be taken every %d h %d m\n", med.name, med.repeat.tm_hour, med.repeat.tm_min);
+
+    if (difftime(current, last) > (med.repeat.tm_hour * 60 * 60 + med.repeat.tm_min * 60)){
         return 1;
 
         //Debugging print
-        printf("Medicine %c triggered at time: %d:%d", med.name, current_time.tm_hour, current_time.tm_min);
+        printf("Medicine %c triggered at time: %d:%d\n", med.name, current_time.tm_hour, current_time.tm_min);
     }
 
     return 0;
@@ -146,7 +148,7 @@ int main() {
 
     while (1) {
         //Debugging purposes
-        struct tm current_dt = get_minutes_from_hwclock();
+        struct tm current_dt = get_time_from_hwclock();
         if (current_dt.tm_min == 0) {
             sleep(10); // Retry after 10 seconds if there was an error
             continue;
@@ -185,7 +187,7 @@ int main() {
         //Debugging purposes
         printf("Medicine Triggered: [ ");
         for (int i = 0; i < num_medicine; i++) {
-            printf("%d ", medicine_active[i]);  // Print each element
+            printf("%d ", medicine_triggered[i]);  // Print each element
         }
         printf("]\n");
 
