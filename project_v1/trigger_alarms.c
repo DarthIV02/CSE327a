@@ -124,6 +124,8 @@ int isMedtriggered(Medicine med, struct tm current_time){
     time_t last = mktime(&med.taken);
 
     // Debug
+    printf("Difference: %lf\n", difftime(current, last));
+    printf("Repeat every: %d", med.repeat.tm_hour * 60 * 60 + med.repeat.tm_min * 60)
 
     if (difftime(current, last) > (med.repeat.tm_hour * 60 * 60 + med.repeat.tm_min * 60)){
         //Debugging print
@@ -155,7 +157,7 @@ int main() {
 
         if (last_dt.tm_mday == 0 || current_dt.tm_mday != last_dt.tm_mday){ 
             // If its a new day -> check if medicine needs to be taken today
-
+            printf("Checked day\n;")
             for(int i = 0; i < num_medicine; i++){
                 Medicine med = medicines[i];
                 struct tm temp = med.taken;
@@ -188,7 +190,7 @@ int main() {
         for (int i = 0; i < num_medicine; i++) {
             printf("%d ", medicine_triggered[i]);  // Print each element
         }
-        printf("]\n");
+        printf("]\n---------------------\n");
 
         /*MEDICINE FLAG IS TRIGGERED -- ACTION ADDED HERE*/
 
