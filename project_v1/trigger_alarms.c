@@ -133,6 +133,7 @@ int main() {
     struct tm last_dt = {-1}; // Initialize to -1;
 
     // Read JSON to find active medicines
+    printf("JSON started reading\n")
     read_json();
     //Debugging purposes
     printf("JSON finished reading\n")
