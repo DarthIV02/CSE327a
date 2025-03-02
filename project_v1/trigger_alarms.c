@@ -147,7 +147,7 @@ int main() {
 
             for(int i = 0; i < num_medicine; i++){
                 Medicine med = medicines[i];
-                struct tm temp = med.taken
+                struct tm temp = med.taken;
                 temp.tm_hour += med.repeat.tm_hour;           
                 if (temp.tm_yday == current_dt.tm_yday){
                     medicine_active[i] = 1;
