@@ -125,7 +125,7 @@ int isMedtriggered(Medicine med, struct tm current_time){
 
     // Debug
     printf("Difference: %lf\n", difftime(current, last));
-    printf("Repeat every: %d", med.repeat.tm_hour * 60 * 60 + med.repeat.tm_min * 60)
+    printf("Repeat every: %d\n", med.repeat.tm_hour * 60 * 60 + med.repeat.tm_min * 60);
 
     if (difftime(current, last) > (med.repeat.tm_hour * 60 * 60 + med.repeat.tm_min * 60)){
         //Debugging print
