@@ -7,11 +7,11 @@
 
 int main(int argc, char **argv) {
     // Start the background task in a separate thread
-    pthread_t countdown_alarm_thread;
-    pthread_create(&countdown_alarm_thread, NULL, countdown_alarms, NULL);
+    //pthread_t countdown_alarm_thread;
+    //pthread_create(&countdown_alarm_thread, NULL, countdown_alarms, NULL);
 
     // Wait for the background thread to finish
-    pthread_join(countdown_alarm_thread, NULL);
+    //pthread_join(countdown_alarm_thread, NULL);
 
     // Create GTK application
     int status = start_window(argc, argv);
