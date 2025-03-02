@@ -180,7 +180,7 @@ int main() {
 
         for(int i = 0; i < num_medicine; i++){
             // Only check active medicines every minute
-            if (medicine_active[i] = 1){
+            if (medicine_active[i] == 1){
                 medicine_triggered[i] = isMedtriggered(medicines[i], current_dt);
             }
         }
@@ -197,7 +197,7 @@ int main() {
         //Medicine has been taken
         for(int i = 0; i < num_medicine; i++){
             // Only check active medicines every minute
-            if (medicine_triggered[i] = 1){
+            if (medicine_triggered[i] == 1){
                 printf("Updated med %d\n", i);
                 medicines[i].taken = current_dt;
                 medicine_triggered[i] = 0;
