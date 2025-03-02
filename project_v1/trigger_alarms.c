@@ -131,34 +131,32 @@ int isMedtriggered(Medicine med, struct tm current_time){
 
 int main() {
     printf("Start?");
-    struct tm last_dt = {-1}; // Initialize to -1;
+    struct tm last_dt = {0}; // Initialize to -1;
 
     // Read JSON to find active medicines
-    printf("JSON started reading\n");
     read_json();
     //Debugging purposes
-    printf("JSON finished reading\n");
 
     int medicine_active[num_medicine]; // Medicine needs to be taken today
     int medicine_triggered[num_medicine]; // Medicine flag is triggered
 
     while (1) {
         //Debugging purposes
-        printf("Loop\n");
         struct tm current_dt = get_minutes_from_hwclock();
-        if (current_dt.tm_min == -1) {
+        if (current_dt.tm_min == 0) {
             sleep(10); // Retry after 10 seconds if there was an error
             continue;
         }
 
-        if (last_dt.tm_mday == -1 || current_dt.tm_mday != last_dt.tm_mday){ 
+        if (last_dt.tm_mday == 0 || current_dt.tm_mday != last_dt.tm_mday){ 
             // If its a new day -> check if medicine needs to be taken today
 
             for(int i = 0; i < num_medicine; i++){
                 Medicine med = medicines[i];
                 struct tm temp = med.taken;
-                temp.tm_hour += med.repeat.tm_hour;           
-                if (temp.tm_yday == current_dt.tm_yday){
+                temp.tm_hour += med.repeat.tm_hour;
+                temp.tm_min += med.repeat.tm_min;           
+                if (temp.tm_yday < current_dt.tm_yday){
                     medicine_active[i] = 1;
                 } else {
                     medicine_active[i] = 0;
