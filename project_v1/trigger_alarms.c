@@ -250,7 +250,7 @@ void* countdown_alarms() {
             if (medicine_active[i] == 1){
                 medicine_triggered[i] = isMedtriggered(medicines[i], current_dt);
                 if(window_changed == 0 && medicine_triggered[i] == 1){
-                    //change_alarm(1);
+                    change_alarm(1);
                     window_changed = 1;
                 }
             }
@@ -275,7 +275,10 @@ void* countdown_alarms() {
                 medicine_triggered[i] = 0;
             }
         }
-        //change_alarm(0);
+        if(window_changed == 1){
+            change_alarm(0);
+            window_changed = 0;
+        }
 
         last_dt = current_dt;
 

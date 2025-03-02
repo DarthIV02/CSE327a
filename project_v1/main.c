@@ -7,6 +7,7 @@
 
 int main(int argc, char **argv) {
     
+    // Create GTK application
     pthread_t window_thread;
     pthread_create(&window_thread, NULL, start_window, NULL);
 
@@ -17,9 +18,6 @@ int main(int argc, char **argv) {
     // Run concurrently
     pthread_join(window_thread, NULL);
     pthread_join(countdown_alarm_thread, NULL);
-
-    // Create GTK application
-    //int status = start_window(argc, argv);
 
     return 1;
 }
