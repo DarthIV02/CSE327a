@@ -3,12 +3,7 @@
 
 // Global variables
 
-GtkApplication *app;
 int status;
-
-app = gtk_application_new ("org.gtk.example", G_APPLICATION_DEFAULT_FLAGS);
-g_signal_connect (app, "activate", G_CALLBACK (activate), NULL);
-
 GtkWidget *alarm;
 
 static void update_time(gpointer user_data) { // Modify with real time clock ...
@@ -131,16 +126,26 @@ static void activate (GtkApplication* app, gpointer user_data)
 
 int start_window (int argc, char **argv)
 {
-  status = g_application_run (G_APPLICATION (app), argc, argv);
-  g_object_unref (app);
-
+  GtkApplication *app = gtk_application_new("org.gtk.example", G_APPLICATION_DEFAULT_FLAGS);
+  g_signal_connect(app, "activate", G_CALLBACK(activate), NULL);
+  
+  // Run the application
+  status = g_application_run(G_APPLICATION(app), argc, argv);
+  
+  // Clean up
+  g_object_unref(app);
+  
   return status;
 }
 
 int stop_window (int argc)
 {
-  status = g_application_quit (G_APPLICATION (app));
-  g_object_unref (app);
+  GtkApplication *app = gtk_application_new("org.gtk.example", G_APPLICATION_DEFAULT_FLAGS);
+  
+  // Quit the application
+  g_application_quit(G_APPLICATION(app));
 
-  return status;
+  g_object_unref(app);
+
+  return 0;
 }
