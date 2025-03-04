@@ -1,5 +1,6 @@
 #include "window.h"
 #include "trigger_alarms.h"
+#include "compartment.h"
 #include <gtk/gtk.h>
 #include <pthread.h>
 #include <unistd.h>

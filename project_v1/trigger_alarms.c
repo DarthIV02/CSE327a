@@ -8,6 +8,7 @@
 #include <time.h>
 #include "window.h"
 #include "trigger_alarms.h"
+#include "comparment.h"
 #include <semaphore.h>
 
 typedef struct {
@@ -281,8 +282,12 @@ void* countdown_alarms() {
         }
         printf("]\n---------------------\n");*/
 
-        /*MEDICINE FLAG IS TRIGGERED -- ACTION ADDED HERE*/
-        sleep(10);
+        /*MEDICINE FLAG IS TRIGGERED*/
+        for(int i = 0; i < num_medicine; i++){
+            if (medicine_triggered[i] == 1){
+                goToContainer(i);
+            }
+        }
 
         //Medicine has been taken
         for(int i = 0; i < num_medicine; i++){
