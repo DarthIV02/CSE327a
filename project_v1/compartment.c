@@ -2,7 +2,7 @@
 // Button changes rapidly for a button press with debouncing
 // Encoder not working properly
 
-#include "assignment1.h"
+#include "compartment.h"
 #include <stdio.h>
 #include <wiringPi.h>
 #include <softPwm.h>
