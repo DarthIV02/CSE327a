@@ -8,7 +8,7 @@
 #include <time.h>
 #include "window.h"
 #include "trigger_alarms.h"
-#include "comparment.h"
+#include "compartment.h"
 #include <semaphore.h>
 
 typedef struct {
