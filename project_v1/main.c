@@ -9,6 +9,21 @@
 #include <wiringPi.h>
 #include <softPwm.h>
 
+// Thread declaration macros
+#define thread_decl(NAME) \
+void* thread_##NAME(void* param) { \
+	SharedVariable* pV = (SharedVariable*) param; \
+	body_##NAME(pV); \
+	return NULL; }
+
+// Declare threads for each sensor/actuator function
+thread_decl(motion)
+thread_decl(container)
+
+// Thread creation and joining macros
+#define thread_create(NAME) pthread_create(&t_##NAME, NULL, thread_##NAME, &v);
+#define thread_join(NAME) pthread_join(t_##NAME, NULL);
+
 int main(int argc, char **argv) {
     
     // Initialize shared variable
