@@ -15,7 +15,6 @@ struct tm t;
 struct tm t_last_update;
 #define SEM_NAME "/sem_clock"
 int clock_correct = 0;
-int last_modify_screen = 0;
 
 static void update_time(gpointer user_data) { // Modify with real time clock ...
   GtkLabel *label = GTK_LABEL(user_data);
@@ -31,7 +30,7 @@ static void update_time(gpointer user_data) { // Modify with real time clock ...
 
 static void check_screen_change() { // Modify with real time clock ...
   time_t current = mktime(&t);
-  time_t last = mktime(&last_modify_screen);
+  time_t last = mktime(&t_last_update);
 
     // Debug
     /*printf("Last time med taken: %s\n", ctime(&last));
