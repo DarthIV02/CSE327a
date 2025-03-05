@@ -28,6 +28,18 @@ static void update_time(gpointer user_data) { // Modify with real time clock ...
   clock_correct = 1;
 }
 
+void* stop_window ()
+{
+  GtkApplication *app = gtk_application_new("org.gtk.example", G_APPLICATION_DEFAULT_FLAGS);
+
+  // Quit the application
+  g_application_quit(G_APPLICATION(app));
+
+  g_object_unref(app);
+
+  return NULL;
+}
+
 static gboolean check_screen_change() { // Modify with real time clock ...
   time_t current = mktime(&t);
   time_t last = mktime(&t_last_update);
@@ -190,14 +202,3 @@ void* start_window ()
   return NULL;
 }
 
-void* stop_window ()
-{
-  GtkApplication *app = gtk_application_new("org.gtk.example", G_APPLICATION_DEFAULT_FLAGS);
-
-  // Quit the application
-  g_application_quit(G_APPLICATION(app));
-
-  g_object_unref(app);
-
-  return NULL;
-}
