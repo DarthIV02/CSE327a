@@ -17,12 +17,12 @@ void* thread_##NAME(void* param) { \
 	return NULL; }
 
 // Declare threads for each sensor/actuator function
-thread_decl(motion)
-thread_decl(container)
+//thread_decl(motion)
+//thread_decl(container)
 
 // Thread creation and joining macros
-#define thread_create(NAME) pthread_create(&t_##NAME, NULL, thread_##NAME, &v);
-#define thread_join(NAME) pthread_join(t_##NAME, NULL);
+//#define thread_create(NAME) pthread_create(&t_##NAME, NULL, thread_##NAME, &v);
+//#define thread_join(NAME) pthread_join(t_##NAME, NULL);
 
 #define BUTTON 1
 
