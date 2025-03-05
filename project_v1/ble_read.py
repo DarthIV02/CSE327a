@@ -17,7 +17,7 @@ async def main():
         called = int(dev_value[0])
         print("Device Value: {0}".format(called))
         if called == 1:
-            CARETAKER_NUMBER, ORGINATE_NUMBER, PATIENT, HELP_TEXT, ACCOUNT_SID, AUTH_TOKEN = get_info()
+            CARETAKER_NUMBER, ORGINATE_NUMBER, PATIENT, HELP_TEXT = get_info()
             call_for_help(ACCOUNT_SID, AUTH_TOKEN, CARETAKER_NUMBER, HELP_TEXT, ORGINATE_NUMBER)
 
 
