@@ -70,24 +70,22 @@ int main(int argc, char **argv) {
     pthread_t countdown_alarm_thread;
     pthread_create(&countdown_alarm_thread, NULL, countdown_alarms, NULL);
 
-    // Run concurrently
-    //pthread_join(window_thread, NULL); //HEEEERE Window start
-    //pthread_join(countdown_alarm_thread, NULL);
-    // Wait for all threads to finish
     //thread_join(motion); // MOVEMENTTTTT
     //thread_join(container);
 
     while(1){
         if (argc >= 2){
             val = digitalRead(BUTTON);
-            if (val == LOW && window_opened == 0){ // Only do it when the window is not running
+            if ((val == LOW && window_opened == 0) || window_changed == 1){ // Only do it when the window is not running
                 pthread_create(&window_thread, NULL, start_window, NULL);
-                //pthread_join(window_thread, NULL);
                 window_opened = 1;
             }
         }
 
     }    
+
+    pthread_join(window_thread, NULL);
+    pthread_join(countdown_alarm_thread, NULL);
 
     return 1;
 }

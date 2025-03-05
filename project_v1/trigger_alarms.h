@@ -7,6 +7,7 @@ struct tm get_time_from_hwclock();
 extern sem_t high_priority_sem, low_priority_sem;
 extern pthread_mutex_t lock;
 extern int high_priority_waiting;
+extern int window_changed;
 
 
 #endif
