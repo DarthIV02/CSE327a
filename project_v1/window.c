@@ -13,7 +13,6 @@ gpointer alarm_pointer;
 struct tm t;
 #define SEM_NAME "/sem_clock"
 int clock_correct = 0;
-gpointer app_complete;
 
 static void update_time(gpointer user_data) { // Modify with real time clock ...
   GtkLabel *label = GTK_LABEL(user_data);
@@ -65,18 +64,8 @@ static void schedule_clicked(GtkButton *button, gpointer user_data) {
   system("./schedule.sh");
 }
 
-gboolean check_application_flags(gpointer app) {
-  GApplicationFlags flags = g_application_get_flags(G_APPLICATION(app));
-  g_print("Application flags: %d\n", flags);
-  return TRUE; // Keep checking
-}
-
 void change_alarm(int alarm_active){
   GtkWidget *alarm_here = GTK_WIDGET(alarm_pointer);
-  while (check_application_flags(app_complete) != 0){
-    printf("App hasnt loaded");
-    sleep(1);
-  }
   
   printf("\nChange %d alarm triggrered ------------\n ", alarm_active);
   if (alarm_active == 1){
@@ -171,7 +160,6 @@ void* start_window ()
   
   GtkApplication *app = gtk_application_new("org.gtk.example", G_APPLICATION_DEFAULT_FLAGS);
   g_signal_connect(app, "activate", G_CALLBACK(activate), NULL);
-  gpointer app_complete = app;
   
   // Run the application
   status = g_application_run(G_APPLICATION(app), NULL, NULL);
