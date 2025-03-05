@@ -55,7 +55,7 @@ int main(int argc, char **argv) {
 			  t_container;
 
     //thread_create(motion); // MOVEMENT
-    **thread_create(container);
+    //thread_create(container);
 
     // Create GTK application
     //pthread_t window_thread; //HEEEERE Window start
