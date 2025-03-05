@@ -12,7 +12,7 @@ int status;
 gpointer alarm_pointer;
 struct tm t;
 #define SEM_NAME "/sem_clock"
-int clock_correct = 0
+int clock_correct = 0;
 
 static void update_time(gpointer user_data) { // Modify with real time clock ...
   GtkLabel *label = GTK_LABEL(user_data);
