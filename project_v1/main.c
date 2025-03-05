@@ -26,6 +26,10 @@ void* thread_##NAME(void* param) { \
 
 #define BUTTON 1
 
+sem_t high_priority_sem;  // Define it only once here
+sem_t low_priority_sem;
+pthread_mutex_t lock;
+
 int main(int argc, char **argv) {
     
     // Initialize shared variable
@@ -40,10 +44,6 @@ int main(int argc, char **argv) {
 	// Initialize shared variable and sensors
 	init_shared_variable(&v);
 	init_sensors(&v);
-
-    sem_t high_priority_sem;  // Define it only once here
-    sem_t low_priority_sem;
-    pthread_mutex_t lock;
 
     // Initialize semaphores
     sem_init(&high_priority_sem, 0, 1);
