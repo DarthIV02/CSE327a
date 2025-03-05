@@ -119,7 +119,7 @@ static void activate (GtkApplication* app, gpointer user_data)
   g_timeout_add_seconds(1, (GSourceFunc) update_time, label);
 
   if (efficient){ //Every how often do you check
-    g_timeout_add_seconds(15, (GSourceFunc) check_screen_change, NULL);
+    g_timeout_add_seconds(5, (GSourceFunc) check_screen_change, NULL);
   }
 
   //Configure style and visibility of alarm
