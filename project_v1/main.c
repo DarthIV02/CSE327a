@@ -67,7 +67,8 @@ int main(int argc, char **argv) {
 
     // Create GTK application
     pthread_t window_thread; //HEEEERE Window start
-    //pthread_create(&window_thread, NULL, start_window, NULL); //HEEEERE Window start
+    pthread_create(&window_thread, NULL, start_window, NULL); //HEEEERE Window start
+    window_opened = 1;
 
     // Start the background task in a separate thread
     pthread_t countdown_alarm_thread;
@@ -84,18 +85,6 @@ int main(int argc, char **argv) {
             if ((window_opened == 0 && val == LOW) || (window_opened == 0 && window_changed == 1)){ // Only do it when the window is not running
                 pthread_create(&window_thread, NULL, start_window, NULL);
                 window_opened = 1;
-                while (1) {
-                    pthread_mutex_lock(&lock);
-                    if (high_priority_waiting == 0) { // Only run if no high-priority task is waiting
-                        pthread_mutex_unlock(&lock);
-                        break;
-                    }
-                    pthread_mutex_unlock(&lock);
-                    sleep(10); // Small wait to avoid CPU overuse
-                }
-                sem_wait(&low_priority_sem);
-                last_dt = get_time_from_hwclock();
-                sem_post(&low_priority_sem);
 
             } else if(window_opened == 1 && window_changed == 0){
                 /*sem_wait(&low_priority_sem);
@@ -110,7 +99,6 @@ int main(int argc, char **argv) {
                 
             }
         }
-
     }    
 
     //pthread_join(window_thread, NULL);
