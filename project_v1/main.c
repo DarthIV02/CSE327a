@@ -63,8 +63,8 @@ int main(int argc, char **argv) {
     //thread_create(container);
 
     // Create GTK application
-    //pthread_t window_thread; //HEEEERE Window start
-    //pthread_create(&window_thread, NULL, start_window, NULL); //HEEEERE Window start
+    pthread_t window_thread; //HEEEERE Window start
+    pthread_create(&window_thread, NULL, start_window, NULL); //HEEEERE Window start
 
     // Start the background task in a separate thread
     pthread_t countdown_alarm_thread;
@@ -91,8 +91,6 @@ int main(int argc, char **argv) {
     }*/
 
     // What if I just add the screen after
-    pthread_t window_thread;
-    pthread_create(&window_thread, NULL, start_window, NULL);
     pthread_join(window_thread, NULL);
 
     return 1;
