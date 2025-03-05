@@ -50,8 +50,8 @@ int main(int argc, char **argv) {
 	pthread_t t_motion,
 			  t_container;
 
-    thread_create(motion);
-    thread_create(container);
+    //thread_create(motion); // MOVEMENT
+    **thread_create(container);
 
     // Create GTK application
     //pthread_t window_thread; //HEEEERE Window start
@@ -65,8 +65,8 @@ int main(int argc, char **argv) {
     //pthread_join(window_thread, NULL); //HEEEERE Window start
     pthread_join(countdown_alarm_thread, NULL);
     // Wait for all threads to finish
-    thread_join(motion);
-    thread_join(container);
+    //thread_join(motion); // MOVEMENTTTTT
+    //thread_join(container);
 
     while(1){
         if (argc == 2){
