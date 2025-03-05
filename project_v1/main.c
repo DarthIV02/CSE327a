@@ -77,21 +77,16 @@ int main(int argc, char **argv) {
     //thread_join(motion); // MOVEMENTTTTT
     //thread_join(container);
 
-    /*while(1){
+    while(1){
         if (argc >= 2){
             val = digitalRead(BUTTON);
             if (val == LOW && window_opened == 0){ // Only do it when the window is not running
-                pthread_t window_thread;
-                pthread_create(&window_thread, NULL, start_window, NULL);
                 pthread_join(window_thread, NULL);
                 window_opened = 1;
             }
         }
 
-    }*/
-
-    // What if I just add the screen after
-    pthread_join(window_thread, NULL);
+    }    
 
     return 1;
 }
