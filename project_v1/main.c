@@ -89,7 +89,7 @@ int main(int argc, char **argv) {
                 sem_post(&low_priority_sem);
 
             } else if(window_opened == 1 && window_changed == 0){
-                sem_wait(&low_priority_sem);
+                /*sem_wait(&low_priority_sem);
                 struct tm now_dt = get_time_from_hwclock();
                 sem_post(&low_priority_sem);
                 time_t current = mktime(&now_dt);
@@ -97,7 +97,7 @@ int main(int argc, char **argv) {
                 if (difftime(current, last) > 15){
                     printf("Delete thread?");
                     pthread_cancel(window_thread);
-                }
+                }*/
                 
             }
         }
