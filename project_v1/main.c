@@ -32,6 +32,7 @@ sem_t low_priority_sem;
 pthread_mutex_t lock;
 int high_priority_waiting = 0;
 int window_changed = 0;
+int window_opened = 0;
 
 int main(int argc, char **argv) {
     
@@ -54,7 +55,6 @@ int main(int argc, char **argv) {
     
     pinMode(BUTTON, INPUT);
     int val = 0;
-    int window_opened = 0;
 
 	// Thread identifiers
 	pthread_t t_motion,
