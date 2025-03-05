@@ -84,9 +84,18 @@ int main(int argc, char **argv) {
             if ((window_opened == 0 && val == LOW) || (window_opened == 0 && window_changed == 1)){ // Only do it when the window is not running
                 pthread_create(&window_thread, NULL, start_window, NULL);
                 window_opened = 1;
-                /*sem_wait(&low_priority_sem);
+                while (1) {
+                    pthread_mutex_lock(&lock);
+                    if (high_priority_waiting == 0) { // Only run if no high-priority task is waiting
+                        pthread_mutex_unlock(&lock);
+                        break;
+                    }
+                    pthread_mutex_unlock(&lock);
+                    sleep(10); // Small wait to avoid CPU overuse
+                }
+                sem_wait(&low_priority_sem);
                 last_dt = get_time_from_hwclock();
-                sem_post(&low_priority_sem);*/
+                sem_post(&low_priority_sem);
 
             } else if(window_opened == 1 && window_changed == 0){
                 /*sem_wait(&low_priority_sem);
