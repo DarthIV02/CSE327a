@@ -33,8 +33,8 @@ static void check_screen_change() { // Modify with real time clock ...
   time_t last = mktime(&t_last_update);
 
     // Debug
-    /*printf("Last time med taken: %s\n", ctime(&last));
-    printf("Difference: %lf\n", difftime(current, last));*/
+    printf("Last time screen udated: %s\n", ctime(&last));
+    printf("Difference: %lf\n", difftime(current, last));
 
     if (difftime(current, last) > 15){
       stop_window();
@@ -117,7 +117,7 @@ static void activate (GtkApplication* app, gpointer user_data)
   gtk_widget_set_name(label, "clock-label");
   apply_css(label);
   g_timeout_add_seconds(1, (GSourceFunc) update_time, label);
-  printf("------------Efficient on window %d", efficient);
+
   if (efficient){
     g_timeout_add_seconds(15, (GSourceFunc) check_screen_change, NULL);
   }
