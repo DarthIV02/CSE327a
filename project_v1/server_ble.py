@@ -1,29 +1,48 @@
-import asyncio
-from bleak import BleakServer, BleakGATTCharacteristic, BleakGATTService
+import dbus
+import dbus.mainloop.glib
+import dbus.service
+from gi.repository import GLib
+from bluez_peripheral.gatt import Characteristic, Service, Advertisement, Application
+from bluez_peripheral.advert import LocalGATTManager
 
-# Define a simple GATT service
+# Define the UUIDs
 SERVICE_UUID = "12345678-1234-5678-1234-56789abcdef0"
 CHAR_UUID = "12345678-1234-5678-1234-56789abcdef1"
 
-# Define a characteristic write callback
-async def write_callback(sender, data):
-    print(f"Received data from ESP32: {data.decode()}")
+class MyCharacteristic(Characteristic):
+    def __init__(self, service):
+        super().__init__(
+            uuid=CHAR_UUID,
+            flags=["read", "write"],
+            service=service
+        )
+        self.value = b"Hello ESP32!"
 
-async def main():
-    # Create a service
-    service = BleakGATTService(SERVICE_UUID)
-    characteristic = BleakGATTCharacteristic(
-        CHAR_UUID,
-        properties=["write", "read"],
-        write_callback=write_callback,
-    )
+    def ReadValue(self, options):
+        print("ESP32 requested data")
+        return self.value
+
+    def WriteValue(self, value, options):
+        print(f"Received from ESP32: {bytes(value).decode()}")
+        self.value = bytes(value)
+
+def main():
+    dbus.mainloop.glib.DBusGMainLoop(set_as_default=True)
     
-    # Add characteristic to service
-    service.add_characteristic(characteristic)
+    # Create GATT Service
+    service = Service(SERVICE_UUID, primary=True)
+    char = MyCharacteristic(service)
+    service.add_characteristic(char)
 
-    # Start the BLE server
-    async with BleakServer([service]) as server:
-        print("BLE Server Running. Waiting for ESP32...")
-        await asyncio.Future()  # Keep the server running
+    # Start Bluetooth Advertisement
+    app = Application()
+    app.add_service(service)
+    
+    manager = LocalGATTManager(app)
+    manager.run()
 
-asyncio.run(main())
+    print("BLE Server Running...")
+    GLib.MainLoop().run()
+
+if __name__ == "__main__":
+    main()
