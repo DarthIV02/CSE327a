@@ -170,7 +170,7 @@ void* start_window ()
   
   GtkApplication *app = gtk_application_new("org.gtk.example", G_APPLICATION_DEFAULT_FLAGS);
   g_signal_connect(app, "activate", G_CALLBACK(activate), NULL);
-  app_complete = app;
+  gpointer app_complete = app;
   
   // Run the application
   status = g_application_run(G_APPLICATION(app), NULL, NULL);
