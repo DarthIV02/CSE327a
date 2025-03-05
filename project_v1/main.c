@@ -29,6 +29,7 @@ void* thread_##NAME(void* param) { \
 sem_t high_priority_sem;  // Define it only once here
 sem_t low_priority_sem;
 pthread_mutex_t lock;
+int high_priority_waiting = 0;
 
 int main(int argc, char **argv) {
     
@@ -48,7 +49,6 @@ int main(int argc, char **argv) {
     // Initialize semaphores
     sem_init(&high_priority_sem, 0, 1);
     sem_init(&low_priority_sem, 0, 1);
-    high_priority_waiting = 0;
     
     pinMode(BUTTON, INPUT);
     int val = 0;
