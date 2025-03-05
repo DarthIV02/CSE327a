@@ -49,7 +49,7 @@ static gboolean check_screen_change() { // Modify with real time clock ...
   printf("Difference: %lf\n", difftime(current, last));
 
   if (difftime(current, last) > 15){ //How much buffer before it dies
-    g_idle_add((GSourceFunc) stop_window, NULL);
+    g_main_context_invoke(NULL, (GSourceFunc) stop_window, NULL);
   }
   return TRUE; // Ensure it keeps running
 }
