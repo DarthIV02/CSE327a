@@ -1,5 +1,6 @@
 #ifndef TRIGGER_H
 #define TRIGGER_H
+#include <semaphore.h>  // Add this to fix the error
 
 void* countdown_alarms();
 struct tm get_time_from_hwclock();
