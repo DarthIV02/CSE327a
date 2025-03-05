@@ -9,7 +9,7 @@
 #include "window.h"
 #include "trigger_alarms.h"
 #include "compartment.h"
-#include "main.h"
+#include "get_hw.h"
 #include <semaphore.h>
 #include <pthread.h>
 
