@@ -28,7 +28,7 @@ static void update_time(gpointer user_data) { // Modify with real time clock ...
   clock_correct = 1;
 }
 
-static void check_screen_change() { // Modify with real time clock ...
+static gboolean check_screen_change() { // Modify with real time clock ...
   time_t current = mktime(&t);
   time_t last = mktime(&t_last_update);
 
@@ -39,6 +39,7 @@ static void check_screen_change() { // Modify with real time clock ...
     if (difftime(current, last) > 15){ //How much buffer before it dies
       stop_window();
     }
+    return TRUE; // Ensure it keeps running
 }
 
 // Function to apply CSS
