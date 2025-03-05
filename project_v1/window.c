@@ -12,6 +12,7 @@ int status;
 gpointer alarm_pointer;
 struct tm t;
 #define SEM_NAME "/sem_clock"
+int clock_correct = 0
 
 static void update_time(gpointer user_data) { // Modify with real time clock ...
   GtkLabel *label = GTK_LABEL(user_data);
@@ -22,6 +23,7 @@ static void update_time(gpointer user_data) { // Modify with real time clock ...
   strftime(time_str, sizeof(time_str), "%H:%M:%S", &t);
 
   gtk_label_set_text(label, time_str);
+  clock_correct = 1;
 }
 
 // Function to apply CSS
@@ -64,8 +66,8 @@ static void schedule_clicked(GtkButton *button, gpointer user_data) {
 
 void change_alarm(int alarm_active){
   GtkWidget *alarm_here = GTK_WIDGET(alarm_pointer);
-  while (window_opened == 0){
-
+  while (clock_correct == 0){
+    sleep(100)
   }
   if (alarm_active == 1){
     gtk_widget_set_name(alarm_here, "alarm-label");
@@ -159,8 +161,6 @@ void* start_window ()
   
   GtkApplication *app = gtk_application_new("org.gtk.example", G_APPLICATION_DEFAULT_FLAGS);
   g_signal_connect(app, "activate", G_CALLBACK(activate), NULL);
-
-  window_opened = 1;
   
   // Run the application
   status = g_application_run(G_APPLICATION(app), NULL, NULL);
