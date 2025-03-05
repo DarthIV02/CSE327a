@@ -24,6 +24,8 @@ thread_decl(container)
 #define thread_create(NAME) pthread_create(&t_##NAME, NULL, thread_##NAME, &v);
 #define thread_join(NAME) pthread_join(t_##NAME, NULL);
 
+#define BUTTON 1
+
 int main(int argc, char **argv) {
     
     // Initialize shared variable
@@ -39,6 +41,11 @@ int main(int argc, char **argv) {
 	init_shared_variable(&v);
 	init_sensors(&v);
 
+    if (argc == 2){
+        pinMode(BUTTON, INPUT);
+        int val = 0;
+    }
+
 	// Thread identifiers
 	pthread_t t_motion,
 			  t_container;
@@ -47,19 +54,31 @@ int main(int argc, char **argv) {
     thread_create(container);
 
     // Create GTK application
-    pthread_t window_thread;
-    pthread_create(&window_thread, NULL, start_window, NULL);
+    //pthread_t window_thread; //HEEEERE Window start
+    //pthread_create(&window_thread, NULL, start_window, NULL); //HEEEERE Window start
 
     // Start the background task in a separate thread
     pthread_t countdown_alarm_thread;
     pthread_create(&countdown_alarm_thread, NULL, countdown_alarms, NULL);
 
     // Run concurrently
-    pthread_join(window_thread, NULL);
+    //pthread_join(window_thread, NULL); //HEEEERE Window start
     pthread_join(countdown_alarm_thread, NULL);
     // Wait for all threads to finish
     thread_join(motion);
     thread_join(container);
+
+    while(1){
+        if (argc == 2){
+            val = digitalRead(BUTTON);
+            if (val == LOW){ // Only do it when the window is not running
+                pthread_t window_thread;
+                pthread_create(&window_thread, NULL, start_window, NULL);
+                pthread_join(window_thread, NULL);
+            }
+        }
+
+    }
 
     return 1;
 }

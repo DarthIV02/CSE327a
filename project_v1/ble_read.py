@@ -7,8 +7,8 @@ from calls import *
 
 DEVICE = ""
 CHARACTERISTIC = "19b10001-e8f2-537e-4f6c-d104768a1214"
-ACCOUNT_SID = None
-AUTH_TOKEN = None
+ACCOUNT_SID = None # Modify here
+AUTH_TOKEN = None # Modify here
 called = 0
 
 async def main():
