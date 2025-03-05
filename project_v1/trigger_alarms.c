@@ -216,7 +216,6 @@ void* countdown_alarms() {
 
     int medicine_active[num_medicine]; // Medicine needs to be taken today
     int medicine_triggered[num_medicine]; // Medicine flag is triggered
-    window_changed = 0;
     int sem_done = 0;
 
     while (1) {
@@ -312,7 +311,6 @@ void* countdown_alarms() {
         if(window_changed == 1){
             change_alarm(0);
             window_changed = 0;
-            
         }
 
         last_dt = current_dt;

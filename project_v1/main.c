@@ -31,6 +31,7 @@ sem_t high_priority_sem;  // Define it only once here
 sem_t low_priority_sem;
 pthread_mutex_t lock;
 int high_priority_waiting = 0;
+int window_changed = 0;
 
 int main(int argc, char **argv) {
     
