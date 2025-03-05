@@ -8,6 +8,8 @@ from calls import *
 DEVICE = ""
 CHARACTERISTIC = "19b10001-e8f2-537e-4f6c-d104768a1214"
 called = 0
+ACCOUNT_SID = None
+AUTH_TOKEN = None
 
 async def main():
     async with BleakClient(DEVICE) as client:
