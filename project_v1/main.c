@@ -41,10 +41,10 @@ int main(int argc, char **argv) {
 	init_shared_variable(&v);
 	init_sensors(&v);
 
-    if (argc == 2){
-        pinMode(BUTTON, INPUT);
-        int val = 0;
-    }
+    
+    pinMode(BUTTON, INPUT);
+    int val = 0;
+    int window_opened = 0;
 
 	// Thread identifiers
 	pthread_t t_motion,
@@ -71,10 +71,11 @@ int main(int argc, char **argv) {
     while(1){
         if (argc == 2){
             val = digitalRead(BUTTON);
-            if (val == LOW){ // Only do it when the window is not running
+            if (val == LOW && window_opened == 0){ // Only do it when the window is not running
                 pthread_t window_thread;
                 pthread_create(&window_thread, NULL, start_window, NULL);
                 pthread_join(window_thread, NULL);
+                window_opened = 1;
             }
         }
 
