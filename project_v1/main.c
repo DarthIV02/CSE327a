@@ -80,11 +80,10 @@ int main(int argc, char **argv) {
     while(1){
         if (argc >= 2){
             val = digitalRead(BUTTON);
-            printf("Read value: %d", val);
-            /*if (val == LOW && window_opened == 0){ // Only do it when the window is not running
+            if (val == LOW && window_opened == 0){ // Only do it when the window is not running
                 pthread_join(window_thread, NULL);
                 window_opened = 1;
-            }*/
+            }
         }
 
     }    
