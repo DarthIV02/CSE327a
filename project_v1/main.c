@@ -74,18 +74,34 @@ int main(int argc, char **argv) {
     //thread_join(motion); // MOVEMENTTTTT
     //thread_join(container);
 
+    struct tm last_dt;
+
     while(1){
         if (argc >= 2){
             val = digitalRead(BUTTON);
             if ((window_opened == 0 && val == LOW) || (window_opened == 0 && window_changed == 1)){ // Only do it when the window is not running
                 pthread_create(&window_thread, NULL, start_window, NULL);
                 window_opened = 1;
+                sem_wait(&low_priority_sem);
+                last_dt = get_time_from_hwclock();
+                sem_post(&low_priority_sem);
+
+            } else if(window_opened == 1 && window_changed == 0){
+                sem_wait(&low_priority_sem);
+                struct tm now_dt = get_time_from_hwclock();
+                sem_post(&low_priority_sem);
+                time_t current = mktime(&now_dt);
+                time_t last = mktime(&last_dt);
+                if (difftime(current, last) > 30){
+                    pthread_cancel(window_thread);
+                }
+                
             }
         }
 
     }    
 
-    pthread_join(window_thread, NULL);
+    //pthread_join(window_thread, NULL);
     pthread_join(countdown_alarm_thread, NULL);
 
     return 1;
