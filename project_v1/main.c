@@ -1,6 +1,7 @@
 #include "window.h"
 #include "trigger_alarms.h"
 #include "compartment.h"
+#include "main.h"
 #include <gtk/gtk.h>
 #include <pthread.h>
 #include <unistd.h>
@@ -33,6 +34,34 @@ pthread_mutex_t lock;
 int high_priority_waiting = 0;
 int window_changed = 0;
 int window_opened = 0;
+
+struct tm get_time_from_hwclock() {
+    char buffer[128];
+    FILE *fp;
+    struct tm dt = {0}; // Initialize to zero
+
+    // Execute the hwclock command
+    fp = popen("sudo hwclock -r", "r");
+    if (fp == NULL) {
+        perror("Failed to run hwclock");
+        return dt;
+    }
+
+    // Read the output
+    if (fgets(buffer, sizeof(buffer), fp) == NULL) {
+        perror("Failed to read hwclock output");
+        pclose(fp);
+        return dt;
+    }
+
+    pclose(fp);
+
+    // Extract the minute from the time string
+    if (strptime(buffer, "%Y-%m-%d %H:%M:%S", &dt) == NULL) {
+        printf("Failed to parse date string\n");
+    }
+    return dt;
+}
 
 int main(int argc, char **argv) {
     

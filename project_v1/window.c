@@ -2,6 +2,7 @@
 #include <time.h>
 #include "window.h"
 #include "trigger_alarms.h"
+#include "main.h"
 #include <semaphore.h>
 #include <fcntl.h>
 #include <pthread.h>
