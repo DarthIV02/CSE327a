@@ -17,3 +17,4 @@ twilio==9.4.6
 urllib3==2.3.0
 wiringpi==2.60.1
 yarl==1.18.3
+bleak
