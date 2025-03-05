@@ -10,6 +10,7 @@
 #include <wiringPi.h>
 #include <softPwm.h>
 #include <pthread.h>
+#include <time.h>
 
 // Thread declaration macros
 #define thread_decl(NAME) \
