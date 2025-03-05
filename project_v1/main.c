@@ -8,6 +8,7 @@
 #include <semaphore.h>
 #include <wiringPi.h>
 #include <softPwm.h>
+#include <pthread.h>
 
 // Thread declaration macros
 #define thread_decl(NAME) \

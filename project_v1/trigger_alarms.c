@@ -10,6 +10,7 @@
 #include "trigger_alarms.h"
 #include "compartment.h"
 #include <semaphore.h>
+#include <pthread.h>
 
 typedef struct {
     char name[45];

@@ -4,6 +4,7 @@
 #include "trigger_alarms.h"
 #include <semaphore.h>
 #include <fcntl.h>
+#include <pthread.h>
 
 // Global variables
 
