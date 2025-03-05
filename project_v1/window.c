@@ -36,7 +36,7 @@ static void check_screen_change() { // Modify with real time clock ...
     printf("Last time screen udated: %s\n", ctime(&last));
     printf("Difference: %lf\n", difftime(current, last));
 
-    if (difftime(current, last) > 15){
+    if (difftime(current, last) > 15){ //How much buffer before it dies
       stop_window();
     }
 }
@@ -118,7 +118,7 @@ static void activate (GtkApplication* app, gpointer user_data)
   apply_css(label);
   g_timeout_add_seconds(1, (GSourceFunc) update_time, label);
 
-  if (efficient){
+  if (efficient){ //Every how often do you check
     g_timeout_add_seconds(15, (GSourceFunc) check_screen_change, NULL);
   }
 
