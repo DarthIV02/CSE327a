@@ -12,8 +12,10 @@
 int status;
 gpointer alarm_pointer;
 struct tm t;
+struct tm t_last_update;
 #define SEM_NAME "/sem_clock"
 int clock_correct = 0;
+int last_modify_screen = 0;
 
 static void update_time(gpointer user_data) { // Modify with real time clock ...
   GtkLabel *label = GTK_LABEL(user_data);
@@ -25,6 +27,19 @@ static void update_time(gpointer user_data) { // Modify with real time clock ...
 
   gtk_label_set_text(label, time_str);
   clock_correct = 1;
+}
+
+static void check_screen_change() { // Modify with real time clock ...
+  time_t current = mktime(&t);
+  time_t last = mktime(&last_modify_screen);
+
+    // Debug
+    /*printf("Last time med taken: %s\n", ctime(&last));
+    printf("Difference: %lf\n", difftime(current, last));*/
+
+    if (difftime(current, last) > 15){
+      stop_window();
+    }
 }
 
 // Function to apply CSS
@@ -74,6 +89,7 @@ void change_alarm(int alarm_active){
     gtk_widget_set_name(alarm_here, "alarm-label-invisible");
     apply_css(alarm_here);
   }
+  t_last_update = t;
 }
 
 static void activate (GtkApplication* app, gpointer user_data)
@@ -156,6 +172,7 @@ void* start_window ()
   pthread_mutex_lock(&lock);
   high_priority_waiting--; // Indicate that high-priority is done
   pthread_mutex_unlock(&lock);
+  t_last_update = t;
   
   GtkApplication *app = gtk_application_new("org.gtk.example", G_APPLICATION_DEFAULT_FLAGS);
   g_signal_connect(app, "activate", G_CALLBACK(activate), NULL);
