@@ -44,14 +44,14 @@ static gboolean check_screen_change() { // Modify with real time clock ...
   time_t current = mktime(&t);
   time_t last = mktime(&t_last_update);
 
-    // Debug
-    printf("Last time screen udated: %s\n", ctime(&last));
-    printf("Difference: %lf\n", difftime(current, last));
+  // Debug
+  printf("Last time screen udated: %s\n", ctime(&last));
+  printf("Difference: %lf\n", difftime(current, last));
 
-    if (difftime(current, last) > 15){ //How much buffer before it dies
-      stop_window();
-    }
-    return TRUE; // Ensure it keeps running
+  if (difftime(current, last) > 15){ //How much buffer before it dies
+    g_idle_add((GSourceFunc) stop_window, NULL);
+  }
+  return TRUE; // Ensure it keeps running
 }
 
 // Function to apply CSS
