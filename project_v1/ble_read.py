@@ -11,9 +11,10 @@ ACCOUNT_SID = None
 AUTH_TOKEN = None
 called = 0
 
-def main(called):
-    with BleakClient(DEVICE) as client:
-        dev_value = client.read_gatt_char(CHARACTERISTIC)
+async def main():
+    global called
+    async with BleakClient(DEVICE) as client:
+        dev_value = await client.read_gatt_char(CHARACTERISTIC)
         input = int(dev_value[0])
         print("Device Value: {0}".format(input))
         if input == 1 and called == 0:
@@ -30,4 +31,4 @@ if len(sys.argv) < 2:
 DEVICE = sys.argv[1]
 
 while True:
-    main(called)
+    asyncio.run(main())
