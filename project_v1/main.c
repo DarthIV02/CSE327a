@@ -44,8 +44,8 @@ int main(int argc, char **argv) {
 	}
 
 	// Initialize shared variable and sensors
-	init_shared_variable(&v);
-	init_sensors(&v);
+	//init_shared_variable(&v);
+	//init_sensors(&v);
 
     // Initialize semaphores
     sem_init(&high_priority_sem, 0, 1);
@@ -63,15 +63,15 @@ int main(int argc, char **argv) {
     //thread_create(container);
 
     // Create GTK application
-    pthread_t window_thread; //HEEEERE Window start
-    pthread_create(&window_thread, NULL, start_window, NULL); //HEEEERE Window start
+    //pthread_t window_thread; //HEEEERE Window start
+    //pthread_create(&window_thread, NULL, start_window, NULL); //HEEEERE Window start
 
     // Start the background task in a separate thread
     pthread_t countdown_alarm_thread;
     pthread_create(&countdown_alarm_thread, NULL, countdown_alarms, NULL);
 
     // Run concurrently
-    pthread_join(window_thread, NULL); //HEEEERE Window start
+    //pthread_join(window_thread, NULL); //HEEEERE Window start
     pthread_join(countdown_alarm_thread, NULL);
     // Wait for all threads to finish
     //thread_join(motion); // MOVEMENTTTTT
