@@ -35,11 +35,15 @@ pthread_mutex_t lock;
 int high_priority_waiting = 0;
 int window_changed = 0;
 int window_opened = 0;
+int efficient = 0;
 
 int main(int argc, char **argv) {
     
     // Initialize shared variable
 	SharedVariable v;
+    if (argc >= 2){
+        efficient = 1;
+    }
 
 	// Initialize WiringPi library
 	if (wiringPiSetup() == -1) {
@@ -80,7 +84,7 @@ int main(int argc, char **argv) {
     struct tm last_dt;
 
     while(1){
-        if (argc >= 2){
+        if (efficient){
             val = digitalRead(BUTTON);
             if ((window_opened == 0 && val == LOW) || (window_opened == 0 && window_changed == 1)){ // Only do it when the window is not running
                 pthread_create(&window_thread, NULL, start_window, NULL);

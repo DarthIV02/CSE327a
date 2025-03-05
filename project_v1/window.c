@@ -117,6 +117,9 @@ static void activate (GtkApplication* app, gpointer user_data)
   gtk_widget_set_name(label, "clock-label");
   apply_css(label);
   g_timeout_add_seconds(1, (GSourceFunc) update_time, label);
+  if (efficient){
+    g_timeout_add_seconds(15, (GSourceFunc) check_screen_change, NULL);
+  }
 
   //Configure style and visibility of alarm
   gtk_widget_set_name(alarm, "alarm-label-invisible");
