@@ -41,6 +41,10 @@ int main(int argc, char **argv) {
 	init_shared_variable(&v);
 	init_sensors(&v);
 
+    // Initialize semaphores
+    sem_init(&high_priority_sem, 0, 1);
+    sem_init(&low_priority_sem, 0, 1);
+    high_priority_waiting = 0;
     
     pinMode(BUTTON, INPUT);
     int val = 0;

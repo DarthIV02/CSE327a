@@ -134,17 +134,24 @@ static void activate (GtkApplication* app, gpointer user_data)
 
 void* start_window ()
 {
-  sem_t *sem = sem_open(SEM_NAME, O_CREAT, 0666, 0);
+  /*sem_t *sem = sem_open(SEM_NAME, O_CREAT, 0666, 0);
   if (sem == SEM_FAILED) {
       perror("sem_open");
       exit(EXIT_FAILURE);
-  }
+  }*/
+  pthread_mutex_lock(&lock);
+  high_priority_waiting++; // Indicate that high-priority is waiting
+  pthread_mutex_unlock(&lock);
+
+  sem_wait(&high_priority_sem);
     
   t = get_time_from_hwclock();
   
-  sem_post(sem); // Notify that data is ready
+  sem_post(&high_priority_sem); // Notify that data is ready
 
-  sem_close(sem);
+  pthread_mutex_lock(&lock);
+  high_priority_waiting--; // Indicate that high-priority is done
+  pthread_mutex_unlock(&lock);
   
   GtkApplication *app = gtk_application_new("org.gtk.example", G_APPLICATION_DEFAULT_FLAGS);
   g_signal_connect(app, "activate", G_CALLBACK(activate), NULL);

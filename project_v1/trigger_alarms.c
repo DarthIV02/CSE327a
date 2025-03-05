@@ -220,19 +220,28 @@ void* countdown_alarms() {
 
     while (1) {
         //Debugging purposes
-        if (sem_done == 0){
-            sem_t *sem = sem_open(SEM_NAME, 0);
-            if (sem == SEM_FAILED) {
-                perror("sem_open");
-                exit(EXIT_FAILURE);
-            }
+        
+        /*sem_t *sem = sem_open(SEM_NAME, 0);
+        if (sem == SEM_FAILED) {
+            perror("sem_open");
+            exit(EXIT_FAILURE);
+        }*/
 
-            sem_wait(sem); // Wait for Script A to signal
-            sem_unlink(SEM_NAME);
-            sem_done = 1;
+        while (1) {
+            pthread_mutex_lock(&lock);
+            if (high_priority_waiting == 0) { // Only run if no high-priority task is waiting
+                pthread_mutex_unlock(&lock);
+                break;
+            }
+            pthread_mutex_unlock(&lock);
+            usleep(10000); // Small wait to avoid CPU overuse
         }
 
+        sem_wait(&low_priority_sem); // Wait for Script A to signal        
+
         struct tm current_dt = get_time_from_hwclock();
+
+        sem_post(&low_priority_sem);
 
         if (current_dt.tm_min == 0) {
             sleep(10); // Retry after 10 seconds if there was an error
