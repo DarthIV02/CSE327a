@@ -69,7 +69,7 @@ void change_alarm(int alarm_active){
   while (clock_correct == 0){
     sleep(1);
   }
-  printf("\nChange alarm triggrered ------------\n ");
+  printf("\nChange %d alarm triggrered ------------\n ", alarm_active);
   if (alarm_active == 1){
     gtk_widget_set_name(alarm_here, "alarm-label");
     apply_css(alarm_here);
