@@ -234,7 +234,7 @@ void* countdown_alarms() {
                 break;
             }
             pthread_mutex_unlock(&lock);
-            usleep(10000); // Small wait to avoid CPU overuse
+            sleep(10); // Small wait to avoid CPU overuse
         }
 
         sem_wait(&low_priority_sem); // Wait for Script A to signal        
