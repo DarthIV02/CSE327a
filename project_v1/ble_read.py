@@ -3,14 +3,21 @@
 import sys
 import asyncio
 from bleak import BleakClient
+from calls import *
 
 DEVICE = ""
 CHARACTERISTIC = "19b10001-e8f2-537e-4f6c-d104768a1214"
+called = 0
 
 async def main():
     async with BleakClient(DEVICE) as client:
         dev_value = await client.read_gatt_char(CHARACTERISTIC)
-        print("Device Value: {0}".format(int(dev_value[0])))
+        called = int(dev_value[0])
+        print("Device Value: {0}".format(called))
+        if called == 1:
+            CARETAKER_NUMBER, ORGINATE_NUMBER, PATIENT, HELP_TEXT, ACCOUNT_SID, AUTH_TOKEN = get_info()
+            call_for_help(CARETAKER_NUMBER, ORGINATE_NUMBER, PATIENT, HELP_TEXT, ACCOUNT_SID, AUTH_TOKEN)
+
 
 if len(sys.argv) < 2:
     print("Usage: {} <addr>".format(sys.argv[0]))
