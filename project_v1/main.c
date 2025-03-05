@@ -72,7 +72,7 @@ int main(int argc, char **argv) {
 
     // Run concurrently
     //pthread_join(window_thread, NULL); //HEEEERE Window start
-    pthread_join(countdown_alarm_thread, NULL);
+    //pthread_join(countdown_alarm_thread, NULL);
     // Wait for all threads to finish
     //thread_join(motion); // MOVEMENTTTTT
     //thread_join(container);
