@@ -65,7 +65,7 @@ static void schedule_clicked(GtkButton *button, gpointer user_data) {
 void change_alarm(int alarm_active){
   GtkWidget *alarm_here = GTK_WIDGET(alarm_pointer);
   while (window_opened == 0){
-    
+
   }
   if (alarm_active == 1){
     gtk_widget_set_name(alarm_here, "alarm-label");
@@ -159,6 +159,8 @@ void* start_window ()
   
   GtkApplication *app = gtk_application_new("org.gtk.example", G_APPLICATION_DEFAULT_FLAGS);
   g_signal_connect(app, "activate", G_CALLBACK(activate), NULL);
+
+  window_opened = 1;
   
   // Run the application
   status = g_application_run(G_APPLICATION(app), NULL, NULL);
