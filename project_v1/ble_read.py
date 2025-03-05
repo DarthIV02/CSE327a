@@ -18,4 +18,5 @@ if len(sys.argv) < 2:
 
 DEVICE = sys.argv[1]
 
-asyncio.run(main())
+while True:
+    asyncio.run(main())
