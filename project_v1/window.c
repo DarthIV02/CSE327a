@@ -67,7 +67,7 @@ static void schedule_clicked(GtkButton *button, gpointer user_data) {
 void change_alarm(int alarm_active){
   GtkWidget *alarm_here = GTK_WIDGET(alarm_pointer);
   while (clock_correct == 0){
-    sleep(100)
+    sleep(100);
   }
   if (alarm_active == 1){
     gtk_widget_set_name(alarm_here, "alarm-label");
