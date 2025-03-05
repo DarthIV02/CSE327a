@@ -92,7 +92,8 @@ int main(int argc, char **argv) {
                 sem_post(&low_priority_sem);
                 time_t current = mktime(&now_dt);
                 time_t last = mktime(&last_dt);
-                if (difftime(current, last) > 10){
+                if (difftime(current, last) > 15){
+                    printf("Delete thread?");
                     pthread_cancel(window_thread);
                 }
                 
