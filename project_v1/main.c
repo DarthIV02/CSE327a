@@ -76,7 +76,7 @@ int main(int argc, char **argv) {
     while(1){
         if (argc >= 2){
             val = digitalRead(BUTTON);
-            if ((val == LOW && window_opened == 0) || window_changed == 1){ // Only do it when the window is not running
+            if (window_opened == 0 || (window_changed == 1 || val == LOW)){ // Only do it when the window is not running
                 pthread_create(&window_thread, NULL, start_window, NULL);
                 window_opened = 1;
             }
