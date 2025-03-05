@@ -72,7 +72,7 @@ gboolean check_application_flags(gpointer app) {
 
 void change_alarm(int alarm_active){
   GtkWidget *alarm_here = GTK_WIDGET(alarm_pointer);
-  while (check_application_flags(app) != 0){
+  while (check_application_flags(app_complete) != 0){
     printf("App hasnt loaded");
     sleep(1);
   }
@@ -170,7 +170,7 @@ void* start_window ()
   
   GtkApplication *app = gtk_application_new("org.gtk.example", G_APPLICATION_DEFAULT_FLAGS);
   g_signal_connect(app, "activate", G_CALLBACK(activate), NULL);
-  app_complete = &app;
+  app_complete = app;
   
   // Run the application
   status = g_application_run(G_APPLICATION(app), NULL, NULL);
