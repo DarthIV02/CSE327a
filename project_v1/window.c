@@ -66,9 +66,7 @@ static void schedule_clicked(GtkButton *button, gpointer user_data) {
 
 void change_alarm(int alarm_active){
   GtkWidget *alarm_here = GTK_WIDGET(alarm_pointer);
-  while (clock_correct == 0){
-    sleep(1);
-  }
+  
   printf("\nChange %d alarm triggrered ------------\n ", alarm_active);
   if (alarm_active == 1){
     gtk_widget_set_name(alarm_here, "alarm-label");
@@ -77,6 +75,12 @@ void change_alarm(int alarm_active){
     gtk_widget_set_name(alarm_here, "alarm-label-invisible");
     apply_css(alarm_here);
   }
+}
+
+gboolean check_application_flags(gpointer app) {
+  GApplicationFlags flags = g_application_get_flags(G_APPLICATION(app));
+  g_print("Application flags: %d\n", flags);
+  return TRUE; // Keep checking
 }
 
 static void activate (GtkApplication* app, gpointer user_data)
@@ -137,6 +141,8 @@ static void activate (GtkApplication* app, gpointer user_data)
   g_signal_connect(schedule_button, "clicked", G_CALLBACK (schedule_clicked), window);
 
   gtk_widget_show_all(window);
+
+  g_timeout_add_seconds(5, check_application_flags, app);
 }
 
 void* start_window ()
