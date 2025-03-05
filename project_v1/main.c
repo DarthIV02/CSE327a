@@ -1,3 +1,5 @@
+#define _XOPEN_SOURCE 700  // Required for strptime()
+
 #include "window.h"
 #include "trigger_alarms.h"
 #include "compartment.h"
