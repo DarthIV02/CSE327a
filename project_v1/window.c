@@ -55,7 +55,7 @@ static gboolean check_screen_change(gpointer user_data) { // Modify with real ti
     GtkWidget *window = GTK_WIDGET(user_data);
     gtk_window_close(GTK_WINDOW(window)); // Close the window
     //g_application_quit(G_APPLICATION(app)); // Quit the application
-    gtk_main_quit();
+    g_idle_add((GSourceFunc) gtk_main_quit, NULL);
     pthread_exit("Visualization closed finished");
   }
   return TRUE; // Ensure it keeps running
