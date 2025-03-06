@@ -5,3 +5,8 @@ sudo apt install libcjson1 libcjson-dev
 sudo apt install -y bluetooth bluez python3-pip
 sudo apt install -y bluetooth bluez libbluetooth-dev
 sudo apt install -y python3-bleak
+
+sudo apt-get install libraspberrypi-bin
+sudo apt update && sudo apt upgrade
+sudo apt install -y edid-decode
+sudo apt install ddcutil
