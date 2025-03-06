@@ -20,6 +20,7 @@ int clock_correct = 0;
 volatile int stop_flag = 0;
 static guint time_id;  // ID of the timeout source
 static guint check_change_id;  // ID of the timeout source
+static volatile int quit_requested = 0;
 
 static void update_time(gpointer user_data) { // Modify with real time clock ...
   GtkLabel *label = GTK_LABEL(user_data);
@@ -59,7 +60,10 @@ static gboolean check_screen_change(gpointer user_data) {
     gtk_window_close(GTK_WINDOW(window)); // Close the window
 
     // Post the quit signal to the main thread using g_idle_add
-    g_idle_add((GSourceFunc)gtk_main_quit, NULL);
+    if (!quit_requested) {
+      quit_requested = 1;
+      g_idle_add((GSourceFunc)gtk_main_quit, NULL);
+    }
 
     // End thread processing by signaling exit
     return FALSE;  // Return FALSE to stop further checking
