@@ -36,29 +36,36 @@ static void update_time(gpointer user_data) { // Modify with real time clock ...
 void stop_window(GtkApplication *app) {
   // Check if the stop flag is set to stop the GTK window
   if (stop_flag) {
-    g_application_quit(G_APPLICATION(app));
+    g_application_quit(G_APPLICATION(app));  // Quit the application
   }
 }
 
-static gboolean check_screen_change(gpointer user_data) { // Modify with real time clock ...
+static gboolean check_screen_change(gpointer user_data) {
   time_t current = mktime(&t);
   time_t last = mktime(&t_last_update);
 
-  // Debug
-  printf("Last time screen udated: %s\n", ctime(&last));
+  // Debugging output
+  printf("Last time screen updated: %s\n", ctime(&last));
   printf("Difference: %lf\n", difftime(current, last));
 
-  if (difftime(current, last) > 15){ //How much buffer before it dies
+  if (difftime(current, last) > 15) { // How much buffer before it dies
     stop_flag = 1;  // Set the stop flag to true
+
+    // Remove the timeouts
     g_source_remove(time_id);
     g_source_remove(check_change_id);
+
     GtkWidget *window = GTK_WIDGET(user_data);
     gtk_window_close(GTK_WINDOW(window)); // Close the window
-    //g_application_quit(G_APPLICATION(app)); // Quit the application
-    g_idle_add((GSourceFunc) gtk_main_quit, NULL);
-    pthread_exit("Visualization closed finished");
+
+    // Post the quit signal to the main thread using g_idle_add
+    g_idle_add((GSourceFunc)gtk_main_quit, NULL);
+
+    // End thread processing by signaling exit
+    return FALSE;  // Return FALSE to stop further checking
   }
-  return TRUE; // Ensure it keeps running
+
+  return TRUE; // Continue checking every 5 seconds
 }
 
 // Function to apply CSS
