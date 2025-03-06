@@ -49,7 +49,9 @@ static gboolean check_screen_change(gpointer user_data) { // Modify with real ti
   if (difftime(current, last) > 15){ //How much buffer before it dies
     stop_flag = 1;  // Set the stop flag to true
 
-    gtk_window_close(GTK_WINDOW(window));
+    GtkWidget *window = GTK_WIDGET(user_data);
+    gtk_window_close(GTK_WINDOW(window)); // Close the window
+    g_application_quit(G_APPLICATION(app)); // Quit the application
     pthread_exit("Visualization closed finished");
   }
   return TRUE; // Ensure it keeps running
@@ -134,8 +136,6 @@ static void activate (GtkApplication* app, gpointer user_data)
 
   if (efficient){ //Every how often do you check
     g_timeout_add_seconds(5, (GSourceFunc) check_screen_change, window);
-
-
   }
 
   //Configure style and visibility of alarm
