@@ -56,21 +56,23 @@ int main(int argc, char **argv) {
 
     pthread_t window_thread; // Thread for GTK window
     pthread_create(&window_thread, NULL, start_window, NULL);  // Create GTK window in a separate thread
+    window_opened = 1;
 
     pthread_t countdown_alarm_thread;
     pthread_create(&countdown_alarm_thread, NULL, countdown_alarms, NULL);  // Assuming countdown_alarms exists
 
     struct tm last_dt;
 
-    while (1) {
-        if (efficient) {
-            val = digitalRead(BUTTON);
-            if (val == LOW || window_changed == 1) {
-                // Ensure the window is opened only once
-                pthread_create(&window_thread, NULL, start_window, NULL);
-                pthread_join(window_thread, NULL);
-            }
+    pthread_join(window_thread, NULL);
+
+    while (efficient) {
+        val = digitalRead(BUTTON);
+        if (val == LOW || window_changed == 1) {
+            // Ensure the window is opened only once
+            pthread_create(&window_thread, NULL, start_window, NULL);
+            pthread_join(window_thread, NULL);
         }
+        
     }
 
     pthread_join(countdown_alarm_thread, NULL);
