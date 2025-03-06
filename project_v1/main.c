@@ -65,11 +65,10 @@ int main(int argc, char **argv) {
     while (1) {
         if (efficient) {
             val = digitalRead(BUTTON);
-            if ((window_opened == 0 && val == LOW) || (window_opened == 0 && window_changed == 1)) {
+            if (val == LOW || window_changed == 1) {
                 // Ensure the window is opened only once
                 pthread_create(&window_thread, NULL, start_window, NULL);
                 pthread_join(window_thread, NULL);
-                //window_opened = 1;
             }
         }
     }
