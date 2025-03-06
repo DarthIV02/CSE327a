@@ -68,7 +68,8 @@ int main(int argc, char **argv) {
             if ((window_opened == 0 && val == LOW) || (window_opened == 0 && window_changed == 1)) {
                 // Ensure the window is opened only once
                 pthread_create(&window_thread, NULL, start_window, NULL);
-                window_opened = 1;
+                pthread_join(window_thread, NULL);
+                //window_opened = 1;
             }
         }
     }
