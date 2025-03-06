@@ -68,6 +68,17 @@ int main(int argc, char **argv) {
     while (efficient) {
         val = digitalRead(BUTTON);
         if (val == LOW || window_changed == 1) {
+            
+            // Turn everything on with the screen
+            // Revert CPU Governor to Default
+            printf("Turning everuthing on")
+            char command[128]; 
+            snprintf(command, sizeof(command), "echo %s | sudo tee /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor", governor);
+            system(command);
+            system("vcgencmd display_power 1");  // Turns on HDMI
+            system("sudo sed -i '/gpu_mem/d' /boot/config.txt");  // Removes custom GPU memory line
+            system("echo '1-1' | sudo tee /sys/bus/usb/drivers/usb/bind");
+
             // Ensure the window is opened only once
             pthread_create(&window_thread, NULL, start_window, NULL);
             pthread_join(window_thread, NULL);
