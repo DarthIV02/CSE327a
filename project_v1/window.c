@@ -49,6 +49,7 @@ static gboolean check_screen_change(gpointer user_data) { // Modify with real ti
   if (difftime(current, last) > 15){ //How much buffer before it dies
     stop_flag = 1;  // Set the stop flag to true
 
+    gtk_close_window(user_data);
     pthread_exit("Visualization closed finished");
   }
   return TRUE; // Ensure it keeps running
