@@ -54,6 +54,15 @@ int main(int argc, char **argv) {
     pinMode(BUTTON, INPUT);
     int val = 0;
 
+    printf("Turning everuthing on");
+    char command[128]; 
+    char governor[128] = "ondemand";
+    snprintf(command, sizeof(command), "echo %s | sudo tee /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor", governor);
+    system(command);
+    system("sudo vcgencmd display_power 1");  // Turns on HDMI
+    system("sudo sed -i '/gpu_mem/d' /boot/config.txt");  // Removes custom GPU memory line
+    system("echo '1-1' | sudo tee /sys/bus/usb/drivers/usb/bind");
+
     pthread_t window_thread; // Thread for GTK window
     pthread_create(&window_thread, NULL, start_window, NULL);  // Create GTK window in a separate thread
     window_opened = 1;
@@ -71,14 +80,7 @@ int main(int argc, char **argv) {
             
             // Turn everything on with the screen
             // Revert CPU Governor to Default
-            printf("Turning everuthing on");
-            char command[128]; 
-            char governor[128] = "ondemand";
-            snprintf(command, sizeof(command), "echo %s | sudo tee /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor", governor);
-            system(command);
-            system("sudo vcgencmd display_power 1");  // Turns on HDMI
-            system("sudo sed -i '/gpu_mem/d' /boot/config.txt");  // Removes custom GPU memory line
-            system("echo '1-1' | sudo tee /sys/bus/usb/drivers/usb/bind");
+            
 
             // Ensure the window is opened only once
             pthread_create(&window_thread, NULL, start_window, NULL);
