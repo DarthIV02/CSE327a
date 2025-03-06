@@ -73,6 +73,7 @@ int main(int argc, char **argv) {
             // Revert CPU Governor to Default
             printf("Turning everuthing on");
             char command[128]; 
+            char governor[128] = "ondemand";
             snprintf(command, sizeof(command), "echo %s | sudo tee /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor", governor);
             system(command);
             system("vcgencmd display_power 1");  // Turns on HDMI
