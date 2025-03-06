@@ -76,7 +76,7 @@ int main(int argc, char **argv) {
             char governor[128] = "ondemand";
             snprintf(command, sizeof(command), "echo %s | sudo tee /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor", governor);
             system(command);
-            system("vcgencmd display_power 1");  // Turns on HDMI
+            system("sudo vcgencmd display_power 1");  // Turns on HDMI
             system("sudo sed -i '/gpu_mem/d' /boot/config.txt");  // Removes custom GPU memory line
             system("echo '1-1' | sudo tee /sys/bus/usb/drivers/usb/bind");
 
