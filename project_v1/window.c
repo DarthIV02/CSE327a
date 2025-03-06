@@ -62,7 +62,8 @@ static gboolean check_screen_change(gpointer user_data) {
     // Post the quit signal to the main thread using g_idle_add
     if (!quit_requested) {
       quit_requested = 1;
-      g_idle_add((GSourceFunc)gtk_main_quit, NULL);
+      //g_idle_add((GSourceFunc)gtk_main_quit, NULL);
+      gtk_main_quit();
     }
 
     // End thread processing by signaling exit
