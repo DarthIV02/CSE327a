@@ -16,6 +16,9 @@ struct tm t_last_update;
 #define SEM_NAME "/sem_clock"
 int clock_correct = 0;
 
+// Global flag to indicate whether to stop the window
+volatile int stop_flag = 0;
+
 static void update_time(gpointer user_data) { // Modify with real time clock ...
   GtkLabel *label = GTK_LABEL(user_data);
   t.tm_sec += 1;
@@ -28,19 +31,14 @@ static void update_time(gpointer user_data) { // Modify with real time clock ...
   clock_correct = 1;
 }
 
-void* stop_window ()
-{
-  GtkApplication *app = gtk_application_new("org.gtk.example", G_APPLICATION_DEFAULT_FLAGS);
-
-  // Quit the application
-  g_application_quit(G_APPLICATION(app));
-
-  g_object_unref(app);
-
-  return NULL;
+void stop_window(GtkApplication *app) {
+  // Check if the stop flag is set to stop the GTK window
+  if (stop_flag) {
+    g_application_quit(G_APPLICATION(app));
+  }
 }
 
-static gboolean check_screen_change() { // Modify with real time clock ...
+static gboolean check_screen_change(gpointer user_data) { // Modify with real time clock ...
   time_t current = mktime(&t);
   time_t last = mktime(&t_last_update);
 
@@ -49,7 +47,9 @@ static gboolean check_screen_change() { // Modify with real time clock ...
   printf("Difference: %lf\n", difftime(current, last));
 
   if (difftime(current, last) > 15){ //How much buffer before it dies
-    g_main_context_invoke(NULL, (GSourceFunc) stop_window, NULL);
+    stop_flag = 1;  // Set the stop flag to true
+
+    pthread_exit("Visualization closed finished");
   }
   return TRUE; // Ensure it keeps running
 }
@@ -132,7 +132,9 @@ static void activate (GtkApplication* app, gpointer user_data)
   g_timeout_add_seconds(1, (GSourceFunc) update_time, label);
 
   if (efficient){ //Every how often do you check
-    g_timeout_add_seconds(5, (GSourceFunc) check_screen_change, NULL);
+    g_timeout_add_seconds(5, (GSourceFunc) check_screen_change, app);
+
+
   }
 
   //Configure style and visibility of alarm
