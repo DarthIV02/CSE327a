@@ -18,6 +18,8 @@ int clock_correct = 0;
 
 // Global flag to indicate whether to stop the window
 volatile int stop_flag = 0;
+static guint time_id;  // ID of the timeout source
+static guint check_change_id;  // ID of the timeout source
 
 static void update_time(gpointer user_data) { // Modify with real time clock ...
   GtkLabel *label = GTK_LABEL(user_data);
@@ -48,10 +50,12 @@ static gboolean check_screen_change(gpointer user_data) { // Modify with real ti
 
   if (difftime(current, last) > 15){ //How much buffer before it dies
     stop_flag = 1;  // Set the stop flag to true
-
+    g_source_remove(time_id);
+    g_source_remove(check_change_id);
     GtkWidget *window = GTK_WIDGET(user_data);
     gtk_window_close(GTK_WINDOW(window)); // Close the window
     //g_application_quit(G_APPLICATION(app)); // Quit the application
+    gtk_main_quit();
     pthread_exit("Visualization closed finished");
   }
   return TRUE; // Ensure it keeps running
@@ -132,10 +136,10 @@ static void activate (GtkApplication* app, gpointer user_data)
   // Add CSS class
   gtk_widget_set_name(label, "clock-label");
   apply_css(label);
-  g_timeout_add_seconds(1, (GSourceFunc) update_time, label);
+  time_id = g_timeout_add_seconds(1, (GSourceFunc) update_time, label);
 
   if (efficient){ //Every how often do you check
-    g_timeout_add_seconds(5, (GSourceFunc) check_screen_change, window);
+    check_change_id = g_timeout_add_seconds(5, (GSourceFunc) check_screen_change, window);
   }
 
   //Configure style and visibility of alarm

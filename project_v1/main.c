@@ -38,63 +38,41 @@ int window_opened = 0;
 int efficient = 0;
 
 int main(int argc, char **argv) {
-    
-    // Initialize shared variable
-	SharedVariable v;
-    if (argc >= 2){
+    SharedVariable v;
+    if (argc >= 2) {
         efficient = 1;
     }
 
-	// Initialize WiringPi library
-	if (wiringPiSetup() == -1) {
-		printf("Failed to setup wiringPi.\n");
-		return 1; 
-	}
+    if (wiringPiSetup() == -1) {
+        printf("Failed to setup wiringPi.\n");
+        return 1;
+    }
 
-	// Initialize shared variable and sensors
-	//init_shared_variable(&v);
-	//init_sensors(&v);
-
-    // Initialize semaphores
     sem_init(&high_priority_sem, 0, 1);
     sem_init(&low_priority_sem, 0, 1);
     
     pinMode(BUTTON, INPUT);
     int val = 0;
 
-	// Thread identifiers
-	pthread_t t_motion,
-			  t_container;
+    pthread_t window_thread; // Thread for GTK window
+    pthread_create(&window_thread, NULL, start_window, NULL);  // Create GTK window in a separate thread
 
-    //thread_create(motion); // MOVEMENT
-    //thread_create(container);
-
-    // Create GTK application
-    pthread_t window_thread; //HEEEERE Window start
-    pthread_create(&window_thread, NULL, start_window, NULL); //HEEEERE Window start
-    window_opened = 1;
-
-    // Start the background task in a separate thread
     pthread_t countdown_alarm_thread;
-    pthread_create(&countdown_alarm_thread, NULL, countdown_alarms, NULL);
-
-    //thread_join(motion); // MOVEMENTTTTT
-    //thread_join(container);
+    pthread_create(&countdown_alarm_thread, NULL, countdown_alarms, NULL);  // Assuming countdown_alarms exists
 
     struct tm last_dt;
 
-    while(1){
-        if (efficient){
+    while (1) {
+        if (efficient) {
             val = digitalRead(BUTTON);
-            if ((window_opened == 0 && val == LOW) || (window_opened == 0 && window_changed == 1)){ // Only do it when the window is not running
+            if ((window_opened == 0 && val == LOW) || (window_opened == 0 && window_changed == 1)) {
+                // Ensure the window is opened only once
                 pthread_create(&window_thread, NULL, start_window, NULL);
                 window_opened = 1;
             }
         }
-    }    
+    }
 
-    //pthread_join(window_thread, NULL);
     pthread_join(countdown_alarm_thread, NULL);
-
     return 1;
 }
