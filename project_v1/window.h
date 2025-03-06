@@ -4,7 +4,6 @@
 #include <gtk/gtk.h>
 
 void* start_window();
-void* stop_window();
 void change_alarm(int alarm_active);
 extern int efficient;
 
